@@ -1,0 +1,5 @@
+C:\Users\brand\source\repos\ServiceConsole\ServiceConsole\obj\Debug\net6.0\ServiceConsole.csproj.AssemblyReference.cache
+C:\Users\brand\source\repos\ServiceConsole\ServiceConsole\obj\Debug\net6.0\ServiceConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\brand\source\repos\ServiceConsole\ServiceConsole\obj\Debug\net6.0\ServiceConsole.AssemblyInfoInputs.cache
+C:\Users\brand\source\repos\ServiceConsole\ServiceConsole\obj\Debug\net6.0\ServiceConsole.AssemblyInfo.cs
+C:\Users\brand\source\repos\ServiceConsole\ServiceConsole\obj\Debug\net6.0\ServiceConsole.csproj.CoreCompileInputs.cache

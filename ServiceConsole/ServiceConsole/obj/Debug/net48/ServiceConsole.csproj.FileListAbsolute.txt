@@ -1,0 +1,14 @@
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.csproj.AssemblyReference.cache
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.csproj.SuggestedBindingRedirects.cache
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.AssemblyInfoInputs.cache
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.AssemblyInfo.cs
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.csproj.CoreCompileInputs.cache
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\bin\Debug\net48\ServiceConsole.exe.config
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\bin\Debug\net48\ServiceConsole.exe
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\bin\Debug\net48\ServiceConsole.pdb
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\bin\Debug\net48\System.ServiceModel.Http.dll
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\bin\Debug\net48\System.ServiceModel.Primitives.dll
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.csproj.CopyComplete
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.exe
+C:\Users\brand\source\repos\Unit 1-2\ServiceConsole\ServiceConsole\obj\Debug\net48\ServiceConsole.pdb
