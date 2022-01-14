@@ -6,6 +6,7 @@ using System.Text;
 
 // To use ServiceContract/ServiceModel, you need to install System.ServiceModel.Primitives
 // IDE will let you do that by looking through the solutions.
+// RUN THIS SERVICE IN ADMINISTRATOR MODE
 
 // USE .NET FRAMEWORK 4.8 FOR FULL COMPATIBILITY
 namespace ServiceConsole
@@ -30,7 +31,7 @@ namespace ServiceConsole
             }
         }
 
-        public double PiValue()
+        public double PiValue() 
         {
             double pi = System.Math.PI;
 
