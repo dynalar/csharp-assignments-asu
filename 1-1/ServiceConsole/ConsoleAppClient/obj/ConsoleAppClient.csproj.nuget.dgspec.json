@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\brant\\Source\\Repos\\csharp-practice\\1-1\\ServiceConsole\\ConsoleAppClient\\ConsoleAppClient.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\brant\\Source\\Repos\\csharp-practice\\1-1\\ServiceConsole\\ConsoleAppClient\\ConsoleAppClient.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\brant\\Source\\Repos\\csharp-practice\\1-1\\ServiceConsole\\ConsoleAppClient\\ConsoleAppClient.csproj",
+        "projectName": "ConsoleAppClient",
+        "projectPath": "C:\\Users\\brant\\Source\\Repos\\csharp-practice\\1-1\\ServiceConsole\\ConsoleAppClient\\ConsoleAppClient.csproj",
+        "packagesPath": "C:\\Users\\brant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brant\\Source\\Repos\\csharp-practice\\1-1\\ServiceConsole\\ConsoleAppClient\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\brant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
+            "System.Net.Primitives": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.ServiceModel.Primitives": {
+              "target": "Package",
+              "version": "[4.9.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

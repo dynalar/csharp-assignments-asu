@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f9f52c70-daca-4c37-99f6-3efef806bd48": {
+      "ProjectGuid": "f9f52c70-daca-4c37-99f6-3efef806bd48",
+      "DisplayName": "ServiceConsole",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "8a73cd89-d80d-4715-addf-43878a774238": {
+      "ProjectGuid": "8a73cd89-d80d-4715-addf-43878a774238",
+      "DisplayName": "ConsoleAppClient",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
