@@ -1,0 +1,7 @@
+C:\Users\brant\source\repos\Assignment 1\NumberGuesserService\bin\NumberGuesserService.dll.config
+C:\Users\brant\source\repos\Assignment 1\NumberGuesserService\bin\NumberGuesserService.dll
+C:\Users\brant\source\repos\Assignment 1\NumberGuesserService\bin\NumberGuesserService.pdb
+C:\Users\brant\source\repos\Assignment 1\NumberGuesserService\obj\Debug\NumberGuesserService.csproj.AssemblyReference.cache
+C:\Users\brant\source\repos\Assignment 1\NumberGuesserService\obj\Debug\NumberGuesserService.csproj.CoreCompileInputs.cache
+C:\Users\brant\source\repos\Assignment 1\NumberGuesserService\obj\Debug\NumberGuesserService.dll
+C:\Users\brant\source\repos\Assignment 1\NumberGuesserService\obj\Debug\NumberGuesserService.pdb
