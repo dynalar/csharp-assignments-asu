@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<!--code goes here for our form fields for number guessing game-->
+
+<h2><strong>Number Guessing Game</strong></h2>
+
+&nbsp;
+
+<form class="form-inline">
+    <div class="form-group">Lower Limit: <input type="text" name="lower" class="form-control" value="" /></div>
+    <div class="form-group">Upper Limit: <input type="text" name="upper" class="form-control" value="" /></div>
+    <button class="btn btn-primary">Generate a Secret Number</button>
+</form>
+
+&nbsp;
+
+<form class="form-inline">
+    <div class="form-group">Make a guess: <input type="text" name="guess" value="" class="form-control" /></div>
+    <button class="btn btn-primary">Play</button>
+    &nbsp;
+</form>
+
+<h3><strong>Attempts - </strong><span class="totalAttempts">0</span></h3>
+<h3><strong>The number is - </strong><span class="guessResult">N/A</span></h3>
