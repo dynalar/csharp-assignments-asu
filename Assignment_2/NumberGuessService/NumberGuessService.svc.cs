@@ -10,7 +10,7 @@ namespace NumberGuessService
 {
     public class NumberGuessService : INumberGuessService
     {
-        // this code stays the same from the previous project
+        // this code stays the same from the previous project for our service
         public string CheckNumber(int userNum, int secretNum)
         {
             if (userNum == secretNum)
@@ -21,7 +21,7 @@ namespace NumberGuessService
             else return "too small";
         }
 
-        // this code stays the same from the previous project
+        // this code stays the same from the previous project for our service
         public int SecretNumber(int lower, int upper)
         {
             DateTime currentDate = DateTime.Now;
