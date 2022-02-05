@@ -42,6 +42,7 @@
 
             // set up callback function for when http status is successful
             xhttp.onreadystatechange = function () {
+                // run this code and get response when status is 200 and ready state 4
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
                     // we are setting the value here in a hidden field so we can retrieve it when we run the callNumberGuessEndpoint function.
                     document.secretNumForm.storedSecretNum.value = xhttp.responseText;
@@ -67,6 +68,7 @@
 
             // callback function for when http call returns and is successful
             xhttp.onreadystatechange = function () {
+                // run this code and get response when status is 200 and ready state 4
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
                     // count the attempt only when the call to the service is successful.
                     totalAttemptsElement.innerHTML++;
