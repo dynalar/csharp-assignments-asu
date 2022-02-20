@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Cryptocurrency Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -11,32 +12,109 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                @Html.ActionLink("Cryptocurrency Tracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Cryptocurrency Tracker</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <!-- code that calls our REST service is placed here. -->
+    <script>
+
+        var cryptoChart;
+
+        // load the initial call to get default bitcoin numbers.
+        $(document).ready(function () {
+            $.ajax({
+                url: 'Crypto/CallCryptoService',
+                data: {ticker: "bitcoin"},
+                success: function (responseData) {
+
+                    var ctx = document.getElementById('cryptoChart').getContext('2d');
+
+                    var data = {
+                        labels: generateLabels(responseData),
+                        datasets: [
+                            {
+                                label: 'Price',
+                                data: parsePrices(responseData),
+                                borderColor: '#4dc9f6',
+                            },
+                        ]
+                    };
+
+                    cryptoChart = new Chart(ctx, {
+                        type: 'line',
+                        data: data,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        function parsePrices(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['prices'];
+            var pricesLength = prices.length;
+            var formattedPrices = [];
+
+            for (var i = 0; i < pricesLength; i++) {
+                formattedPrices.push(Math.floor(prices[i][1]));
+            }
+
+            return formattedPrices
+        }
+
+        function generateLabels(data) {
+            var labels = ['Today'];
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['prices'];
+            var pricesLength = prices.length;
+
+            for (var i = 1; i < pricesLength; i++) {
+                labels.push('Day ' + i);
+            }
+
+            return labels;
+        }
+
+
+        // handle the selection of the dropdown
+        $("#cryptoDropdown").change(function () {
+            var selectedTicker = $('#cryptoDropdown option:selected').val();
+            $("#cryptoName").text(selectedTicker);
+            updateChart(selectedTicker);
+        });
+
+
+        function updateChart(ticker) {
+            $.ajax({
+                url: 'Crypto/CallCryptoService',
+                data: { ticker: ticker },
+                success: function (responseData) {
+                    cryptoChart.data.datasets[0].data = parsePrices(responseData);
+                    cryptoChart.update();
+                }
+            });
+        }
+
+    </script>
+
 </body>
 </html>
