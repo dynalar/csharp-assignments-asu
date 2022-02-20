@@ -1,23 +1,45 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Crypto Tracker Home Page";
 }
-
 
 <!--code goes here for our form fields for number guessing game-->
 
 <h2><strong>Crypto Tracker - <span id="cryptoName">bitcoin</span></strong></h2>
+
+<h4><span><strong>Current Price:</strong> <span id="currentPrice"></span></span></h4>
+<h4><span><strong>Current Market Capital:</strong> <span id="currentMarketCap"></span></span></h4>
+<h4><span><strong>Volume Traded (24h):</strong> <span id="volumeTraded"></span></span></h4>
 
 <select class="form-control" id="cryptoDropdown">
     <option selected="selected" value="bitcoin">Bitcoin (BTC)</option>
     <option value="ethereum">Ethereum (ETH)</option>
     <option value="tether">Tether (USDT)</option>
     <option value="ripple">Ripple (XRP)</option>
+    <option value="cardano">Cardano (ADA)</option>
     <option value="avalanche-2">Avalanche (AVAX)</option>
     <option value="solana">Solana (SOL)</option>
+    <option value="dogecoin">Dogecoin (DOGE)</option>
+    <option value="secret">Secret (SCRT)</option>
+    <option value="sushi">Sushi (SUSHI)</option>
+    <option value="polkadot">Polkadot (DOT)</option>
+    <option value="polygon">Polygon (MATIC)</option>
+    <option value="near">Near Protocol (NEAR)</option>
+    <option value="decentraland">Decentraland (MANA)</option>
+    <option value="stellar">Stellar (XLM)</option>
+    <option value="fantom">Fantom (FTM)</option>
+    <option value="the-graph">The Graph (GRT)</option>
+    <option value="monero">Monero (XMR)</option>
+    <option value="terra-luna">Terra (LUNA)</option>
 </select>
 
 &nbsp;
 
-<div class="chart-container" style="position: relative; height:1000px; width:1000px">
+<h2>Price</h2>
+<div class="chart-container"  height:600px; width:600px">
     <canvas id="cryptoChart"></canvas>
+</div>
+
+<h2>Market Cap</h2>
+<div class="chart-container"  height:600px; width:600px">
+    <canvas id="marketCapChart"></canvas>
 </div>

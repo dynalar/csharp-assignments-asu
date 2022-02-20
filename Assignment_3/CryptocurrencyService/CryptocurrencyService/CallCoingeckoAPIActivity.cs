@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CryptocurrencyService
 {
@@ -29,9 +31,9 @@ namespace CryptocurrencyService
 
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;
+
                 context.SetValue(CoinGeckoResponse, result);
             }
         }
-
     }
 }

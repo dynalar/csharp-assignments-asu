@@ -32,6 +32,7 @@
     <script>
 
         var cryptoChart;
+        var marketCapChart;
 
         // load the initial call to get default bitcoin numbers.
         $(document).ready(function () {
@@ -39,16 +40,31 @@
                 url: 'Crypto/CallCryptoService',
                 data: {ticker: "bitcoin"},
                 success: function (responseData) {
+                    $("#currentPrice").text("$" + getCurrentPrice(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#currentMarketCap").text("$" + getCurrentMarketCap(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#volumeTraded").text("$" + getVolumeTraded(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                     var ctx = document.getElementById('cryptoChart').getContext('2d');
+                    var mkCtx = document.getElementById('marketCapChart').getContext('2d');
 
                     var data = {
                         labels: generateLabels(responseData),
                         datasets: [
                             {
-                                label: 'Price',
+                                label: 'bitcoin Price',
                                 data: parsePrices(responseData),
                                 borderColor: '#4dc9f6',
+                            },
+                        ]
+                    };
+
+                    var mkData = {
+                        labels: generateLabels(responseData),
+                        datasets: [
+                            {
+                                label: 'bitcoin Market Cap',
+                                data: parseMarketCap(responseData),
+                                borderColor: '#6E33FF',
                             },
                         ]
                     };
@@ -64,13 +80,62 @@
                             }
                         }
                     });
+
+                    marketCapChart = new Chart(mkCtx, {
+                        type: 'line',
+                        data: mkData,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 }
             });
         });
 
+        function getCurrentPrice(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['prices'];
+            var pricesLength = prices.length;
+
+            return prices[pricesLength - 1][1];
+        }
+
+        function getCurrentMarketCap(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['market_caps'];
+            var pricesLength = prices.length;
+
+            return prices[pricesLength - 1][1];
+        }
+
+        function getVolumeTraded(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['total_volumes'];
+            var pricesLength = prices.length;
+
+            return prices[pricesLength - 1][1];
+        }
+
         function parsePrices(data) {
             var parsedJson = JSON.parse(data);
             var prices = parsedJson['prices'];
+            var pricesLength = prices.length;
+            var formattedPrices = [];
+
+            for (var i = 0; i < pricesLength; i++) {
+                formattedPrices.push(prices[i][1]);
+            }
+
+            return formattedPrices
+        }
+
+        function parseMarketCap(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['market_caps'];
             var pricesLength = prices.length;
             var formattedPrices = [];
 
@@ -82,14 +147,16 @@
         }
 
         function generateLabels(data) {
-            var labels = ['Today'];
+            var labels = [];
             var parsedJson = JSON.parse(data);
             var prices = parsedJson['prices'];
             var pricesLength = prices.length;
 
-            for (var i = 1; i < pricesLength; i++) {
+            for (var i = pricesLength - 1; i >= 1; i--) {
                 labels.push('Day ' + i);
             }
+
+            labels.push('Today');
 
             return labels;
         }
@@ -102,16 +169,26 @@
             updateChart(selectedTicker);
         });
 
-
+        // call crypto service and update the chart with new data
         function updateChart(ticker) {
             $.ajax({
                 url: 'Crypto/CallCryptoService',
                 data: { ticker: ticker },
                 success: function (responseData) {
+                    $("#currentPrice").text("$" + getCurrentPrice(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#currentMarketCap").text("$" + getCurrentMarketCap(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#volumeTraded").text("$" + getVolumeTraded(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+                    cryptoChart.data.datasets[0].label = ticker + " price";
                     cryptoChart.data.datasets[0].data = parsePrices(responseData);
                     cryptoChart.update();
+
+                    marketCapChart.data.datasets[0].label = ticker + " market cap";
+                    marketCapChart.data.datasets[0].data = parseMarketCap(responseData);
+                    marketCapChart.update();
                 }
             });
+        
         }
 
     </script>
