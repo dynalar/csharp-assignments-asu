@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- process definition -->
 <!-- crpt: gets cryptocurrency data -->
 <!-- trnsfrm: transforms, formats, and sanitizes JSON data coming back from cryptocurrency endpoint -->
 <process name="Cryptocurrency"
@@ -8,7 +7,7 @@
     xmlns="http://schemas.xmlSoap.org/ws/2003/03/business-process/"
     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process!"
     xmlns:crpt="http://servicedomain.com/bpel/cryptocurrency/"
-    xmlns:trnsfrm="http://servicedomain.com/bpel/transformer/">
+    xmlns:trnsfrm="http://servicedomain.com/bpel/cryptocyrrency-metadata/">
 
     <!-- partner links -->
     <partnerLinks>
