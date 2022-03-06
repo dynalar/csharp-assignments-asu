@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- partner links -->
+
+<!-- client (sync) -->
+<plnk:partnerLinkType name="cryptoCurrencyClientLT">
+    <plnk:role name="cryptoCurrencyService">
+        <plnk:portType name="tns:CryptoCurrencyPT"/>
+    </plnk:role>
+</plnk:partnerLinkType>
+
+<!-- get crypto price (sync) -->
+<plnk:partnerLinkType name="cryptoCurrencyPriceLT">
+    <plnk:role name="cryptoCurrencyPrice">
+        <plnk:portType name="tns:cryptoCurrencyPricePT"/>
+    </plnk:role>
+</plnk:partnerLinkType>
+
+<!-- get crypto metadata (async) -->
+<plnk:partnerLinkType name="cryptocurrencyMetadataLT">
+    <plnk:role name="cryptocurrencyAssets">
+        <plnk:portType name="tns:CryptocurrencyMetadataPT"/>
+    </plnk:role>
+    <plnk:role name="cryptocurrencyMetadata">
+        <plnk:portType name="tns:CryptocurrencyMetadataCallbackPT"/>
+    </plnk:role>
+</plnk:partnerLinkType>

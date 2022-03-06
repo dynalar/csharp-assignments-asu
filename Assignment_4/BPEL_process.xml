@@ -14,178 +14,124 @@
     <partnerLinks>
         <!-- client partner link -->
         <partnerLink name="cryptoCurrencyClient"
-            partnerLinkType="crcl:cryptoCurrencyClient"
-            partnerRole="cryptoCurrencyClient"/>
+            partnerLinkType="crc:cryptoCurrencyClientLT"
+            myRole="cryptoCurrencyService"/>
         <!-- returns price/tabular data of cryptocurrency, historical data, averages, etc. -->
         <partnerLink name="cryptoCurrencyPrice"
-            partnerLinkType="crpr:cryptoCurrencyPrice"
+            partnerLinkType="crpr:cryptoCurrencyPriceLT"
             partnerRole="cryptoCurrencyPrice"/>
         <!-- returns metadata about the specific cryptocurrency like description, images, assets, etc. -->
         <partnerLink name="cryptocurrencyMetadata"
-            partnerLinkType = "mtdt:cryptocurrencyMetadata"
-            myRole="cryptocurrencyMetadata"
+            partnerLinkType = "mtdt:cryptocurrencyMetadataLT"
+            myRole="cryptocurrencyAssets"
             partnerRole="cryptocurrencyMetadata"/>
     </partnerLinks>
 
     <!-- variables for operating bpel process -->
     <variables>
+        <!-- client entry point -->
+        <variable name="CryptocurrencyRequest" 
+            messageType="cpt:CryptocurrencyRequestMessage"/>
         <!-- input for crypto price web service -->
         <variable name="CryptocurrencyPriceRequest" 
             messageType="crpr:CryptocurrencyPriceRequestMessage"/>
         <!-- output for crypto price web service -->
         <variable name="CryptocurrencyPriceResponse" 
             messageType="crpr:CryptocurrencyPriceResponseMessage"/>
-        <!-- input for data transformer -->
-        <variable name="CryptocurrencyMetadata" 
+        <!-- input for metadata of cryptocurrency -->
+        <variable name="CryptocurrencyMetadataRequest" 
             messageType="mtdt:CryptocurrencyMetadataMessage"/>
-        <!-- output for data transformer -->
-        <variable name="CryptocurrencyMetadata" 
+        <!-- output for metadata of cryptocurrency -->
+        <variable name="CryptocurrencyMetadataResponse" 
             messageType="mtdt:CryptocurrencyMetadataMessage"/>
+        <!-- all of our responses are added to this variable -->
+        <variable name="CryptocurrencyData" 
+            messageType="crpr:CryptocurrencyAggregatedData"/>
     </variables>
 
     <!-- defining the sequence for our services to operate -->
     <sequence>
-        
-    </sequence>
-    
-</process>  
-
-
-
-
-
-<!-- shit -->
-<?xml version= "1.0" encoding="utf-8"?>
-<process name="Cryptocurrency"
-    targetNameSpace="http://bpeldomain.com/bpel/cryptocurrency"
-    xmlns="http://schemas.xmlSoap.org/ws/2003/03/business-process/"
-    xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process!"
-    xmlns:crpt="http://servicedomain.com/bpel/cryptocurrency/"
-    xmlns:trnsfrm="http://servicedomain.com/bpel/transformer/">
-
-    <partnerLinks>
-        <partnerLink name="client"
-            partnerLinkType="trv:travelLT"
-            myRole="travelService"/>
-        <partnerLink name="employeeTravelStatus"
-            partnerLinkType="emp:employeeLT"
-            partnerRole="employeeTravelStatusService"/>
-        <partnerLink name="AmericanAirlines"
-            partnerLinkType = "aln:flightLT"
-            myRole="airlineCustomer"
-            partnerRole="airlineService"/>
-        <partnerLink name="DeltaAirlines"
-            partnerLinkType = "aln:flightLT"
-            myRole="airlineCustomer"
-            partnerRole="airlineService"/>
-    </partnerLinks>
-    <variables>
-        <!-- input for this process -->
-        <variable name="TravelRequest" 
-            messageType="trv:TravelRequestMessage"/>
-        <!-- input for the Employee Travel Status web service -->
-        <variable name="EmployeeTravelStatusRequest" 
-            messageType="emp: EmployeeTravelStatusRequestMessage"/>
-        <!-- output from the Employee Travel Status web service -->
-        <variable name="EmployeeTravelStatusResponse"
-            messageType="emp:EmployeeTravelStatusResponseMessage"/>
-        <!-- input for American and Delta web services -->
-        <variable name="FlightDetails" 
-            messageType="aln:FlightTicketRequestMessage"/>
-        <!-- output from American Airlines -->
-        <variable name="FlightResponseAA" 
-            messageType="aln:TravelResponseMessage"/>
-        <!-- output from Delta Airlines -->
-        <variable name="FlightResponseDA" 
-            messageType="aln:TravelResponseMessage"/>
-        <!-- output from BPEL process -->
-        <variable name="TravelResponse" 
-            messageType="aln:TravelResponseMessage"/>
-    </variables>
-    <sequence>
-        <!-- Receive the initial request for from client -->
-        <receive partnerLink="client"
-            portType="trv:TravelApprovalPT" 
-            operation="TravelApproval" 
-            variable="TravelRequest" 
+        <!-- client entry request -->
+        <receive partnerLink="Client"
+            portType="cpt:CryptocurrencyPricePT" 
+            operation="CryptocurrencyDataRetrieve" 
+            variable="CryptocurrencyRequest" 
             createlnstance="yes" />
-        <!-- Prepare input for the Employee Travel Status WS -->
+        
+        <!-- assign the variable from the client to the  -->
         <assign>
             <copy>
-                <from variable="TravelRequest" part="employee"/>
-                <to variable="EmployeeTravelStatusRequest" part="employee"/>
+                <from variable="CryptocurrencyRequest" part="ticker"/>
+                <to variable="CryptocurrencyPriceRequest" part="ticker"/>
             </copy>
         </assign>
-        <!-- synchronously invoke Employee Travel Status Web Service -->
-        <invoke partnerLink="employeeTravelStatus" 
-            portType="emp:EmployeeTravelStatusPT" 
-            operation="EmployeeTravelStatus"
-            inputvariable="EmployeeTravelStatusRequest" 
-            outputvariable="EmployeeTravelStatusResponse"/>
-        <!-- Prepare the input for invoking airlines -->
+
+        <!-- synchronously call crypto price request endpoint -->
+        <invoke partnerLink="cryptoCurrencyPrice" 
+            portType="crpr:CryptoCurrencyPT" 
+            operation="cryptoCurrencyPrice"
+            inputvariable="CryptocurrencyPriceRequest" 
+            outputvariable="CryptocurrencyPriceResponse"/>
+        
+        <!-- Assign input to right variables, we're sending the ticker and the pricing object -->
+        <!-- ticker is needed to get metadata -->
         <assign>
             <copy>
-                <from variable="TravelRequest" part="flightData"/>
-                <to variable="FlightDetails" part="flightData"/>
+                <from variable="CryptocurrencyRequest" part="ticker"/>
+                <to variable="CryptocurrencyData" part="ticker"/>
             </copy>
             <copy>
-                <from variable="EmployeeTravelstatusResponse" 
-                part="travelClass"/>
-                <to variable="FlightDetails" part="travelClass"/>
+                <from variable="CryptocurrencyPriceResponse" part="pricing"/>
+                <to variable="CryptocurrencyData" part="cryptocurrencyPricing"/>
             </copy>
         </assign>
-        <!--  Make concurrent invocation to AA and DA -->
+
+        <!-- asynchronously call our metadata service -->
         <flow>
             <sequence>
-                <!-- Async invoke of the AA WS -->
-                <invoke partnerLink="AmericanAirlines" 
-                    portType="aln:FlightAvailabilityPT" 
-                    operation="FlightAvailability"
-                    inputvariable= "FlightDetails" />
-                <receive partnerLink="AmericanAirlines" 
-                    portType="aln:FlightCallbackPT" 
-                    operation="FlightTicketCallback" 
-                    variable="FlightResponseAA" />
-            </sequence>
-            <sequence>
-                <invoke partnerLink="DeltaAirlines" 
-                    portType="aln:FlightAvailabilityPT" 
-                    operation="FlightAvailability"
-                    inputvariable="FlightDetails" />
-                <receive partnerLink="DeltaAirlines" 
-                    portType="aln:FlightCallbackPT" 
-                    operation="FlightTicketCallback" 
-                    variable="FlightResponseDA" />
+                <!-- Async invoke of the metadata service -->
+                <invoke partnerLink="cryptocurrencyMetadata" 
+                    portType="mtdt:CryptocurrencyMetadataPT" 
+                    operation="CryptocurrencyMetadata"
+                    inputvariable= "CryptocurrencyData" />
+                <receive partnerLink="cryptocurrencyMetadata" 
+                    portType="mtdt:CryptocurrenctMetadataPT" 
+                    operation="CryptocurrencyMetadataCallback" 
+                    variable="CryptocurrencyMetadataResponse" />
             </sequence>
         </flow>
-        <!-- select the best offer and construct the Travel Response -->
+
         <switch>
-            <case condition="bpws:getVariableData(‘FlightResponseAA’,
-‘confirmationData’ , ‘/confirmationData/aln:Price’)
-&lt; = bpws:getVariableData(‘FlightResponseDA’,
-‘confirmationData’, ‘/confirmatlonData/aln:Price’)">
-                <!-- select American Airlines -->
+            <!-- if the metadata exists, attach it to our price response. -->
+            <!-- otherwise, just send the pricing data without metadata. -->
+            <case condition="bpws:getVariableData(CryptocurrencyMetadataResponse,
+cryptocurrencyMetadata , ‘/cryptocurrencyMetadata/mtdt:currentPricing’)">
+                <!-- add both the crypto and metadata response to our final response object -->
                 <assign>
                     <copy>
-                        <from variable= "FightResponseAA" />
-                        <to variable= "TravelResponse" />
+                        <from variable="CryptocurrencyMetadataResponse" />
+                        <to variable="CryptocurrencyData" />
+                    </copy>
+                    <copy>
+                        <from variable="CryptocurrencyPriceResponse" />
+                        <to variable="CryptocurrencyData" />
                     </copy>
                 </assign>
                 <otherwise>
-                    <!-- select Delta Airlines -->
+                    <!-- otherwise, just attach the pricing to our final response. -->
                     <assign>
                         <copy>
-                            <from variable= "FlightResponseDA" />
-                            <to variable= "TravelResponse" />
+                            <from variable="CryptocurrencyPriceResponse" />
+                            <to variable="CryptocurrencyData" />
                         </copy>
                     </assign>
                 </otherwise>
             </case>
         </switch>
-        <!-- send a response to the client -->
+        <!-- finally, send a response back with our final response object -->
         <reply partnerLink="Client" 
-            portType="trv:TravelApprovalPT" 
-            operation="TravelApproval"
-            variable="TravelResponse"/>
+            portType="cpt:CryptocurrencyPricePT" 
+            operation="CryptocurrencyDataRetrieve"
+            variable="CryptocurrencyData"/>
     </sequence>
 </process>
