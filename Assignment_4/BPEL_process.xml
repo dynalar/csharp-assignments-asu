@@ -69,7 +69,7 @@
         <!-- synchronously call crypto price request endpoint -->
         <invoke partnerLink="cryptoCurrencyPrice" 
             portType="crpr:CryptoCurrencyPT" 
-            operation="cryptoCurrencyPrice"
+            operation="getCryptoCurrencyPriceResponse"
             inputvariable="CryptocurrencyPriceRequest" 
             outputvariable="CryptocurrencyPriceResponse"/>
         
