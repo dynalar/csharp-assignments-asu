@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- process definition -->
+<!-- crpt: gets cryptocurrency data -->
+<!-- trnsfrm: transforms, formats, and sanitizes JSON data coming back from cryptocurrency endpoint -->
+<process name="Cryptocurrency"
+    targetNameSpace="http://bpeldomain.com/bpel/cryptocurrency"
+    xmlns="http://schemas.xmlSoap.org/ws/2003/03/business-process/"
+    xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process!"
+    xmlns:crpt="http://servicedomain.com/bpel/cryptocurrency/"
+    xmlns:trnsfrm="http://servicedomain.com/bpel/transformer/">
+
+    <!-- partner links -->
+    <partnerLinks>
+        <!-- client partner link -->
+        <partnerLink name="cryptoCurrencyClient"
+            partnerLinkType="crcl:cryptoCurrencyClient"
+            partnerRole="cryptoCurrencyClient"/>
+        <!-- returns price/tabular data of cryptocurrency, historical data, averages, etc. -->
+        <partnerLink name="cryptoCurrencyPrice"
+            partnerLinkType="crpr:cryptoCurrencyPrice"
+            partnerRole="cryptoCurrencyPrice"/>
+        <!-- returns metadata about the specific cryptocurrency like description, images, assets, etc. -->
+        <partnerLink name="cryptocurrencyMetadata"
+            partnerLinkType = "mtdt:cryptocurrencyMetadata"
+            myRole="cryptocurrencyMetadata"
+            partnerRole="cryptocurrencyMetadata"/>
+    </partnerLinks>
+
+    <!-- variables for operating bpel process -->
+    <variables>
+        <!-- input for crypto price web service -->
+        <variable name="CryptocurrencyPriceRequest" 
+            messageType="crpr:CryptocurrencyPriceRequestMessage"/>
+        <!-- output for crypto price web service -->
+        <variable name="CryptocurrencyPriceResponse" 
+            messageType="crpr:CryptocurrencyPriceResponseMessage"/>
+        <!-- input for data transformer -->
+        <variable name="CryptocurrencyMetadata" 
+            messageType="mtdt:CryptocurrencyMetadataMessage"/>
+        <!-- output for data transformer -->
+        <variable name="CryptocurrencyMetadata" 
+            messageType="mtdt:CryptocurrencyMetadataMessage"/>
+    </variables>
+
+    <!-- defining the sequence for our services to operate -->
+    <sequence>
+        
+    </sequence>
+    
+</process>  
+
+
+
+
+
+<!-- shit -->
+<?xml version= "1.0" encoding="utf-8"?>
+<process name="Cryptocurrency"
+    targetNameSpace="http://bpeldomain.com/bpel/cryptocurrency"
+    xmlns="http://schemas.xmlSoap.org/ws/2003/03/business-process/"
+    xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process!"
+    xmlns:crpt="http://servicedomain.com/bpel/cryptocurrency/"
+    xmlns:trnsfrm="http://servicedomain.com/bpel/transformer/">
+
+    <partnerLinks>
+        <partnerLink name="client"
+            partnerLinkType="trv:travelLT"
+            myRole="travelService"/>
+        <partnerLink name="employeeTravelStatus"
+            partnerLinkType="emp:employeeLT"
+            partnerRole="employeeTravelStatusService"/>
+        <partnerLink name="AmericanAirlines"
+            partnerLinkType = "aln:flightLT"
+            myRole="airlineCustomer"
+            partnerRole="airlineService"/>
+        <partnerLink name="DeltaAirlines"
+            partnerLinkType = "aln:flightLT"
+            myRole="airlineCustomer"
+            partnerRole="airlineService"/>
+    </partnerLinks>
+    <variables>
+        <!-- input for this process -->
+        <variable name="TravelRequest" 
+            messageType="trv:TravelRequestMessage"/>
+        <!-- input for the Employee Travel Status web service -->
+        <variable name="EmployeeTravelStatusRequest" 
+            messageType="emp: EmployeeTravelStatusRequestMessage"/>
+        <!-- output from the Employee Travel Status web service -->
+        <variable name="EmployeeTravelStatusResponse"
+            messageType="emp:EmployeeTravelStatusResponseMessage"/>
+        <!-- input for American and Delta web services -->
+        <variable name="FlightDetails" 
+            messageType="aln:FlightTicketRequestMessage"/>
+        <!-- output from American Airlines -->
+        <variable name="FlightResponseAA" 
+            messageType="aln:TravelResponseMessage"/>
+        <!-- output from Delta Airlines -->
+        <variable name="FlightResponseDA" 
+            messageType="aln:TravelResponseMessage"/>
+        <!-- output from BPEL process -->
+        <variable name="TravelResponse" 
+            messageType="aln:TravelResponseMessage"/>
+    </variables>
+    <sequence>
+        <!-- Receive the initial request for from client -->
+        <receive partnerLink="client"
+            portType="trv:TravelApprovalPT" 
+            operation="TravelApproval" 
+            variable="TravelRequest" 
+            createlnstance="yes" />
+        <!-- Prepare input for the Employee Travel Status WS -->
+        <assign>
+            <copy>
+                <from variable="TravelRequest" part="employee"/>
+                <to variable="EmployeeTravelStatusRequest" part="employee"/>
+            </copy>
+        </assign>
+        <!-- synchronously invoke Employee Travel Status Web Service -->
+        <invoke partnerLink="employeeTravelStatus" 
+            portType="emp:EmployeeTravelStatusPT" 
+            operation="EmployeeTravelStatus"
+            inputvariable="EmployeeTravelStatusRequest" 
+            outputvariable="EmployeeTravelStatusResponse"/>
+        <!-- Prepare the input for invoking airlines -->
+        <assign>
+            <copy>
+                <from variable="TravelRequest" part="flightData"/>
+                <to variable="FlightDetails" part="flightData"/>
+            </copy>
+            <copy>
+                <from variable="EmployeeTravelstatusResponse" 
+                part="travelClass"/>
+                <to variable="FlightDetails" part="travelClass"/>
+            </copy>
+        </assign>
+        <!--  Make concurrent invocation to AA and DA -->
+        <flow>
+            <sequence>
+                <!-- Async invoke of the AA WS -->
+                <invoke partnerLink="AmericanAirlines" 
+                    portType="aln:FlightAvailabilityPT" 
+                    operation="FlightAvailability"
+                    inputvariable= "FlightDetails" />
+                <receive partnerLink="AmericanAirlines" 
+                    portType="aln:FlightCallbackPT" 
+                    operation="FlightTicketCallback" 
+                    variable="FlightResponseAA" />
+            </sequence>
+            <sequence>
+                <invoke partnerLink="DeltaAirlines" 
+                    portType="aln:FlightAvailabilityPT" 
+                    operation="FlightAvailability"
+                    inputvariable="FlightDetails" />
+                <receive partnerLink="DeltaAirlines" 
+                    portType="aln:FlightCallbackPT" 
+                    operation="FlightTicketCallback" 
+                    variable="FlightResponseDA" />
+            </sequence>
+        </flow>
+        <!-- select the best offer and construct the Travel Response -->
+        <switch>
+            <case condition="bpws:getVariableData(‘FlightResponseAA’,
+‘confirmationData’ , ‘/confirmationData/aln:Price’)
+&lt; = bpws:getVariableData(‘FlightResponseDA’,
+‘confirmationData’, ‘/confirmatlonData/aln:Price’)">
+                <!-- select American Airlines -->
+                <assign>
+                    <copy>
+                        <from variable= "FightResponseAA" />
+                        <to variable= "TravelResponse" />
+                    </copy>
+                </assign>
+                <otherwise>
+                    <!-- select Delta Airlines -->
+                    <assign>
+                        <copy>
+                            <from variable= "FlightResponseDA" />
+                            <to variable= "TravelResponse" />
+                        </copy>
+                    </assign>
+                </otherwise>
+            </case>
+        </switch>
+        <!-- send a response to the client -->
+        <reply partnerLink="Client" 
+            portType="trv:TravelApprovalPT" 
+            operation="TravelApproval"
+            variable="TravelResponse"/>
+    </sequence>
+</process>
