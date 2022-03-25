@@ -17,8 +17,8 @@
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
-        <Left>125</Left>
-        <Top>190.08</Top>
+        <Left>78</Left>
+        <Top>42.08</Top>
       </Location>
       <Values>
         <Value Index="0">59</Value>
@@ -42,8 +42,8 @@
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
-        <Left>337</Left>
-        <Top>194.08</Top>
+        <Left>208</Left>
+        <Top>211.08</Top>
       </Location>
       <Values>
         <Value Index="0">PromptDialog</Value>
@@ -57,16 +57,20 @@
       <PreviousActivities>
         <ActivityID>2</ActivityID>
       </PreviousActivities>
-      <NextActivities />
+      <NextActivities>
+        <ActivityID>16</ActivityID>
+      </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
         <GraphEdgeID>5</GraphEdgeID>
       </IncomingLines>
-      <OutgoingLines />
+      <OutgoingLines>
+        <GraphEdgeID>7</GraphEdgeID>
+      </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
-        <Left>550</Left>
-        <Top>198.08</Top>
+        <Left>337</Left>
+        <Top>40.08</Top>
       </Location>
       <Values>
         <Value Index="0">OutputASCIICode</Value>
@@ -105,7 +109,7 @@ public class OutputASCIICode : CodeUtilities.CodeBase
         PrintLine(asciiCode.ToString("D8"));
         
         // You can pass output in a similar way.
-        Output = 3.5;
+        Output = asciiCode.ToString("D8");
     }
 }</Value>
         <Value Index="2">Accessibility.dll</Value>
@@ -122,6 +126,135 @@ public class OutputASCIICode : CodeUtilities.CodeBase
         <Value Index="13">System.Windows.Forms.dll</Value>
         <Value Index="14">System.Xaml.dll</Value>
         <Value Index="15">System.Xml.Linq.dll</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>43</ActivityNameInt>
+      <ActivityID>16</ActivityID>
+      <PreviousActivities>
+        <ActivityID>7</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>18</ActivityID>
+        <ActivityID>21</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>7</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>9</GraphEdgeID>
+        <GraphEdgeID>12</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>547</Left>
+        <Top>40.08</Top>
+      </Location>
+      <Values>
+        <Value Index="0">https://venus.sod.asu.edu/WSRepository/Services/EncryptionRest/Service.svc/Encrypt?text={0}</Value>
+        <Value Index="1">Object</Value>
+        <Value Index="2">EncryptedString</Value>
+        <Value Index="3">System.String</Value>
+        <Value Index="4">value</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>28</ActivityNameInt>
+      <ActivityID>18</ActivityID>
+      <PreviousActivities>
+        <ActivityID>16</ActivityID>
+      </PreviousActivities>
+      <NextActivities />
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>9</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines />
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>690.148958333333</Left>
+        <Top>214.08</Top>
+      </Location>
+      <Values>
+        <Value />
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>44</ActivityNameInt>
+      <ActivityID>21</ActivityID>
+      <PreviousActivities>
+        <ActivityID>16</ActivityID>
+      </PreviousActivities>
+      <NextActivities />
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>12</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines />
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>814</Left>
+        <Top>39.08</Top>
+      </Location>
+      <Values>
+        <Value Index="0">DecryptASCIICode</Value>
+        <Value Index="1">using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
+[Serializable]
+public class DecryptASCIICode : CodeUtilities.CodeBase
+{
+	private const string serviceUrl = "https://venus.sod.asu.edu/WSRepository/Services/EncryptionRest/Service.svc/Decrypt";
+	
+	
+    public DecryptASCIICode()
+    {
+        
+    }
+
+    // To execute your code, you must override the Execute method.
+    public override void Execute()
+    {   
+        // Obtain the value of the input to this activity.
+        // The type of this value will depend on what input you pass to this activity.
+        string myInput = Input.ToString();
+        
+        // call the http client with our encrypted string, and print out the decrypted response.
+        using (var client = new HttpClient())
+		{
+		    var response = client.GetAsync(serviceUrl + "?text=" + myInput).Result;
+		
+		    if (response.IsSuccessStatusCode)
+		    {
+		        var responseContent = response.Content; 
+		
+		        // by calling .Result you are synchronously reading the result
+		        string responseString = responseContent.ReadAsStringAsync().Result;
+		
+		        PrintLine(responseString);
+		        Output = responseString;
+		    }
+		}
+    }
+}</Value>
+        <Value Index="2">Accessibility.dll</Value>
+        <Value Index="3">Microsoft.CSharp.dll</Value>
+        <Value Index="4">mscorlib.dll</Value>
+        <Value Index="5">System.Configuration.dll</Value>
+        <Value Index="6">System.Core.dll</Value>
+        <Value Index="7">System.dll</Value>
+        <Value Index="8">System.Drawing.dll</Value>
+        <Value Index="9">System.Dynamic.dll</Value>
+        <Value Index="10">System.Net.Http.dll</Value>
+        <Value Index="11">System.Runtime.dll</Value>
+        <Value Index="12">System.Runtime.InteropServices.WindowsRuntime.dll</Value>
+        <Value Index="13">System.Runtime.WindowsRuntime.dll</Value>
+        <Value Index="14">System.Windows.Forms.dll</Value>
+        <Value Index="15">System.Xaml.dll</Value>
+        <Value Index="16">System.Xml.Linq.dll</Value>
       </Values>
     </Activity>
   </ProgrammingPanel>
