@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Program xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="/ StateFileSchema.xsd" VIPLE_Type="1">
+  <Version>4.0.0.1</Version>
+  <ProgrammingPanel Name="Main">
+    <Variables />
+    <Activity IsFlipped="false">
+      <ActivityNameInt>44</ActivityNameInt>
+      <ActivityID>32</ActivityID>
+      <PreviousActivities>
+        <ActivityID>41</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>33</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>28</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>18</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>1036.5</Left>
+        <Top>545.08</Top>
+      </Location>
+      <Values>
+        <Value Index="0">OutputASCIICode</Value>
+        <Value Index="1">using System;
+using System.Text.RegularExpressions;
+
+[Serializable]
+public class OutputASCIICode : CodeUtilities.CodeBase
+{
+    public OutputASCIICode()
+    {
+        
+    }
+
+    // To execute your code, you must override the Execute method.
+    public override void Execute()
+    {
+        // Obtain the value of the input to this activity.
+        // The type of this value will depend on what input you pass to this activity.
+        string myInput = (string)Input;
+        
+        // convert int to string
+        string convertedInput = myInput.ToString();
+        
+        // remove all zeroes so only 1s are left over
+        string leftoverOnes = Regex.Replace(convertedInput, @"(\s+|0|)", "");
+        
+        // check if parity bit needs to be 1 or 0 at the end.
+        int parityBit = leftoverOnes.Length % 2 != 0 ? 1 : 0;
+        
+        // combine the numbers together
+		int asciiCode = int.Parse(myInput.ToString() + parityBit.ToString());
+        
+        // You can use the PrintLine 	method to print strings to the run window
+        // during runtime.
+        PrintLine(asciiCode.ToString("D8"));
+        
+        // You can pass output in a similar way.
+        Output = asciiCode.ToString("D8");
+    }
+}</Value>
+        <Value Index="2">Accessibility.dll</Value>
+        <Value Index="3">Microsoft.CSharp.dll</Value>
+        <Value Index="4">mscorlib.dll</Value>
+        <Value Index="5">System.Configuration.dll</Value>
+        <Value Index="6">System.Core.dll</Value>
+        <Value Index="7">System.dll</Value>
+        <Value Index="8">System.Drawing.dll</Value>
+        <Value Index="9">System.Dynamic.dll</Value>
+        <Value Index="10">System.Runtime.dll</Value>
+        <Value Index="11">System.Runtime.InteropServices.WindowsRuntime.dll</Value>
+        <Value Index="12">System.Runtime.WindowsRuntime.dll</Value>
+        <Value Index="13">System.Windows.Forms.dll</Value>
+        <Value Index="14">System.Xaml.dll</Value>
+        <Value Index="15">System.Xml.Linq.dll</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>43</ActivityNameInt>
+      <ActivityID>33</ActivityID>
+      <PreviousActivities>
+        <ActivityID>32</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>35</ActivityID>
+        <ActivityID>66</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>18</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>20</GraphEdgeID>
+        <GraphEdgeID>52</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>1144</Left>
+        <Top>741.33</Top>
+      </Location>
+      <Values>
+        <Value Index="0">https://venus.sod.asu.edu/WSRepository/Services/EncryptionRest/Service.svc/Encrypt?text={0}</Value>
+        <Value Index="1">Object</Value>
+        <Value Index="2">EncryptedString</Value>
+        <Value Index="3">System.String</Value>
+        <Value Index="4">value</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>44</ActivityNameInt>
+      <ActivityID>35</ActivityID>
+      <PreviousActivities>
+        <ActivityID>33</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>48</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>20</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>49</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>1345.25</Left>
+        <Top>741.58</Top>
+      </Location>
+      <Values>
+        <Value Index="0">DecryptASCIICode</Value>
+        <Value Index="1">using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
+[Serializable]
+public class DecryptASCIICode : CodeUtilities.CodeBase
+{
+	private const string serviceUrl = "https://venus.sod.asu.edu/WSRepository/Services/EncryptionRest/Service.svc/Decrypt";
+	
+	
+    public DecryptASCIICode()
+    {
+        
+    }
+
+    // To execute your code, you must override the Execute method.
+    public override void Execute()
+    {   
+        // Obtain the value of the input to this activity.
+        // The type of this value will depend on what input you pass to this activity.
+        string myInput = Input.ToString();
+        
+        // call the http client with our encrypted string, and print out the decrypted response.
+        using (var client = new HttpClient())
+		{
+		    var response = client.GetAsync(serviceUrl + "?text=" + myInput).Result;
+		
+		    if (response.IsSuccessStatusCode)
+		    {
+		        var responseContent = response.Content; 
+		
+		        // by calling .Result you are synchronously reading the result
+		        string responseString = responseContent.ReadAsStringAsync().Result;
+		
+		        PrintLine(responseString);
+		        Output = responseString;
+		    }
+		}
+    }
+}</Value>
+        <Value Index="2">Accessibility.dll</Value>
+        <Value Index="3">Microsoft.CSharp.dll</Value>
+        <Value Index="4">mscorlib.dll</Value>
+        <Value Index="5">System.Configuration.dll</Value>
+        <Value Index="6">System.Core.dll</Value>
+        <Value Index="7">System.dll</Value>
+        <Value Index="8">System.Drawing.dll</Value>
+        <Value Index="9">System.Dynamic.dll</Value>
+        <Value Index="10">System.Net.Http.dll</Value>
+        <Value Index="11">System.Runtime.dll</Value>
+        <Value Index="12">System.Runtime.InteropServices.WindowsRuntime.dll</Value>
+        <Value Index="13">System.Runtime.WindowsRuntime.dll</Value>
+        <Value Index="14">System.Windows.Forms.dll</Value>
+        <Value Index="15">System.Xaml.dll</Value>
+        <Value Index="16">System.Xml.Linq.dll</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>1</ActivityNameInt>
+      <ActivityID>37</ActivityID>
+      <PreviousActivities>
+        <ActivityID>38</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>45</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>25</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>36</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>232.79678604224</Left>
+        <Top>371.35</Top>
+      </Location>
+      <Values>
+        <Value>iterations</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>12</ActivityNameInt>
+      <ActivityID>38</ActivityID>
+      <PreviousActivities />
+      <NextActivities>
+        <ActivityID>37</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines />
+      <OutgoingLines>
+        <GraphEdgeID>25</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>84.046786042241</Left>
+        <Top>510.1</Top>
+      </Location>
+      <Values>
+        <Value Index="0">PromptDialog</Value>
+        <Value Index="1">Enter number of times to iterate.</Value>
+        <Value Index="2">1</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>2</ActivityNameInt>
+      <ActivityID>39</ActivityID>
+      <PreviousActivities>
+        <ActivityID>45</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>47</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>37</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>39</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>554.046786042241</Left>
+        <Top>395.1</Top>
+      </Location>
+      <Values>
+        <Value>state.iterations - 1</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>44</ActivityNameInt>
+      <ActivityID>41</ActivityID>
+      <PreviousActivities>
+        <ActivityID>47</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>32</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>41</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>28</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>1055</Left>
+        <Top>277.6</Top>
+      </Location>
+      <Values>
+        <Value Index="0">GenerateRandomSevenBits</Value>
+        <Value Index="1">using System;
+using System.Threading;
+
+[Serializable]
+public class GenerateRandomSevenBits : CodeUtilities.CodeBase
+{
+    public GenerateRandomSevenBits()
+    {
+        
+    }
+
+    // To execute your code, you must override the Execute method.
+    public override void Execute()
+    {   
+    	string binaryString = null;
+    
+        // You can use the PrintLine method to print strings to the run window
+        // during runtime.
+       	Random rand = new Random();
+		
+		for(int i = 0; i &lt; 7; i++) {
+			int randomInt = rand.Next(0, 2);
+			binaryString += randomInt.ToString();
+		}
+		
+		// sleep because otherwise the output gets messed up
+		Thread.Sleep(200);
+		
+		PrintLine(binaryString);
+        
+        // You can pass output in a similar way.
+        Output = binaryString;
+    }
+}</Value>
+        <Value Index="2">Accessibility.dll</Value>
+        <Value Index="3">Microsoft.CSharp.dll</Value>
+        <Value Index="4">mscorlib.dll</Value>
+        <Value Index="5">System.Configuration.dll</Value>
+        <Value Index="6">System.Core.dll</Value>
+        <Value Index="7">System.dll</Value>
+        <Value Index="8">System.Drawing.dll</Value>
+        <Value Index="9">System.Dynamic.dll</Value>
+        <Value Index="10">System.Net.Http.dll</Value>
+        <Value Index="11">System.Runtime.dll</Value>
+        <Value Index="12">System.Runtime.InteropServices.WindowsRuntime.dll</Value>
+        <Value Index="13">System.Runtime.WindowsRuntime.dll</Value>
+        <Value Index="14">System.Windows.Forms.dll</Value>
+        <Value Index="15">System.Xaml.dll</Value>
+        <Value Index="16">System.Xml.Linq.dll</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>8</ActivityNameInt>
+      <ActivityID>45</ActivityID>
+      <PreviousActivities>
+        <ActivityID>37</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>39</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>36</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>37</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>391.25</Left>
+        <Top>200.1</Top>
+      </Location>
+      <Values>
+        <Value>1 &lt;= state.iterations</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>1</ActivityNameInt>
+      <ActivityID>47</ActivityID>
+      <PreviousActivities>
+        <ActivityID>39</ActivityID>
+      </PreviousActivities>
+      <NextActivities>
+        <ActivityID>41</ActivityID>
+        <ActivityID>71</ActivityID>
+      </NextActivities>
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>39</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines>
+        <GraphEdgeID>41</GraphEdgeID>
+        <GraphEdgeID>57</GraphEdgeID>
+      </OutgoingLines>
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>755</Left>
+        <Top>301.35</Top>
+      </Location>
+      <Values>
+        <Value>iterations</Value>
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>10</ActivityNameInt>
+      <ActivityID>48</ActivityID>
+      <PreviousActivities>
+        <ActivityID>35</ActivityID>
+      </PreviousActivities>
+      <NextActivities />
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>49</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines />
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>1620</Left>
+        <Top>827.6</Top>
+      </Location>
+      <Values>
+        <Value />
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>28</ActivityNameInt>
+      <ActivityID>66</ActivityID>
+      <PreviousActivities>
+        <ActivityID>33</ActivityID>
+      </PreviousActivities>
+      <NextActivities />
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>52</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines />
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>1266.25</Left>
+        <Top>940.1</Top>
+      </Location>
+      <Values>
+        <Value />
+      </Values>
+    </Activity>
+    <Activity IsFlipped="false">
+      <ActivityNameInt>28</ActivityNameInt>
+      <ActivityID>71</ActivityID>
+      <PreviousActivities>
+        <ActivityID>47</ActivityID>
+      </PreviousActivities>
+      <NextActivities />
+      <AlternateNextActivities />
+      <IncomingLines>
+        <GraphEdgeID>57</GraphEdgeID>
+      </IncomingLines>
+      <OutgoingLines />
+      <AlternateOutgoingLines />
+      <Location>
+        <Left>818.75</Left>
+        <Top>535.1</Top>
+      </Location>
+      <Values>
+        <Value />
+      </Values>
+    </Activity>
+  </ProgrammingPanel>
+  <Variables>
+    <Variable>
+      <VariableName>iterations</VariableName>
+      <VariableType>System.Int32</VariableType>
+    </Variable>
+  </Variables>
+  <UsedCustomActivityNames />
+</Program>
