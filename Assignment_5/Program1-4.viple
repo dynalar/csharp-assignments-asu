@@ -5,19 +5,19 @@
     <Variables />
     <Activity IsFlipped="false">
       <ActivityNameInt>44</ActivityNameInt>
-      <ActivityID>79</ActivityID>
+      <ActivityID>0</ActivityID>
       <PreviousActivities>
-        <ActivityID>85</ActivityID>
+        <ActivityID>6</ActivityID>
       </PreviousActivities>
       <NextActivities>
-        <ActivityID>80</ActivityID>
+        <ActivityID>1</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>63</GraphEdgeID>
+        <GraphEdgeID>0</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines>
-        <GraphEdgeID>64</GraphEdgeID>
+        <GraphEdgeID>1</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -82,21 +82,21 @@ public class OutputASCIICode : CodeUtilities.CodeBase
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>43</ActivityNameInt>
-      <ActivityID>80</ActivityID>
+      <ActivityID>1</ActivityID>
       <PreviousActivities>
-        <ActivityID>79</ActivityID>
+        <ActivityID>0</ActivityID>
       </PreviousActivities>
       <NextActivities>
-        <ActivityID>81</ActivityID>
-        <ActivityID>89</ActivityID>
+        <ActivityID>2</ActivityID>
+        <ActivityID>10</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>64</GraphEdgeID>
+        <GraphEdgeID>1</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines>
-        <GraphEdgeID>65</GraphEdgeID>
-        <GraphEdgeID>66</GraphEdgeID>
+        <GraphEdgeID>2</GraphEdgeID>
+        <GraphEdgeID>3</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -113,19 +113,19 @@ public class OutputASCIICode : CodeUtilities.CodeBase
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>44</ActivityNameInt>
-      <ActivityID>81</ActivityID>
+      <ActivityID>2</ActivityID>
       <PreviousActivities>
-        <ActivityID>80</ActivityID>
+        <ActivityID>1</ActivityID>
       </PreviousActivities>
       <NextActivities>
-        <ActivityID>88</ActivityID>
+        <ActivityID>9</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>65</GraphEdgeID>
+        <GraphEdgeID>2</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines>
-        <GraphEdgeID>67</GraphEdgeID>
+        <GraphEdgeID>4</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -194,19 +194,15 @@ public class DecryptASCIICode : CodeUtilities.CodeBase
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>1</ActivityNameInt>
-      <ActivityID>82</ActivityID>
-      <PreviousActivities>
-        <ActivityID>83</ActivityID>
-      </PreviousActivities>
+      <ActivityID>3</ActivityID>
+      <PreviousActivities />
       <NextActivities>
-        <ActivityID>86</ActivityID>
+        <ActivityID>7</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
-      <IncomingLines>
-        <GraphEdgeID>68</GraphEdgeID>
-      </IncomingLines>
+      <IncomingLines />
       <OutgoingLines>
-        <GraphEdgeID>69</GraphEdgeID>
+        <GraphEdgeID>6</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -218,43 +214,20 @@ public class DecryptASCIICode : CodeUtilities.CodeBase
       </Values>
     </Activity>
     <Activity IsFlipped="false">
-      <ActivityNameInt>12</ActivityNameInt>
-      <ActivityID>83</ActivityID>
-      <PreviousActivities />
-      <NextActivities>
-        <ActivityID>82</ActivityID>
-      </NextActivities>
-      <AlternateNextActivities />
-      <IncomingLines />
-      <OutgoingLines>
-        <GraphEdgeID>68</GraphEdgeID>
-      </OutgoingLines>
-      <AlternateOutgoingLines />
-      <Location>
-        <Left>84.046786042241</Left>
-        <Top>510.1</Top>
-      </Location>
-      <Values>
-        <Value Index="0">PromptDialog</Value>
-        <Value Index="1">Enter number of times to iterate.</Value>
-        <Value Index="2">1</Value>
-      </Values>
-    </Activity>
-    <Activity IsFlipped="false">
       <ActivityNameInt>2</ActivityNameInt>
-      <ActivityID>84</ActivityID>
+      <ActivityID>5</ActivityID>
       <PreviousActivities>
-        <ActivityID>86</ActivityID>
+        <ActivityID>7</ActivityID>
       </PreviousActivities>
       <NextActivities>
-        <ActivityID>87</ActivityID>
+        <ActivityID>8</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>70</GraphEdgeID>
+        <GraphEdgeID>7</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines>
-        <GraphEdgeID>71</GraphEdgeID>
+        <GraphEdgeID>8</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -262,24 +235,24 @@ public class DecryptASCIICode : CodeUtilities.CodeBase
         <Top>372.6</Top>
       </Location>
       <Values>
-        <Value>state.iterations - 1</Value>
+        <Value>state.iterations + 1</Value>
       </Values>
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>44</ActivityNameInt>
-      <ActivityID>85</ActivityID>
+      <ActivityID>6</ActivityID>
       <PreviousActivities>
-        <ActivityID>87</ActivityID>
+        <ActivityID>8</ActivityID>
       </PreviousActivities>
       <NextActivities>
-        <ActivityID>79</ActivityID>
+        <ActivityID>0</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>72</GraphEdgeID>
+        <GraphEdgeID>9</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines>
-        <GraphEdgeID>63</GraphEdgeID>
+        <GraphEdgeID>0</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -342,19 +315,19 @@ public class GenerateRandomSevenBits : CodeUtilities.CodeBase
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>8</ActivityNameInt>
-      <ActivityID>86</ActivityID>
+      <ActivityID>7</ActivityID>
       <PreviousActivities>
-        <ActivityID>82</ActivityID>
+        <ActivityID>3</ActivityID>
       </PreviousActivities>
       <NextActivities>
-        <ActivityID>84</ActivityID>
+        <ActivityID>5</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>69</GraphEdgeID>
+        <GraphEdgeID>6</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines>
-        <GraphEdgeID>70</GraphEdgeID>
+        <GraphEdgeID>7</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -362,26 +335,26 @@ public class GenerateRandomSevenBits : CodeUtilities.CodeBase
         <Top>198.85</Top>
       </Location>
       <Values>
-        <Value>1 &lt;= state.iterations</Value>
+        <Value>state.iterations &lt; 10</Value>
       </Values>
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>1</ActivityNameInt>
-      <ActivityID>87</ActivityID>
+      <ActivityID>8</ActivityID>
       <PreviousActivities>
-        <ActivityID>84</ActivityID>
+        <ActivityID>5</ActivityID>
       </PreviousActivities>
       <NextActivities>
-        <ActivityID>85</ActivityID>
-        <ActivityID>90</ActivityID>
+        <ActivityID>6</ActivityID>
+        <ActivityID>11</ActivityID>
       </NextActivities>
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>71</GraphEdgeID>
+        <GraphEdgeID>8</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines>
-        <GraphEdgeID>72</GraphEdgeID>
-        <GraphEdgeID>73</GraphEdgeID>
+        <GraphEdgeID>9</GraphEdgeID>
+        <GraphEdgeID>10</GraphEdgeID>
       </OutgoingLines>
       <AlternateOutgoingLines />
       <Location>
@@ -394,14 +367,14 @@ public class GenerateRandomSevenBits : CodeUtilities.CodeBase
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>10</ActivityNameInt>
-      <ActivityID>88</ActivityID>
+      <ActivityID>9</ActivityID>
       <PreviousActivities>
-        <ActivityID>81</ActivityID>
+        <ActivityID>2</ActivityID>
       </PreviousActivities>
       <NextActivities />
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>67</GraphEdgeID>
+        <GraphEdgeID>4</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines />
       <AlternateOutgoingLines />
@@ -415,14 +388,14 @@ public class GenerateRandomSevenBits : CodeUtilities.CodeBase
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>28</ActivityNameInt>
-      <ActivityID>89</ActivityID>
+      <ActivityID>10</ActivityID>
       <PreviousActivities>
-        <ActivityID>80</ActivityID>
+        <ActivityID>1</ActivityID>
       </PreviousActivities>
       <NextActivities />
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>66</GraphEdgeID>
+        <GraphEdgeID>3</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines />
       <AlternateOutgoingLines />
@@ -436,14 +409,14 @@ public class GenerateRandomSevenBits : CodeUtilities.CodeBase
     </Activity>
     <Activity IsFlipped="false">
       <ActivityNameInt>28</ActivityNameInt>
-      <ActivityID>90</ActivityID>
+      <ActivityID>11</ActivityID>
       <PreviousActivities>
-        <ActivityID>87</ActivityID>
+        <ActivityID>8</ActivityID>
       </PreviousActivities>
       <NextActivities />
       <AlternateNextActivities />
       <IncomingLines>
-        <GraphEdgeID>73</GraphEdgeID>
+        <GraphEdgeID>10</GraphEdgeID>
       </IncomingLines>
       <OutgoingLines />
       <AlternateOutgoingLines />
