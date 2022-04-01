@@ -17,10 +17,10 @@
 
         <!-- Weather data will be displayed below -->
         <FlexLayout>
-            <Label x:Name="CachedLabel" Text="Data from cache?: " />
-            <Label x:Name="CachedValue" Text="false" />
+            <Label x:Name="CachedLabel" Text="Data from cache?: " FontAttributes="Bold" FontSize="18"/>
+            <Label x:Name="CachedValue" Text="false" FontSize="18"/>
         </FlexLayout>
-        <Label Text="Weather Report" FontSize="Title"/>
+        <Label Text="Weather Report" FontSize="Title" FontAttributes="Bold"/>
         <FlexLayout>
             <Label x:Name="ConditionsLabel" Text="Conditions: " />
             <Label x:Name="ConditionsValue" Text="N/A" />
@@ -39,7 +39,7 @@
         </FlexLayout>
 
         <!-- Location data will be displayed below -->
-        <Label Text="Your Current Location" FontSize="Title"/>
+        <Label Text="Your Current Location" FontSize="Title" FontAttributes="Bold"/>
         <FlexLayout>
             <Label x:Name="LocationLabel" Text="Zip Code Location: " />
             <Label x:Name="LocationValue" Text="N/A" />

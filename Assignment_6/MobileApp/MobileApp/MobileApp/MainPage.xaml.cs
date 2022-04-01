@@ -1,11 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -21,12 +16,21 @@ namespace MobileApp
         public string fromCache = "false";
 
         // API endpoints
-        private const string googleMapsGeocodingEndpoint = "";
-        private const string weatherApiEndpoint = "";
+        private const string googleMapsGeocodingEndpoint = "https://maps.googleapis.com/maps/api/geocode/json";
+        private const string weatherApiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
 
         // bad practice to store API keys here in the real world, but for our purposes it's ok.
-        private const string openWeatherMapAPIKey = "3a16025f3740884e31385c79e3b9588c";
-        private const string googleMapsAPIKey = "AIzaSyCV5pTKtfwl2Is_GVpGvVAboogc3RXSfUQ";
+        private const string openWeatherMapAPIKey = "c641aea47c7d362af597c57e28c2aeb5";
+        private const string googleMapsAPIKey = "AIzaSyClXnOanbBNWulSvYF7wOqyoZJ2pKBYtwI";
+
+        // data to send to xaml layout
+        public string latitude;
+        public string longitude;
+        public string address;
+        public string currentConditions;
+        public string currentTemp;
+        public string minTemp;
+        public string maxTemp;
 
         public MainPage()
         {
@@ -48,42 +52,24 @@ namespace MobileApp
             string geocodeResponseString;
             string weatherResponseString;
 
-            // data to send to xaml layout
-            string latitude;
-            string longitude;
-            string address;
-            string currentConditions;
-            string currentTemp;
-            string minTemp;
-            string maxTemp;
-
             // if cached data is present, just get the items from the cache and set the variables.
             // display immediately and halt execution.
+            // zip code is used as the key for searching if it has associated cache data
             JObject cachedData = GetCacheData<JObject>(ZipCodeEntry.Text);
 
             // check if the cache has data, if it does then display to the app and stop execution.
             if (cachedData != null)
             {
-                latitude = (string)cachedData.SelectToken("latitude");
-                longitude = (string)cachedData.SelectToken("longitude");
-                address = (string)cachedData.SelectToken("address");
-                currentConditions = (string)cachedData.SelectToken("currentConditions");
-                currentTemp = (string)cachedData.SelectToken("currentTemp");
-                minTemp = (string)cachedData.SelectToken("minTemp");
-                maxTemp = (string)cachedData.SelectToken("maxTemp");
-
-                // weather data displayed here
-                ConditionsValue.Text = currentConditions;
-                TempValue.Text = currentTemp;
-                MinTempValue.Text = minTemp;
-                MaxTempValue.Text = maxTemp;
-
-                // location data displayed here
-                LatitudeValue.Text = latitude;
-                LongitudeValue.Text = longitude;
-                LocationValue.Text = address;
-
-                // display that the data came from the cache
+                // if we have cache data, get values from cache and display them
+                LatitudeValue.Text = (string)cachedData.SelectToken("latitude");
+                LongitudeValue.Text = (string)cachedData.SelectToken("longitude");
+                LocationValue.Text = (string)cachedData.SelectToken("address");
+                ConditionsValue.Text = (string)cachedData.SelectToken("currentConditions");
+                TempValue.Text = (string)cachedData.SelectToken("currentTemp");
+                MinTempValue.Text = (string)cachedData.SelectToken("minTemp");
+                MaxTempValue.Text = (string)cachedData.SelectToken("maxTemp");
+                
+                // display to front end if data came from cache.
                 CachedValue.Text = fromCache;
 
                 return;
@@ -115,7 +101,7 @@ namespace MobileApp
                 minTemp = (string)weatherDataObject.SelectToken("main.temp_min") + " °F";
                 maxTemp = (string)weatherDataObject.SelectToken("main.temp_max") + " °F";
 
-                // create json object for caching. we will always cache data
+                // create json object for caching. we will always cache data when we do an API call.
                 JObject cacheData = new JObject
                 {
                     ["latitude"] = latitude,
@@ -128,17 +114,16 @@ namespace MobileApp
                 };
 
                 // set to the cache once we have all data ready
-                SetCacheData(ZipCodeEntry.Text, cacheData);
+                // expiration time is set to 10 seconds.
+                SetCacheData(ZipCodeEntry.Text, cacheData, TimeSpan.FromSeconds(expirationTime));
             }
             catch (HttpRequestException ex)
             {
-                geocodeResponseString = ex.ToString();
-
                 LatitudeValue.Text = "No Location Found";
                 LongitudeValue.Text = "No Longitude Found";
                 LocationValue.Text = "No Latitude Found";
 
-                ConditionsValue.Text = "Conditions Not Available";
+                ConditionsValue.Text = ex.ToString();
                 TempValue.Text = "Current Temperature Not Available";
                 MinTempValue.Text = "Min Temp Not Available";
                 MaxTempValue.Text = "Max Temp Not Available";
@@ -159,11 +144,13 @@ namespace MobileApp
             CachedValue.Text = fromCache;
         }
 
-        public void SetCacheData<T>(string key, T value)
+        // set the cache data to our memory cache
+        public void SetCacheData<T>(string key, T value, TimeSpan expiration)
         {
-            _cache.Set(key, value);
+            _cache.Set(key, value, expiration);
         }
 
+        // get the cached data from memory
         public T GetCacheData<T>(string key)
         {
             if(_cache.TryGetValue(key, out T value))
