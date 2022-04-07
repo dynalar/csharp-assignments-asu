@@ -1,4 +1,4 @@
-Subject,Course,CourseId,Title,Location,Instructor
+Subject,Code,CourseId,Title,Location,Instructor
 "Aerospace Engineering","MAE 201",89800,"Mech. Particles/Rigid Bodies I","ASU Online","Stefanaki"
 "Electrical Engineering","EEE 352",77404,"Properties Electronic Material","ASU Online","Zhang"
 "Computer Science and Engineering","CSE 511",81661,"Data Processing at Scale","ASU Online","Ghayekhloo"
