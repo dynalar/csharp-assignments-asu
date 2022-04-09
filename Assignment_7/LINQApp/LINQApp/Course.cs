@@ -8,7 +8,7 @@ namespace LINQApp
 {
     internal class Course
     {
-        public Course(string subject, string code, int courseId, string title, string location, string instructor)
+        public Course(string subject, int code, int courseId, string title, string location, string instructor)
         {
             Subject = subject;
             Code = code;
@@ -20,7 +20,7 @@ namespace LINQApp
 
         public string Subject { get; set; }
 
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         public int CourseId { get; set; }
         

@@ -8,12 +8,49 @@ namespace LINQApp
 {
     internal class Program
     {
+        // main method will contain all of our solutions.
         static void Main(string[] args)
         {
             // create our array of course objects
-            Course[] courseArray = createCourseArray();
 
-            
+            // Question 1.1
+            Course[] Courses = createCourseArray();
+
+            // Question 1.2a
+            IEnumerable<Course> coursesQuery =
+                from c in Courses
+                    where c.Subject.Contains("IEE")
+                    where c.Code >= 300
+                select c;
+
+            Console.WriteLine("Question 1.2a Output:\n");
+            foreach(Course item in coursesQuery)
+            {
+                Console.WriteLine(
+                    "Subject: {0}, Code: {1}, Course ID: {2}, Title: {3}, Location: {4}, Instructor: {5}",
+                    item.Subject, item.Code, item.CourseId, item.Title, item.Location, item.Instructor
+                );
+            }
+            Console.WriteLine("\n");
+
+            // Question 1.2b
+            Console.WriteLine("Question 1.2b Output:\n");
+            var coursesQueryLevels =
+                from c in Courses
+                    group c by c.Subject into subjectGroup
+                from codeGroup in (from c in subjectGroup group c by c.Code) 
+                    group codeGroup by subjectGroup.Key;
+
+            foreach(var levelTwoGroup in coursesQueryLevels)
+            {
+                Console.WriteLine($"Subject = {levelTwoGroup.Key}");
+                foreach(var levelOneGroup in levelTwoGroup)
+                {
+                    Console.WriteLine($"\tCourse Code: {levelOneGroup.Key}");
+                }
+            }
+
+            Console.ReadLine();
         }
 
         static Course[] createCourseArray()
@@ -52,7 +89,7 @@ namespace LINQApp
                     // write the columns to our array of course objects
                     courseArray[arrayIndex] = new Course(
                         columns[0],
-                        columns[1],
+                        Int32.Parse(columns[1]),
                         Int32.Parse(columns[2]),
                         columns[3],
                         columns[4],
@@ -73,7 +110,7 @@ namespace LINQApp
         {
             var stream = new System.IO.StreamReader("App_Data/Courses.csv");
 
-            int lineCount = 1;
+            int lineCount = -1;
 
             string lineString = stream.ReadLine();
 
