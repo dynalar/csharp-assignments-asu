@@ -31,7 +31,7 @@ namespace LINQApp
             foreach (Course item in coursesQuery)
             {
                 Console.WriteLine(
-                    "Course Title: {0}, Location: {1}",
+                    "Course Title: {0}, Instructor: {1}",
                     item.Title, item.Instructor
                 );
             }
@@ -142,10 +142,10 @@ namespace LINQApp
                     courseArray[arrayIndex] = new Course(
                         subject: columns[0],
                         code: Int32.Parse(columns[1]),
-                        courseId: Int32.Parse(columns[2]),
-                        title: columns[3],
-                        location: columns[4],
-                        instructor: columns[5]
+                        title: columns[2],
+                        courseId: Int32.Parse(columns[3]),
+                        instructor: columns[4],
+                        location: columns[8]
                     );
                     
                     // read the next line
