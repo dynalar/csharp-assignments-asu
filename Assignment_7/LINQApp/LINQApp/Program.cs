@@ -11,16 +11,19 @@ namespace LINQApp
         // main method will contain all of our solutions.
         static void Main(string[] args)
         {
-            // create our array of course objects
-
-            // Question 1.1
+            //////////////////
+            // Question 1.1 //
+            //////////////////
             Course[] Courses = createCourseArray();
 
-            // Question 1.2a
+            ///////////////////
+            // Question 1.2a //
+            ///////////////////
             IEnumerable<Course> coursesQuery =
                 from c in Courses
                     where c.Subject.Contains("IEE")
                     where c.Code >= 300
+                    orderby c.Instructor ascending
                 select c;
 
             Console.WriteLine("Question 1.2a Output:\n");
@@ -33,23 +36,28 @@ namespace LINQApp
             }
             Console.WriteLine("\n");
 
-            // Question 1.2b
+            ///////////////////
+            // Question 1.2b //
+            ///////////////////
             Console.WriteLine("Question 1.2b Output:\n");
             var coursesQueryLevels =
                 from c in Courses
                     group c by c.Subject into subjectGroup
-                from codeGroup in (from c in subjectGroup group c by c.Code) 
-                    group codeGroup by subjectGroup.Key;
+                where subjectGroup.Count() >= 2
+                from codeGroup in (from c in subjectGroup group c by c.Code)
+            group codeGroup by subjectGroup.Key;
 
-            foreach(var levelTwoGroup in coursesQueryLevels)
+            foreach(var level1 in coursesQueryLevels)
             {
-                Console.WriteLine($"Subject = {levelTwoGroup.Key}");
-                foreach(var levelOneGroup in levelTwoGroup)
+                Console.WriteLine($"Subject = {level1.Key}");
+                foreach(var level2 in level1)
                 {
-                    Console.WriteLine($"\tCourse Code: {levelOneGroup.Key}");
+                    Console.WriteLine($"\tCourse Code: {level2.Key}");
                 }
             }
 
+            Console.WriteLine("\n");
+            Console.WriteLine("Hit ENTER to quit the program.");
             Console.ReadLine();
         }
 

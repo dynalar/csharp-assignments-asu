@@ -5,6 +5,7 @@ Subject,Code,CourseId,Title,Location,Instructor
 "MAT",343,88986,"Applied Linear Algebra","ASU Online","Platte"
 "MAT",275,87793,"Modern Differential Equations","ASU Online","Renaut"
 "EEE",407,70560,"Digital Signal Processing","ASU Online","Spanias"
+"SOC",333,84110,"Population","Tempe - BDH201","Cotton"
 "EEE",448,88111,"Fiber Optics","ASU Online","Palais"
 "CSE",572,89271,"Data Mining","ASU Online","Staff"
 "CSE",551,85190,"Foundations of Algorithms","ASU Online","Ghayekhloo"
@@ -13,3 +14,4 @@ Subject,Code,CourseId,Title,Location,Instructor
 "IEE",210,70813,"Intro to Industrial Engineering","CAVC 359","Yauch"
 "IEE",200,71717,"Industrial Engineering Primer","CAVC 209","Yauch"
 "IEE",470,89191,"Stochastic Operations Research","BYAC 270","Yan"
+"ART",107,95859,"Photography As Experience","iCourse","Czajkowski"
