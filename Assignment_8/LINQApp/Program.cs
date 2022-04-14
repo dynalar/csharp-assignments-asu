@@ -61,7 +61,7 @@ namespace LINQApp
                 XmlRootAttribute rootNode = new XmlRootAttribute("Courses");
                 XmlSerializer courseSerializer = new XmlSerializer(courseList.GetType(), rootNode);
 
-                Console.WriteLine("In-memory array created with XML of course objects. \n");
+                Console.WriteLine("In-memory xml file created with course objects. \n");
 
                 ////////////////////
                 /// Question 2.2 ///
