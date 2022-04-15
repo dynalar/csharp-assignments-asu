@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
@@ -16,6 +17,9 @@ namespace LINQApp
             {
                 // set delimiter
                 char _Delimiter = ',';
+
+                // app_data directory path for this project.
+                string AppDataPath = Directory.GetCurrentDirectory() + "\\App_Data\\Courses.xml";
 
                 // define empty list of course objects
                 List<Course> courseList = new List<Course>();
@@ -52,11 +56,10 @@ namespace LINQApp
                 }
 
 
-
                 ////////////////////
                 /// Question 2.1 ///
                 ////////////////////
-                /// Creates in memory xml with course objects
+                /// Creates in memory xml file with course objects
                 
                 XmlRootAttribute rootNode = new XmlRootAttribute("Courses");
                 XmlSerializer courseSerializer = new XmlSerializer(courseList.GetType(), rootNode);
@@ -74,10 +77,19 @@ namespace LINQApp
 
                 Console.WriteLine(
                     "Courses.xml written to {0} in current project directory. \n",
-                    Directory.GetCurrentDirectory() + "\\App_Data\\Courses.xml"
+                    AppDataPath
                 );
 
+                ////////////////////
+                /// Question 2.3a //
+                ////////////////////
+                // open xml file from storage and query it.
+                
+                XElement coursesXelement = XElement.Load(AppDataPath);
 
+                IEnumerable<XElement> courseEnumerable =
+                    from course in coursesXelement.Elements("Course")
+                    
 
 
                 Console.WriteLine("Press ENTER to end program...");
