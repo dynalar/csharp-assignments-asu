@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -85,18 +83,21 @@ namespace LINQApp
                 /// Question 2.3a //
                 ////////////////////
                 // open xml file from storage and query it, store in enumerable
+
                 Console.WriteLine("Question 2.3a Output:\n");
                 Console.WriteLine("-----------------------------\n");
 
+                // open up our xml file
                 XElement coursesXelement = XElement.Load(AppDataPath);
 
                 IEnumerable<XElement> courseEnumerable =
-                    from courseEl in coursesXelement.Elements("Course")
-                        where (string)courseEl.Element("Subject") == "\"CPI\""
-                        where (Int32)courseEl.Element("CourseCode") >= 200
-                        orderby (string)courseEl.Element("Instructor") ascending
-                    select courseEl;
+                    from courseElement in coursesXelement.Elements("Course")
+                        where (string)courseElement.Element("Subject") == "\"CPI\""
+                        where (Int32)courseElement.Attribute("CourseCode") >= 200
+                        orderby (string)courseElement.Element("Instructor") ascending
+                    select courseElement;
 
+                // freehanding the XML output, just because it's of a IEnumerable data type.
                 foreach (XElement courseEnum in courseEnumerable)
                 {
                     Console.WriteLine("<Course>");
@@ -111,20 +112,43 @@ namespace LINQApp
                 ////////////////////
                 /// Question 2.3b //
                 ////////////////////
-                // open xml file from storage and query it, store in enumerable
+                // retrieves courses in two levels, first level is course subject and second are the course codes.
                 Console.WriteLine("Question 2.3b Output:\n");
                 Console.WriteLine("------------------------------\n");
 
-                var coursesCodeQuery =
-                    from courseElement in coursesXelement.Elements("Course")
-                        group courseElement by courseElement.Element("Subject") into subjectGroup
-                    where subjectGroup.Elements().Count() >= 7
-                    group subjectGroup by subjectGroup.Key;
+                // opening another instance of this file, just for safety purposes
+                XElement xElementCourse = XElement.Load(AppDataPath);
 
-                foreach (var level1 in coursesCodeQuery)
-                {
-                    Console.WriteLine($"Subject = {level1.Key}");
-                }
+                // query groups everything into sublevels, and prints out courses that have only 2 or more in
+                // the second level group.
+                // I am outputting everything as an XElement, nicer because I don't have to iterate through output for the console.
+                var coursesCodeQuery =
+                    new XElement("AllCourses", 
+                        from courseElement in xElementCourse.Elements("Course")
+                        group courseElement by (string)courseElement.Element("Subject") into subjectGroup
+                        where subjectGroup.Count() >= 2
+                        select new XElement("CourseSubject",
+                            new XAttribute("Subject", subjectGroup.Key.Replace("\"", "")),
+                            from g in subjectGroup
+                            select new XElement("Course",
+                                g.Attribute("CourseCode")
+                            )
+                        )
+                    );
+
+                // write out our newly created xml document from our query
+                Console.WriteLine(coursesCodeQuery);
+                Console.WriteLine("\n");
+
+
+                ////////////////////
+                /// Question 2.4 ///
+                ////////////////////
+                // open xml file from storage and query it, store in enumerable
+                Console.WriteLine("Question 2.4 Output:\n");
+                Console.WriteLine("------------------------------\n");
+
+                //IEnumerable<XElement> courseEnumerable = 
 
 
                 Console.WriteLine("Press ENTER to end program...");

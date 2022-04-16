@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace LINQApp
 {
@@ -18,6 +19,7 @@ namespace LINQApp
 
         public string Title { get; set; }
 
+        [XmlAttribute("CourseCode")]
         public string CourseCode { get; set; }
         
         public string Location { get; set; }
