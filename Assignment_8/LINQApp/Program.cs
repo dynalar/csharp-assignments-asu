@@ -45,6 +45,7 @@ namespace LINQApp
                         new Course
                         {
                             CourseId = columns[3],
+                            Subject = columns[0],
                             Title = columns[2],
                             CourseCode = columns[1],
                             Location = columns[8],
@@ -83,13 +84,47 @@ namespace LINQApp
                 ////////////////////
                 /// Question 2.3a //
                 ////////////////////
-                // open xml file from storage and query it.
-                
+                // open xml file from storage and query it, store in enumerable
+                Console.WriteLine("Question 2.3a Output:\n");
+                Console.WriteLine("-----------------------------\n");
+
                 XElement coursesXelement = XElement.Load(AppDataPath);
 
                 IEnumerable<XElement> courseEnumerable =
-                    from course in coursesXelement.Elements("Course")
-                    
+                    from courseEl in coursesXelement.Elements("Course")
+                        where (string)courseEl.Element("Subject") == "\"CPI\""
+                        where (Int32)courseEl.Element("CourseCode") >= 200
+                        orderby (string)courseEl.Element("Instructor") ascending
+                    select courseEl;
+
+                foreach (XElement courseEnum in courseEnumerable)
+                {
+                    Console.WriteLine("<Course>");
+                    Console.WriteLine("\t" + courseEnum.Element("Instructor"));
+                    Console.WriteLine("\t" + courseEnum.Element("Title"));
+                    Console.WriteLine("</Course>");
+                }
+
+                Console.WriteLine("\n");
+
+
+                ////////////////////
+                /// Question 2.3b //
+                ////////////////////
+                // open xml file from storage and query it, store in enumerable
+                Console.WriteLine("Question 2.3b Output:\n");
+                Console.WriteLine("------------------------------\n");
+
+                var coursesCodeQuery =
+                    from courseElement in coursesXelement.Elements("Course")
+                        group courseElement by courseElement.Element("Subject") into subjectGroup
+                    where subjectGroup.Elements().Count() >= 7
+                    group subjectGroup by subjectGroup.Key;
+
+                foreach (var level1 in coursesCodeQuery)
+                {
+                    Console.WriteLine($"Subject = {level1.Key}");
+                }
 
 
                 Console.WriteLine("Press ENTER to end program...");

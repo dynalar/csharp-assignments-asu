@@ -14,6 +14,8 @@ namespace LINQApp
 
         public string CourseId { get; set; }
 
+        public string Subject { get; set; }
+
         public string Title { get; set; }
 
         public string CourseCode { get; set; }
