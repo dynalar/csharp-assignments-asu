@@ -19,7 +19,6 @@ namespace LINQApp
 
         public string Title { get; set; }
 
-        [XmlAttribute("CourseCode")]
         public string CourseCode { get; set; }
         
         public string Location { get; set; }

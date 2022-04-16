@@ -93,7 +93,7 @@ namespace LINQApp
                 IEnumerable<XElement> courseEnumerable =
                     from courseElement in coursesXelement.Elements("Course")
                         where (string)courseElement.Element("Subject") == "\"CPI\""
-                        where (Int32)courseElement.Attribute("CourseCode") >= 200
+                        where (Int32)courseElement.Element("CourseCode") >= 200
                         orderby (string)courseElement.Element("Instructor") ascending
                     select courseElement;
 
@@ -131,7 +131,7 @@ namespace LINQApp
                             new XAttribute("Subject", subjectGroup.Key.Replace("\"", "")),
                             from g in subjectGroup
                             select new XElement("Course",
-                                g.Attribute("CourseCode")
+                                g.Element("CourseCode")
                             )
                         )
                     );
@@ -147,6 +147,8 @@ namespace LINQApp
                 // open xml file from storage and query it, store in enumerable
                 Console.WriteLine("Question 2.4 Output:\n");
                 Console.WriteLine("------------------------------\n");
+
+                // bring in the xelement xml file and the instructors csv data source
 
                 //IEnumerable<XElement> courseEnumerable = 
 
