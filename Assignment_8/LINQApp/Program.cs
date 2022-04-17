@@ -54,15 +54,13 @@ namespace LINQApp
                     line = textReader.ReadLine();
                 }
 
-                // Create XML file for instructors, will be used for question 2.4
-                CreateInMemoryInstructorsXmlFile();
-
                 ////////////////////
                 /// Question 2.1 ///
                 ////////////////////
-                /// Creates in memory xml file with course objects
-
+                
+                // created a root node of courses for our xml object
                 XmlRootAttribute rootNode = new XmlRootAttribute("Courses");
+                // XML serializer converts our list of Course objects to XML
                 XmlSerializer courseSerializer = new XmlSerializer(courseList.GetType(), rootNode);
 
                 Console.WriteLine("In-memory xml file created with course objects. \n");
@@ -70,8 +68,8 @@ namespace LINQApp
                 ////////////////////
                 /// Question 2.2 ///
                 ////////////////////
-                // create xml file, add serialized XML content, and close it.
-
+                
+                // creates a Courses.xml file, and writes data to file from our previous question
                 FileStream coursesFile = File.Create("App_Data/Courses.xml");
                 courseSerializer.Serialize(coursesFile, courseList);
                 coursesFile.Close();
@@ -92,6 +90,7 @@ namespace LINQApp
                 // open up our xml file
                 XElement coursesXelement = XElement.Load(AppDataPath + "Courses.xml");
 
+                // query our xelement
                 IEnumerable<XElement> courseEnumerable =
                     from courseElement in coursesXelement.Elements("Course")
                         where (string)courseElement.Element("Subject") == "\"CPI\""
@@ -117,7 +116,6 @@ namespace LINQApp
                 ////////////////////
                 /// Question 2.3b //
                 ////////////////////
-                // retrieves courses in two levels, first level is course subject and second are the course codes.
                 Console.WriteLine("Question 2.3b Output:\n");
                 Console.WriteLine("------------------------------\n");
 
@@ -149,27 +147,27 @@ namespace LINQApp
                 ////////////////////
                 /// Question 2.4 ///
                 ////////////////////
-                // open xml file from storage and query it, store in enumerable
                 Console.WriteLine("Question 2.4 Output:\n");
                 Console.WriteLine("------------------------------\n");
 
-                // bring in the xelement xml file and the instructors xml data source
+                // bring in the xml data source, and the list we made for instructors.
                 XElement courseElements = XElement.Load(AppDataPath + "Courses.xml");
-                XElement instructorElements = XElement.Load(AppDataPath + "Instructors.xml");
+                List<Instructor> Instructors = CreateInstructorsList();
 
+                // query both the course Xelement and instructors list at the same time
                 IEnumerable<XElement> courseInstructorEnumerable =
                         from course in courseElements.Elements("Course")
-                        join instructor in instructorElements.Elements("Instructor")
-                            on (string)course.Element("Instructor") equals (string)instructor.Element("InstructorName")
+                        join instructor in Instructors
+                            on (string)course.Element("Instructor") equals (string)instructor.InstructorName
                         where (Int32)course.Element("CourseCode") >= 200 && (Int32)course.Element("CourseCode") <= 299
                         orderby (Int32)course.Element("CourseCode") ascending
                         select new XElement("Course", 
-                            instructor.Element("Email"),
+                            new XElement("Email", instructor.Email),
                             course.Element("Subject"),
                             course.Element("CourseCode")
                         );
 
-
+                // output everything to the console
                 foreach (XElement courseInstructorEnum in courseInstructorEnumerable)
                 {
                     Console.WriteLine("<Course>");
@@ -185,18 +183,15 @@ namespace LINQApp
             }
         }
 
-        public static void CreateInMemoryInstructorsXmlFile()
+        // method generates a list of instructors, added an Instructor class to handle the data.
+        public static List<Instructor> CreateInstructorsList()
         {
+            List<Instructor> instructorList = new List<Instructor>();
+
             using (var textReader = new StreamReader("App_Data/Instructors.csv"))
             {
                 // set delimiter
                 char _Delimiter = ',';
-
-                // app_data directory path for this project.
-                string AppDataPath = Directory.GetCurrentDirectory() + "\\App_Data\\Instructors.xml";
-
-                // define empty list of course objects
-                List<Instructor> instructorList = new List<Instructor>();
 
                 // start at the first line of the text file
                 string line = textReader.ReadLine();
@@ -215,27 +210,20 @@ namespace LINQApp
                     String[] columns = line.Split(_Delimiter);
 
                     // add course object to course list
+                    // adds an empty string if nothing is found for emails
                     instructorList.Add(
-                        new Instructor
-                        {
-                            InstructorName = columns[0],
-                            OfficeNumber = columns[1],
-                            Email = columns[2]
-                        }
+                        new Instructor(
+                            instructorName: columns[0],
+                            officeNumber: columns[1],
+                            email: columns[2].ToString().Length == 0 ? "\"\"" : columns[2].ToString()
+                        )
                     );
+
 
                     line = textReader.ReadLine();
                 }
-
-                // serialize the list of xml from a list to xml
-                XmlRootAttribute rootNode = new XmlRootAttribute("Instructors");
-                XmlSerializer courseSerializer = new XmlSerializer(instructorList.GetType(), rootNode);
-
-                // save the data in memory to a file in storage.
-                FileStream coursesFile = File.Create("App_Data/Instructors.xml");
-                courseSerializer.Serialize(coursesFile, instructorList);
-                coursesFile.Close();
             }
+            return instructorList;
         }
     }
 }

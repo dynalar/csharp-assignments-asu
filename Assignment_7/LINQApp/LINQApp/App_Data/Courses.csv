@@ -30,7 +30,7 @@ Subject,Code,Title,CourseId,Instructor,Days,Start,End,Location,Dates,Units,Enrol
 "CSE",110,Principles of Programming,20770,Suthar,M W,3:00 PM,4:15 PM,Poly - PRLTA202,01/11 - 04/23(C),3,10of39
 "CSE",120,Digital Design Fundamentals,28566,Millman,T Th,1:30 PM,2:45 PM,Tempe - SCOB210,01/11 - 04/23(C),3,1of58
 "CSE",120,Laboratory,28567,Millman,,,,Tempe - TBA,01/11 - 04/23(C),0,1of58
-"CSE",205,Object-Oriented Program & Data,12605,Feng,M W F,8:00 AM,8:50 AM,ASU Sync Only,01/11 - 04/23(C),3,94of166
+"CSE",205,Object-Oriented Program & Data,12605,Staff,M W F,8:00 AM,8:50 AM,ASU Sync Only,01/11 - 04/23(C),3,94of166
 "CSE",205,Object-Oriented Program & Data,15818,Feng,M W F,12:20 PM,1:10 PM,ASU Sync Only,01/11 - 04/23(C),3,78of166
 "CSE",205,Object-Oriented Program & Data,11206,Hsiao,M W F,11:15 AM,12:05 PM,ASU Sync Only,01/11 - 04/23(C),3,70of166
 "CSE",205,Object-Oriented Program & Data,33115,Hsiao,M W F,11:15 AM,12:05 PM,Tempe - SHESC340,01/11 - 04/23(C),3,46of50
