@@ -51,9 +51,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="App_Data\Courses.csv" />
-    <None Include="App_Data\Instructors.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="App_Data\Instructors.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

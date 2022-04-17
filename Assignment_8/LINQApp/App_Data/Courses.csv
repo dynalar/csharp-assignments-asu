@@ -36,6 +36,7 @@ Subject,Code,Title,CourseId,Instructor,Days,Start,End,Location,Dates,Units,Enrol
 "CSE",205,Object-Oriented Program & Data,33115,Hsiao,M W F,11:15 AM,12:05 PM,Tempe - SHESC340,01/11 - 04/23(C),3,46of50
 "CSE",205,Object-Oriented Program & Data,15466,Osburn,M W,4:30 PM,5:45 PM,ASU Sync Only,01/11 - 04/23(C),3,8of166
 "CSE",205,Object-Oriented Program & Data,20773,Osburn,T Th,10:30 AM,11:45 AM,Poly - AGBC154,01/11 - 04/23(C),3,13of80
+"CSE",205,Object-Oriented Program & Data,20773,Staff,T Th,10:30 AM,11:45 AM,Poly - AGBC154,01/11 - 04/23(C),3,13of80
 "CSE",205,Object-Oriented Program & Data,11272,Tadayon-Navabi,T Th,4:30 PM,5:45 PM,ASU Sync Only,01/11 - 04/23(C),3,41of166
 "CSE",205,Object-Oriented Program & Data,11282,Tadayon-Navabi,T Th,9:00 AM,10:15 AM,ASU Sync Only,01/11 - 04/23(C),3,11of166
 "CSE",205,Object-Oriented Program & Data,19341,Tadayon-Navabi,T Th,1:30 PM,2:45 PM,ASU Sync Only,01/11 - 04/23(C),3,4of166
@@ -43,10 +44,12 @@ Subject,Code,Title,CourseId,Instructor,Days,Start,End,Location,Dates,Units,Enrol
 "CSE",205,Object-Oriented Program & Data,33117,Tadayon-Navabi,T Th,9:00 AM,10:15 AM,Tempe - CAVC351,01/11 - 04/23(C),3,8of50
 "CSE",220,Programming for Computer Engr,11243,"Farazi,Wang",T Th,1:30 PM,2:45 PM,ASU Sync Only,01/11 - 04/23(C),3,110of175
 "CSE",230,Computer Org/Assemb Lang Prog,20774,Burger,T Th,12:00 PM,1:15 PM,Poly - AGBC115,01/11 - 04/23(C),3,24of72
+"CSE",235,Computer Org/Assemb Lang Prog,20774,Staff,T Th,12:00 PM,1:15 PM,Poly - AGBC115,01/11 - 04/23(C),3,24of72
 "CSE",230,Computer Org/Assemb Lang Prog,33122,Nakamura,M W,10:30 AM,11:45 AM,Tempe - DISCVRY350,01/11 - 04/23(C),3,1of35
 "CSE",230,Computer Org/Assemb Lang Prog,29751,Vrudhula,T Th,9:00 AM,10:15 AM,ASU Sync Only,01/11 - 04/23(C),3,16of169
 "CSE",240,Intro to Programming Languages,13536,Chen,T Th,4:30 PM,5:45 PM,ASU Sync Only,01/11 - 04/23(C),3,120of200
 "CSE",240,Intro to Programming Languages,26611,Chen,T Th,1:30 PM,2:45 PM,ASU Sync Only,01/11 - 04/23(C),3,65of200
+"CSE",240,Intro to Programming Languages,26611,Staff,T F,1:30 PM,2:45 PM,ASU Sync Only,01/11 - 04/23(C),3,65of200
 "CSE",240,Intro to Programming Languages,33391,Chen,T Th,4:30 PM,5:45 PM,Tempe - COOR120,01/11 - 04/23(C),3,25of50
 "CSE",240,Intro to Programming Languages,33392,Chen,T Th,1:30 PM,2:45 PM,Tempe - BYAC270,01/11 - 04/23(C),3,2of50
 "CSE",259,Logic in Computer Science,19998,Osburn,M W,12:00 PM,1:15 PM,Tempe - COOR199,01/11 - 04/23(C),3,14of86

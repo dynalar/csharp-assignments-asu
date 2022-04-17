@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<Instructors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Instructor>
+    <InstructorName>Platte</InstructorName>
+    <OfficeNumber>GWC 634</OfficeNumber>
+    <Email>rodrigo.platte@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Renaut</InstructorName>
+    <OfficeNumber>GWC 652</OfficeNumber>
+    <Email>renaut@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Akbari</InstructorName>
+    <OfficeNumber>BYENG 486</OfficeNumber>
+    <Email>Akbari@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Chakati</InstructorName>
+    <OfficeNumber>BYENG 394</OfficeNumber>
+    <Email>Chakati@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Yauch</InstructorName>
+    <OfficeNumber>TEMPE - BDH201</OfficeNumber>
+    <Email>dyauch@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Ghayekhloo</InstructorName>
+    <OfficeNumber>BYENG 514</OfficeNumber>
+    <Email>samira.ghayekhloo@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Stefanaki</InstructorName>
+    <OfficeNumber>TEMPE BDH154</OfficeNumber>
+    <Email>astefan9@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Cotton</InstructorName>
+    <OfficeNumber>TEMPE - BDH221</OfficeNumber>
+    <Email>cassandra.cotton@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Palais</InstructorName>
+    <OfficeNumber>TEMPE - GWC224</OfficeNumber>
+    <Email>joseph.palais@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Tadayon-Navabi</InstructorName>
+    <OfficeNumber>TEMPE - BYENG518</OfficeNumber>
+    <Email>navabi@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Spanias</InstructorName>
+    <OfficeNumber>TEMPE - GWC411</OfficeNumber>
+    <Email>spanias@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Jennings</InstructorName>
+    <OfficeNumber />
+    <Email>sarah.e.jennings@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Juarez</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>joseph.juarez@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Mudiam</InstructorName>
+    <OfficeNumber>TEMPE - LSA114</OfficeNumber>
+    <Email>Mudiam@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Sefair</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>sefair@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Zhang</InstructorName>
+    <OfficeNumber>ERC117</OfficeNumber>
+    <Email>yhzhang@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Torres</InstructorName>
+    <OfficeNumber>TEMPE - C401</OfficeNumber>
+    <Email>cit@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Loughman</InstructorName>
+    <OfficeNumber>TEMPE - Music Building</OfficeNumber>
+    <Email>joseph.Loughman@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Kucukozyigit</InstructorName>
+    <OfficeNumber>POLY Campus</OfficeNumber>
+    <Email>a.kucukozyigit@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>McCarville</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>McCarville@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Escobedo</InstructorName>
+    <OfficeNumber>WEST</OfficeNumber>
+    <Email>Escobedo@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Feng</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>a.feng@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Meuth</InstructorName>
+    <OfficeNumber>TEMPE - DN162</OfficeNumber>
+    <Email>Meuth@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Bazzi</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>Bazzi@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Britton</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>michael.britton.1@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Adams</InstructorName>
+    <OfficeNumber>TEMPE - PSH551</OfficeNumber>
+    <Email>gary.adams@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Boley</InstructorName>
+    <OfficeNumber>TEMPE - PSH355</OfficeNumber>
+    <Email>allison.boley@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Banerjee</InstructorName>
+    <OfficeNumber>TEMPE - PSF429</OfficeNumber>
+    <Email>banerjee@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Osburn</InstructorName>
+    <OfficeNumber>TEMPE - GWC5528</OfficeNumber>
+    <Email>osburn@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Suthar</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>suthar@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Chen</InstructorName>
+    <OfficeNumber>BYENG M1-06</OfficeNumber>
+    <Email>yinong.chen@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Hsiao</InstructorName>
+    <OfficeNumber>BYENG</OfficeNumber>
+    <Email>hsiao@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Zhao</InstructorName>
+    <OfficeNumber>TEMPE</OfficeNumber>
+    <Email>zhao@asu.edu</Email>
+  </Instructor>
+  <Instructor>
+    <InstructorName>Staff</InstructorName>
+    <OfficeNumber />
+    <Email />
+  </Instructor>
+</Instructors>
