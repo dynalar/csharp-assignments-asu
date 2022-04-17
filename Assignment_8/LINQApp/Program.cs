@@ -77,7 +77,7 @@ namespace LINQApp
                 coursesFile.Close();
 
                 Console.WriteLine(
-                    "Courses.xml written to {0} in current project directory. \n",
+                    "Courses.xml written to {0}. \n",
                     AppDataPath + "Courses.xml"
                 );
 
