@@ -17,7 +17,7 @@ namespace LINQApp
                 char _Delimiter = ',';
 
                 // app_data directory path for this project.
-                string AppDataPath = Directory.GetCurrentDirectory() + "\\App_Data\\Courses.xml";
+                string AppDataPath = Directory.GetCurrentDirectory() + "\\App_Data\\";
 
                 // define empty list of course objects
                 List<Course> courseList = new List<Course>();
@@ -54,12 +54,14 @@ namespace LINQApp
                     line = textReader.ReadLine();
                 }
 
+                // Create XML file for instructors, will be used for question 2.4
+                CreateInMemoryInstructorsXmlFile();
 
                 ////////////////////
                 /// Question 2.1 ///
                 ////////////////////
                 /// Creates in memory xml file with course objects
-                
+
                 XmlRootAttribute rootNode = new XmlRootAttribute("Courses");
                 XmlSerializer courseSerializer = new XmlSerializer(courseList.GetType(), rootNode);
 
@@ -76,26 +78,29 @@ namespace LINQApp
 
                 Console.WriteLine(
                     "Courses.xml written to {0} in current project directory. \n",
-                    AppDataPath
+                    AppDataPath + "Courses.xml"
                 );
 
                 ////////////////////
                 /// Question 2.3a //
                 ////////////////////
-                // open xml file from storage and query it, store in enumerable
 
+                // open xml file from storage and query it, store in enumerable
                 Console.WriteLine("Question 2.3a Output:\n");
                 Console.WriteLine("-----------------------------\n");
 
                 // open up our xml file
-                XElement coursesXelement = XElement.Load(AppDataPath);
+                XElement coursesXelement = XElement.Load(AppDataPath + "Courses.xml");
 
                 IEnumerable<XElement> courseEnumerable =
                     from courseElement in coursesXelement.Elements("Course")
                         where (string)courseElement.Element("Subject") == "\"CPI\""
                         where (Int32)courseElement.Element("CourseCode") >= 200
                         orderby (string)courseElement.Element("Instructor") ascending
-                    select courseElement;
+                    select new XElement("Course",
+                            courseElement.Element("Instructor"),
+                            courseElement.Element("Title")
+                    );
 
                 // freehanding the XML output, just because it's of a IEnumerable data type.
                 foreach (XElement courseEnum in courseEnumerable)
@@ -117,7 +122,7 @@ namespace LINQApp
                 Console.WriteLine("------------------------------\n");
 
                 // opening another instance of this file, just for safety purposes
-                XElement xElementCourse = XElement.Load(AppDataPath);
+                XElement xElementCourse = XElement.Load(AppDataPath + "Courses.xml");
 
                 // query groups everything into sublevels, and prints out courses that have only 2 or more in
                 // the second level group.
@@ -148,13 +153,88 @@ namespace LINQApp
                 Console.WriteLine("Question 2.4 Output:\n");
                 Console.WriteLine("------------------------------\n");
 
-                // bring in the xelement xml file and the instructors csv data source
+                // bring in the xelement xml file and the instructors xml data source
+                XElement courseElements = XElement.Load(AppDataPath + "Courses.xml");
+                XElement instructorElements = XElement.Load(AppDataPath + "Instructors.xml");
 
-                //IEnumerable<XElement> courseEnumerable = 
+                IEnumerable<XElement> courseInstructorEnumerable =
+                        from course in courseElements.Elements("Course")
+                        join instructor in instructorElements.Elements("Instructor")
+                            on (string)course.Element("Instructor") equals (string)instructor.Element("InstructorName")
+                        where (Int32)course.Element("CourseCode") >= 200 && (Int32)course.Element("CourseCode") <= 299
+                        orderby (Int32)course.Element("CourseCode") ascending
+                        select new XElement("Course", 
+                            instructor.Element("Email"),
+                            course.Element("Subject"),
+                            course.Element("CourseCode")
+                        );
+
+
+                foreach (XElement courseInstructorEnum in courseInstructorEnumerable)
+                {
+                    Console.WriteLine("<Course>");
+                    Console.WriteLine("\t" + courseInstructorEnum.Element("Email"));
+                    Console.WriteLine("\t" + courseInstructorEnum.Element("Subject"));
+                    Console.WriteLine("\t" + courseInstructorEnum.Element("CourseCode"));
+                    Console.WriteLine("<Course>");
+                }
 
 
                 Console.WriteLine("Press ENTER to end program...");
                 Console.ReadLine();
+            }
+        }
+
+        public static void CreateInMemoryInstructorsXmlFile()
+        {
+            using (var textReader = new StreamReader("App_Data/Instructors.csv"))
+            {
+                // set delimiter
+                char _Delimiter = ',';
+
+                // app_data directory path for this project.
+                string AppDataPath = Directory.GetCurrentDirectory() + "\\App_Data\\Instructors.xml";
+
+                // define empty list of course objects
+                List<Instructor> instructorList = new List<Instructor>();
+
+                // start at the first line of the text file
+                string line = textReader.ReadLine();
+
+                // skips the first line which has the column names
+                int skipCount = 0;
+                while (line != null && skipCount < 1)
+                {
+                    line = textReader.ReadLine(); skipCount++;
+                }
+
+                // while loop that iterates through all items of the courses
+                while (line != null)
+                {
+                    // split columns by delimiter
+                    String[] columns = line.Split(_Delimiter);
+
+                    // add course object to course list
+                    instructorList.Add(
+                        new Instructor
+                        {
+                            InstructorName = columns[0],
+                            OfficeNumber = columns[1],
+                            Email = columns[2]
+                        }
+                    );
+
+                    line = textReader.ReadLine();
+                }
+
+                // serialize the list of xml from a list to xml
+                XmlRootAttribute rootNode = new XmlRootAttribute("Instructors");
+                XmlSerializer courseSerializer = new XmlSerializer(instructorList.GetType(), rootNode);
+
+                // save the data in memory to a file in storage.
+                FileStream coursesFile = File.Create("App_Data/Instructors.xml");
+                courseSerializer.Serialize(coursesFile, instructorList);
+                coursesFile.Close();
             }
         }
     }
