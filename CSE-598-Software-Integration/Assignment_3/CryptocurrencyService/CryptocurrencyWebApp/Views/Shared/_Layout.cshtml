@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Cryptocurrency Tracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Cryptocurrency Tracker</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <!-- code that calls our REST service is placed here. -->
+    <script>
+
+        var cryptoChart;
+        var marketCapChart;
+
+        // load the initial call to get default bitcoin numbers.
+        $(document).ready(function () {
+            $.ajax({
+                url: 'Crypto/CallCryptoService',
+                data: {ticker: "bitcoin"},
+                success: function (responseData) {
+                    $("#currentPrice").text("$" + getCurrentPrice(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#currentMarketCap").text("$" + getCurrentMarketCap(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#volumeTraded").text("$" + getVolumeTraded(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+                    var ctx = document.getElementById('cryptoChart').getContext('2d');
+                    var mkCtx = document.getElementById('marketCapChart').getContext('2d');
+
+                    var data = {
+                        labels: generateLabels(responseData),
+                        datasets: [
+                            {
+                                label: 'bitcoin Price',
+                                data: parsePrices(responseData),
+                                borderColor: '#4dc9f6',
+                            },
+                        ]
+                    };
+
+                    var mkData = {
+                        labels: generateLabels(responseData),
+                        datasets: [
+                            {
+                                label: 'bitcoin Market Cap',
+                                data: parseMarketCap(responseData),
+                                borderColor: '#6E33FF',
+                            },
+                        ]
+                    };
+
+                    cryptoChart = new Chart(ctx, {
+                        type: 'line',
+                        data: data,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    marketCapChart = new Chart(mkCtx, {
+                        type: 'line',
+                        data: mkData,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        function getCurrentPrice(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['prices'];
+            var pricesLength = prices.length;
+
+            return prices[pricesLength - 1][1];
+        }
+
+        function getCurrentMarketCap(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['market_caps'];
+            var pricesLength = prices.length;
+
+            return prices[pricesLength - 1][1];
+        }
+
+        function getVolumeTraded(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['total_volumes'];
+            var pricesLength = prices.length;
+
+            return prices[pricesLength - 1][1];
+        }
+
+        function parsePrices(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['prices'];
+            var pricesLength = prices.length;
+            var formattedPrices = [];
+
+            for (var i = 0; i < pricesLength; i++) {
+                formattedPrices.push(prices[i][1]);
+            }
+
+            return formattedPrices
+        }
+
+        function parseMarketCap(data) {
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['market_caps'];
+            var pricesLength = prices.length;
+            var formattedPrices = [];
+
+            for (var i = 0; i < pricesLength; i++) {
+                formattedPrices.push(Math.floor(prices[i][1]));
+            }
+
+            return formattedPrices
+        }
+
+        function generateLabels(data) {
+            var labels = [];
+            var parsedJson = JSON.parse(data);
+            var prices = parsedJson['prices'];
+            var pricesLength = prices.length;
+
+            for (var i = pricesLength - 1; i >= 1; i--) {
+                labels.push('Day ' + i);
+            }
+
+            labels.push('Today');
+
+            return labels;
+        }
+
+
+        // handle the selection of the dropdown
+        $("#cryptoDropdown").change(function () {
+            var selectedTicker = $('#cryptoDropdown option:selected').val();
+            $("#cryptoName").text(selectedTicker);
+            updateChart(selectedTicker);
+        });
+
+        // call crypto service and update the chart with new data
+        function updateChart(ticker) {
+            $.ajax({
+                url: 'Crypto/CallCryptoService',
+                data: { ticker: ticker },
+                success: function (responseData) {
+                    $("#currentPrice").text("$" + getCurrentPrice(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#currentMarketCap").text("$" + getCurrentMarketCap(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    $("#volumeTraded").text("$" + getVolumeTraded(responseData).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+                    cryptoChart.data.datasets[0].label = ticker + " price";
+                    cryptoChart.data.datasets[0].data = parsePrices(responseData);
+                    cryptoChart.update();
+
+                    marketCapChart.data.datasets[0].label = ticker + " market cap";
+                    marketCapChart.data.datasets[0].data = parseMarketCap(responseData);
+                    marketCapChart.update();
+                }
+            });
+        
+        }
+
+    </script>
+
+</body>
+</html>

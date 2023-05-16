@@ -1,0 +1,118 @@
+﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID2}" p1:TextExpression.References="{x:Reference __ReferenceID3}" ConfigurationName="Service1" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="Service1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:c="clr-namespace:CryptocurrencyService;assembly=CryptocurrencyService"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://tempuri.org/"
+ xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <p1:TextExpression.Namespaces>
+      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID2">
+        <x:String>System</x:String>
+        <x:String>System.Collections.Generic</x:String>
+        <x:String>System.Data</x:String>
+        <x:String>System.Linq</x:String>
+        <x:String>System.Text</x:String>
+        <x:String>System.Collections</x:String>
+      </sco:Collection>
+    </p1:TextExpression.Namespaces>
+    <p1:TextExpression.References>
+      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID3">
+        <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.DynamicData</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Drawing</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.Entity</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.ApplicationServices</p1:AssemblyReference>
+        <p1:AssemblyReference>System</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Core</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Data</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Data.Entity</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Runtime.Serialization</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Channels</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xaml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml.Linq</p1:AssemblyReference>
+        <p1:AssemblyReference>System.IO</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Runtime</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ComponentModel.Composition</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Security.Cryptography.Encoding</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Security.Cryptography.Primitives</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Security.Cryptography.Algorithms</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Security.Cryptography.X509Certificates</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Net.Http</p1:AssemblyReference>
+        <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
+        <p1:AssemblyReference>CryptocurrencyService</p1:AssemblyReference>
+      </sco:Collection>
+    </p1:TextExpression.References>
+    <p1:Sequence.Variables>
+      <x:Reference>__ReferenceID1</x:Reference>
+      <p1:Variable x:TypeArguments="x:String" Name="ticker" />
+      <p1:Variable x:TypeArguments="x:String" Name="coinGeckoResponse" />
+    </p1:Sequence.Variables>
+    <Receive x:Name="__ReferenceID0" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_1" OperationName="GetCryptocurrencyPrice" ServiceContractName="p:IService">
+      <Receive.CorrelationInitializers>
+        <RequestReplyCorrelationInitializer>
+          <RequestReplyCorrelationInitializer.CorrelationHandle>
+            <p1:InArgument x:TypeArguments="CorrelationHandle">
+              <p1:VariableValue x:TypeArguments="CorrelationHandle">
+                <p1:VariableValue.Variable>
+                  <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID1" Name="__handle1" />
+                </p1:VariableValue.Variable>
+              </p1:VariableValue>
+            </p1:InArgument>
+          </RequestReplyCorrelationInitializer.CorrelationHandle>
+        </RequestReplyCorrelationInitializer>
+      </Receive.CorrelationInitializers>
+      <ReceiveParametersContent>
+        <p1:OutArgument x:TypeArguments="x:String" x:Key="cryptoTicker">
+          <mca:CSharpReference x:TypeArguments="x:String">ticker</mca:CSharpReference>
+        </p1:OutArgument>
+      </ReceiveParametersContent>
+    </Receive>
+    <c:CallCoingeckoAPIActivity sap2010:WorkflowViewState.IdRef="CallCoingeckoAPIActivity_1">
+      <c:CallCoingeckoAPIActivity.CoinGeckoResponse>
+        <p1:OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">coinGeckoResponse</mca:CSharpReference>
+        </p1:OutArgument>
+      </c:CallCoingeckoAPIActivity.CoinGeckoResponse>
+      <c:CallCoingeckoAPIActivity.Text>
+        <p1:InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">ticker</mca:CSharpValue>
+        </p1:InArgument>
+      </c:CallCoingeckoAPIActivity.Text>
+    </c:CallCoingeckoAPIActivity>
+    <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_1">
+      <SendParametersContent>
+        <p1:InArgument x:TypeArguments="x:String" x:Key="response">
+          <mca:CSharpValue x:TypeArguments="x:String">coinGeckoResponse</mca:CSharpValue>
+        </p1:InArgument>
+      </SendParametersContent>
+    </SendReply>
+    <sads:DebugSymbol.Symbol>d3NDOlxVc2Vyc1xicmFudFxzb3VyY2VccmVwb3NcY3NoYXJwLXByYWN0aWNlXEFzc2lnbm1lbnRfM1xDcnlwdG9jdXJyZW5jeVNlcnZpY2VcQ3J5cHRvY3VycmVuY3lTZXJ2aWNlXFNlcnZpY2UxLnhhbWx4CQ4DZhEBAT4FUQ8BElIFXSIBCV4FZBEBAkMPRyIBF04LTlcBE1ULVWIBDloLWk8BCmELYVoBAw==</sads:DebugSymbol.Symbol>
+  </p1:Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Receive_1" sap:VirtualizedContainerService.HintSize="255,86" />
+      <sap2010:ViewStateData Id="CallCoingeckoAPIActivity_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="SendReply_1" sap:VirtualizedContainerService.HintSize="255,86" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="277,398">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="307,468" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</WorkflowService>
