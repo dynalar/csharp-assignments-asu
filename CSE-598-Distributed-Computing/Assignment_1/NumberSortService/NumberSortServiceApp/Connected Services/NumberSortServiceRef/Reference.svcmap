@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="6b77f40f-92ad-4ac9-971e-432812c6f1c6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:50073/NumberSortService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="NumberSortService.wsdl" MetadataType="Wsdl" ID="4bcc5a2f-2ede-4de7-94d4-4c482992c675" SourceId="1" SourceUrl="http://localhost:50073/NumberSortService.svc?wsdl" />
+    <MetadataFile FileName="NumberSortService.xsd" MetadataType="Schema" ID="248f1aa2-5eef-4978-a51d-5f295e8af197" SourceId="1" SourceUrl="http://localhost:50073/NumberSortService.svc?xsd=xsd1" />
+    <MetadataFile FileName="NumberSortService1.xsd" MetadataType="Schema" ID="055ae9e9-2d31-4aad-98df-901350f5191c" SourceId="1" SourceUrl="http://localhost:50073/NumberSortService.svc?xsd=xsd0" />
+    <MetadataFile FileName="NumberSortService.disco" MetadataType="Disco" ID="0e6ec868-0e13-433f-90f6-e33f38bfee21" SourceId="1" SourceUrl="http://localhost:50073/NumberSortService.svc?disco" />
+    <MetadataFile FileName="NumberSortService2.xsd" MetadataType="Schema" ID="fa76fd61-8de5-4e75-bdb5-71b23c0b67de" SourceId="1" SourceUrl="http://localhost:50073/NumberSortService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

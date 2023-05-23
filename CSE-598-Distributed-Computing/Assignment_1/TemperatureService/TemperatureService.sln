@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemperatureService", "TemperatureService\TemperatureService.csproj", "{C44D57F8-A760-4001-BEA9-7A84A616A6A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemperatureServiceApp", "TemperatureServiceApp\TemperatureServiceApp.csproj", "{7EED611E-3C60-423C-B223-C72C62B17A3F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C44D57F8-A760-4001-BEA9-7A84A616A6A7} = {C44D57F8-A760-4001-BEA9-7A84A616A6A7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

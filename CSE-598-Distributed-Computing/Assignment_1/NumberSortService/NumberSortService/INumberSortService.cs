@@ -21,7 +21,7 @@ namespace NumberSortService
 
         // TODO: Add your service operations here
         [OperationContract]
-        string sort(string s);
+        string sortString(string s);
     }
 
 

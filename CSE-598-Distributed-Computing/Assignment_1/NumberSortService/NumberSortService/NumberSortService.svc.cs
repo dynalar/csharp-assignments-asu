@@ -12,9 +12,25 @@ namespace NumberSortService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class NumberSortService : INumberSortService
     {
-        public string sort(string s)
+        public string sortString(string s)
         {
-            throw new NotImplementedException();
+            // trim spaces and convert strings to ints
+            int[] splitInts = {};
+
+            try
+            {
+                splitInts = Array.ConvertAll(s.Split(','), p => int.Parse(p.Trim()));
+            }
+            catch (Exception e)
+            {
+                return "Please enter valid data!";
+            }
+
+            // sort the array
+            Array.Sort(splitInts);
+
+            // return joined string with ordered numbers
+            return string.Join(",", splitInts);
         }
         public string GetData(int value)
         {
