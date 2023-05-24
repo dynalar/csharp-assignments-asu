@@ -17,21 +17,6 @@ namespace TemperatureServiceApp
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ConvertToFButton_Click(object sender, EventArgs e)
         {
             int number;
@@ -49,7 +34,7 @@ namespace TemperatureServiceApp
                 int convertedCelsiusTemp = temperatureService.c2f(c);
 
                 // update user interface with correct output
-                celsiusOutput.Text = convertedCelsiusTemp.ToString() + ' ' + 'F';
+                celsiusOutput.Text = convertedCelsiusTemp.ToString() + " F°";
 
                 // clear error message if any
                 errorMesgC.Text = "";
@@ -57,11 +42,6 @@ namespace TemperatureServiceApp
             {
                 errorMesgC.Text = "Please enter a valid number!"; ;
             }
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void ConvertToCButton_Click(object sender, EventArgs e)
@@ -80,7 +60,7 @@ namespace TemperatureServiceApp
                 int convertedCelsiusTemp = temperatureService.f2c(f);
 
                 // update user interface with correct output
-                farenheitOutput.Text = convertedCelsiusTemp.ToString() + ' ' + 'C';
+                farenheitOutput.Text = convertedCelsiusTemp.ToString() + " C°";
 
                 // clear error message if any
                 errorMesgF.Text = "";
