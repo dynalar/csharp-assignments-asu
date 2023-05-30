@@ -35,7 +35,7 @@ namespace OperationScenario
         public void sendOrder(string order)
         {
             // call decoder and decode order to object
-            Decoder decoder = new Decoder(order);
+            Decoder decoder = new Decoder();
             OrderClass decodedOrder = decoder.decodeOrder(order);
 
             // pass our order to order processing class instance

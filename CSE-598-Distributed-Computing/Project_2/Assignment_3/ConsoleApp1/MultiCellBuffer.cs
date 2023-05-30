@@ -24,7 +24,6 @@ namespace OperationScenario
                 cellPool = new Semaphore(0, DefaultBufferSize, order);
             }
 
-
         }
 
         public void getOneCell(int index) 

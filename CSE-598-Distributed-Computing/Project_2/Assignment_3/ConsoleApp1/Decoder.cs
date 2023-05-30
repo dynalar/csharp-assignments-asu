@@ -16,7 +16,7 @@ namespace OperationScenario
 
             double senderId = double.Parse(orderAttributes[0]);
             double quantity = double.Parse(orderAttributes[1]);
-            double cardNo = double.Parse(orderAttributes[2]);
+            long cardNo = long.Parse(orderAttributes[2]);
 
             orderClass.setSenderid(senderId);
             orderClass.setQuantity(quantity);

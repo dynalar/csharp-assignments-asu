@@ -9,16 +9,23 @@ namespace OperationScenario
     internal class OrderClass
     {
         protected double senderId;
-        protected double cardNo;
+        protected long cardNo;
         protected double quantity;
+
+        public OrderClass(double senderId, long cardNo, double quantity)
+        {
+            this.senderId = senderId;
+            this.cardNo = cardNo;
+            this.quantity = quantity;
+        }
 
         public double getSenderId() { return senderId; }
 
         public void setSenderid(double senderId) { this.senderId = senderId; }
 
-        public double getCardNo() {  return cardNo; }
+        public long getCardNo() {  return cardNo; }
 
-        public void setCardNo(double cardNo) { this.cardNo = cardNo; }
+        public void setCardNo(long cardNo) { this.cardNo = cardNo; }
 
         public double getQuantity() { return quantity; }
 

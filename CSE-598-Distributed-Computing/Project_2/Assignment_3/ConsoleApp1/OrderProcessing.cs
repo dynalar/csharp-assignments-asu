@@ -10,8 +10,8 @@ namespace OperationScenario
     {
         OrderClass order;
 
-        public OrderProcessing(OrderClass order) {
-            this.order = order;
+        public OrderProcessing(OrderClass receivedOrder) {
+            order = receivedOrder;
         }
 
         public void processOrder(OrderClass order)
@@ -23,11 +23,11 @@ namespace OperationScenario
 
         public void orderProcessWorker() 
         {
-            bool isValidCc = this.isValidCreditCard(this.order.ccNum);
+            bool isValidCc = this.isValidCreditCard(order.getCardNo());
         }
 
         // accepts only visa credit cards, that start with 4 and with a total length of 16 digits.
-        public bool isValidCreditCard(int ccNum)
+        public bool isValidCreditCard(long ccNum)
         {
             int totalCcNums = ccNum.ToString().Length;
             bool isVisa = ccNum.ToString().Substring(0, 1) == "4";
