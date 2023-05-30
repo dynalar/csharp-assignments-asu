@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace OperationScenario
 {
@@ -33,8 +34,15 @@ namespace OperationScenario
         // receives an order and if it's valid, spins off a new thread to OrderProcessing class
         public void sendOrder(string order)
         {
-            // call decoder
+            // call decoder and decode order to object
             Decoder decoder = new Decoder(order);
+            OrderClass decodedOrder = decoder.decodeOrder(order);
+
+            // pass our order to order processing class instance
+            OrderProcessing orderProcessing = new OrderProcessing(decodedOrder);
+
+            // send off order into its own thread for processing
+            orderProcessing.processOrder(decodedOrder);
         }
     }
 }

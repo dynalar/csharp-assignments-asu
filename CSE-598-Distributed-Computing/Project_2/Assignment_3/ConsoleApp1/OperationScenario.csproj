@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decoder.cs" />
+    <Compile Include="Encoder.cs" />
+    <Compile Include="MultiCellBuffer.cs" />
+    <Compile Include="OrderClass.cs" />
     <Compile Include="OrderProcessing.cs" />
     <Compile Include="PricingModel.cs" />
     <Compile Include="ComputerMaker.cs" />

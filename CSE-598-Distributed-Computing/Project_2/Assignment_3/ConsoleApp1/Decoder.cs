@@ -8,11 +8,21 @@ namespace OperationScenario
 {
     internal class Decoder
     {
-        private string order;
-
-        public Decoder(string order)
+        public OrderClass decodeOrder(string order)
         {
-            this.order = order;
+            string[] orderAttributes = order.Split(',');
+            
+            OrderClass orderClass = new OrderClass();
+
+            double senderId = double.Parse(orderAttributes[0]);
+            double quantity = double.Parse(orderAttributes[1]);
+            double cardNo = double.Parse(orderAttributes[2]);
+
+            orderClass.setSenderid(senderId);
+            orderClass.setQuantity(quantity);
+            orderClass.setCardNo(cardNo);
+
+            return orderClass;
         }
     }
 }
