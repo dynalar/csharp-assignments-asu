@@ -17,7 +17,6 @@ namespace Project_2
                 double totalAmount = currentPrice * order.Quantity + CalculateTax() + CalculateShippingHandling();
 
                 // call back the event action with total amount
-
                 Console.WriteLine("Order has been processed for: " + order.SenderId + " Total: " + totalAmount);
                 order.ConfirmationCallback(totalAmount);
             }
@@ -38,7 +37,7 @@ namespace Project_2
         private double CalculateShippingHandling()
         {
             // random shipping and handling to $20
-            // shipping from china is not cheap
+            // shipping from china is not cheap!
             return 20.0;
         }
     }

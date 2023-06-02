@@ -9,7 +9,7 @@ namespace Project_2
 {
     internal class Store
     {
-        private readonly string name;
+        public string name;
         private double currentPrice;
 
         public Store(string name)
@@ -26,33 +26,24 @@ namespace Project_2
             // Create an order object
             OrderClass order = new OrderClass(name, GenerateCreditCardNumber(), quantity);
 
+            // Save the timestamp for the order
+            DateTime orderTimestamp = DateTime.Now;
+
             // Encode the order object into a string
             Encoder encoder = new Encoder();
             string encodedOrder = encoder.Encode(order);
 
             // Send the order to the multi-cell buffer
             MultiCellBuffer.Instance.SetOneCell(encodedOrder);
-
-            // Save the timestamp for the order
-            DateTime orderTimestamp = DateTime.Now;
-
-            // Define the confirmation callback method
-            Action<double> confirmationCallback = totalAmount =>
-            {
-                // Calculate and print the order processing time
-                TimeSpan processingTime = DateTime.Now - orderTimestamp;
-                Console.WriteLine($"Store: {name} - Order processed in {processingTime.TotalMilliseconds}ms");
-            };
-
-            // Start a new thread to process the order
-            // THIS SHOULD BE DONE FROM THE COMPUTER MAKER INSTEAD NOT HERE
-            OrderProcessing orderProcessing = new OrderProcessing();
-            Thread orderProcessingThread = new Thread(() => orderProcessing.ProcessOrder(order, currentPrice));
-            orderProcessingThread.Start();
-
-            // Set the confirmation callback for the order
-            order.ConfirmationCallback = confirmationCallback;
         }
+
+        // final confirmation callback, signalling that the order has been completed.
+        public Action<double> confirmationCallback = totalAmount =>
+        {
+            // Calculate and print the order processing time
+            DateTime processingTime = DateTime.Now;
+            Console.WriteLine($"Store: Order processed in {processingTime} ms");
+        };
 
         private int GenerateCreditCardNumber()
         {
@@ -63,9 +54,9 @@ namespace Project_2
 
         private int CalculateOrderQuantity(double currentPrice, double previousPrice)
         {
-            // Implement your order quantity calculation logic here
-            // This is just a placeholder
+            // order calculation???? I feel like I did this wrong.
             return (int)(1000 / (currentPrice - previousPrice));
         }
+
     }
 }

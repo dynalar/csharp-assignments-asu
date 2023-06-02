@@ -29,6 +29,7 @@ namespace Project_2
 
         public void Start()
         {
+            // check if a simulated price cut has occurred
             while (priceCutsCounter < maxPriceCuts)
             {
                 // get the current price of the computer
@@ -40,6 +41,28 @@ namespace Project_2
                     // on price cut, call the
                     Console.WriteLine("Price Change detected!.");
                     OnPriceCut(currentPrice);
+
+                    OrderClass decodedOrder = decoder.Decode(buffer.GetOneCell());
+
+                    if (decodedOrder != null)
+                    {
+                        // get the store and connect callback to the order
+                        // needed in order to notify the store that the order is processed
+                        foreach (Store store in stores)
+                        {
+                            if(store.name == decodedOrder.SenderId)
+                            {
+                                decodedOrder.ConfirmationCallback = store.confirmationCallback;
+                                break;
+                            }
+                        }
+
+                        // Start a new thread to process the order
+                        OrderProcessing orderProcessing = new OrderProcessing();
+                        Thread orderProcessingThread = new Thread(() => orderProcessing.ProcessOrder(decodedOrder, currentPrice));
+                        orderProcessingThread.Start();
+                    }
+                   
                 }
 
                 // sleep the thread for 100ms
@@ -57,12 +80,13 @@ namespace Project_2
         {
             stores.Add(store);
 
-            // attach price cut event to each store, that triggers when there is a price cut.
+            // subscribe the store to the price cut event
             PriceCutEvent += store.OnPriceCut;
         }
 
         private void OnPriceCut(double newPrice)
         {
+            // call the PriceCutEvent inside the Store class to trigger action.
             PriceCutEvent?.Invoke(this, new PriceCutEventArgs(newPrice));
             priceCutsCounter++;
         }

@@ -9,10 +9,8 @@ namespace Project_2
 {
     internal class MultiCellBuffer
     {
-        private readonly int n;
-        private readonly string[] cells;
+        private List<string> cells;
         private readonly Semaphore semaphore;
-        private readonly object[] locks;
         private const int totalCells = 5;
 
         // making an instance so I can access without making a new instance
@@ -22,9 +20,10 @@ namespace Project_2
         {
             get
             {
+                // hacky way to call an instance for multi cell buffer
                 if (instance == null)
                 {
-                    instance = new MultiCellBuffer(totalCells); // Set the number of cells here
+                    instance = new MultiCellBuffer(totalCells);
                 }
                 return instance;
             }
@@ -32,46 +31,41 @@ namespace Project_2
 
         private MultiCellBuffer(int n)
         {
-            this.n = n;
-            this.cells = new string[n];
+            this.cells = new List<string>(n);
             this.semaphore = new Semaphore(n, n);
-            this.locks = new object[n];
-            for (int i = 0; i < n; i++)
-            {
-                locks[i] = new object();
-            }
         }
 
+        // using lists for cells since arrays were too problematic
         public void SetOneCell(string data)
         {
-            semaphore.WaitOne(); // Wait for an available cell
+            // wait for available cells by setting semaphore
+            semaphore.WaitOne();
 
             lock (cells)
             {
-                for (int i = 0; i < totalCells; i++)
-                {
-                    if (cells[i] == null)
-                    {
-                        cells[i] = data;
-                        break;
-                    }
-                }
+               cells.Add(data);
             }
+            
+            // release the resource
+            semaphore.Release();
         }
 
         
         public string GetOneCell()
         {
+            // set the semaphore so we dont get access errors
             semaphore.WaitOne();
 
+            // lock all cells before we access
             lock (cells)
             {
-                for (int i = 0; i < totalCells; i++)
+                int index = 0;
+                foreach (string cell in cells)
                 {
-                    if (cells[i] != null)
-                    {
-                        return cells[i];
-                    }
+                    string cellData = cell;
+                    cells.RemoveAt(index);
+                    index++;
+                    return cellData;
                 }
             }
 
