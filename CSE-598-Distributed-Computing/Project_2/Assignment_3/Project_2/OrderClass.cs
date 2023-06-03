@@ -13,6 +13,10 @@ namespace Project_2
         public int Quantity { get; }
 
         public int orderNum { get; }
+        public double totalAmount { get; set; }
+
+        public DateTime orderPlacedDateTime { get; set; }
+
         public Action<double> ConfirmationCallback { get; set; }
 
         public OrderClass(string senderId, int cardNo, int quantity)

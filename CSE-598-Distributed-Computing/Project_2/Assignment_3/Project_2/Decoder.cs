@@ -10,12 +10,15 @@ namespace Project_2
     {
         public OrderClass Decode(string encodedOrder)
         {
-            // Implement your decoding logic here
-            // This is just a placeholder
+            // decode by exploding by colon
             string[] parts = encodedOrder.Split(':');
+
+            // get each piece of the decoded order
             string senderId = parts[0];
             int cardNo = int.Parse(parts[1]);
             int quantity = int.Parse(parts[2]);
+
+            // pass in information to generate order object
             return new OrderClass(senderId, cardNo, quantity);
         }
     }

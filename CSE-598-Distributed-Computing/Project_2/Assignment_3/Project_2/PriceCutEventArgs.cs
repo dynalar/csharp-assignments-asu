@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Project_2
 {
+    // class that stores arguments for price cut event.
+    // really for encapsulation and keeping data where it belongs.
     internal class PriceCutEventArgs
     {
         public double NewPrice { get; }

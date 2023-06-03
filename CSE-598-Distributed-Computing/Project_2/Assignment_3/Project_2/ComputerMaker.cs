@@ -9,8 +9,12 @@ namespace Project_2
 {
     internal class ComputerMaker
     {
+        // total counter of price cuts that have taken placed
         private int priceCutsCounter;
+
+        // max price cuts allowed
         private readonly int maxPriceCuts = 10;
+
         private readonly PricingModel pricingModel;
         private readonly MultiCellBuffer buffer;
         private readonly Decoder decoder;
@@ -18,9 +22,8 @@ namespace Project_2
 
         public event EventHandler<PriceCutEventArgs> PriceCutEvent;
 
-        public ComputerMaker(int maxPriceCuts, PricingModel pricingModel, MultiCellBuffer buffer, Decoder decoder)
+        public ComputerMaker(PricingModel pricingModel, MultiCellBuffer buffer, Decoder decoder)
         {
-            this.maxPriceCuts = maxPriceCuts;
             this.pricingModel = pricingModel;
             this.buffer = buffer;
             this.decoder = decoder;
@@ -38,35 +41,37 @@ namespace Project_2
                 // simulate a comparison if the price is lower than what was generated.
                 if (currentPrice < pricingModel.PreviousPrice)
                 {
-                    // on price cut, call the
-                    Console.WriteLine("Price Change detected!.");
+                    // on price cut, call the event for when price cut occurs
+                    Console.WriteLine("Price Change detected!");
                     OnPriceCut(currentPrice);
 
+                    // get an order from the multi cell buffer
                     OrderClass decodedOrder = decoder.Decode(buffer.GetOneCell());
-
+                    
+                    // ensure the order arrived correctly and is not empty.
                     if (decodedOrder != null)
                     {
-                        // get the store and connect callback to the order
-                        // needed in order to notify the store that the order is processed
+                        // find the store based off the store name and sender id.
                         foreach (Store store in stores)
                         {
                             if(store.name == decodedOrder.SenderId)
                             {
-                                decodedOrder.ConfirmationCallback = store.confirmationCallback;
+                                // Start a new thread to process the order
+                                OrderProcessing orderProcessing = new OrderProcessing();
+
+                                Thread orderProcessingThread = new Thread(
+                                    () => orderProcessing.ProcessOrder(decodedOrder, currentPrice, store.confirmationCallback, store)
+                                );
+
+                                orderProcessingThread.Start();
                                 break;
                             }
                         }
-
-                        // Start a new thread to process the order
-                        OrderProcessing orderProcessing = new OrderProcessing();
-                        Thread orderProcessingThread = new Thread(() => orderProcessing.ProcessOrder(decodedOrder, currentPrice));
-                        orderProcessingThread.Start();
                     }
-                   
                 }
 
                 // sleep the thread for 100ms
-                Thread.Sleep(100);
+                Thread.Sleep(300);
             }
 
             // abort the thread if we reach a maximum
@@ -89,6 +94,8 @@ namespace Project_2
             // call the PriceCutEvent inside the Store class to trigger action.
             PriceCutEvent?.Invoke(this, new PriceCutEventArgs(newPrice));
             priceCutsCounter++;
+
+            Console.WriteLine("Total Price Cuts: " +  priceCutsCounter);
         }
     }
 }

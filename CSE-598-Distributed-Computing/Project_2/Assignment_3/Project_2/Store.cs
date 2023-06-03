@@ -11,6 +11,7 @@ namespace Project_2
     {
         public string name;
         private double currentPrice;
+        public DateTime orderPlacedDateTime;
 
         public Store(string name)
         {
@@ -26,30 +27,34 @@ namespace Project_2
             // Create an order object
             OrderClass order = new OrderClass(name, GenerateCreditCardNumber(), quantity);
 
-            // Save the timestamp for the order
-            DateTime orderTimestamp = DateTime.Now;
-
             // Encode the order object into a string
             Encoder encoder = new Encoder();
             string encodedOrder = encoder.Encode(order);
+
+            // Save the timestamp for the order before we set it in the cell
+            orderPlacedDateTime = DateTime.Now;
 
             // Send the order to the multi-cell buffer
             MultiCellBuffer.Instance.SetOneCell(encodedOrder);
         }
 
         // final confirmation callback, signalling that the order has been completed.
-        public Action<double> confirmationCallback = totalAmount =>
+        // Action<> is the NEW way of storing callbacks, instead of using delegates
+        // we pass the order, as we store the final price, timestamp, etc. in the order.
+        public Action<OrderClass> confirmationCallback = order =>
         {
-            // Calculate and print the order processing time
-            DateTime processingTime = DateTime.Now;
-            Console.WriteLine($"Store: Order processed in {processingTime} ms");
+            // print the total amount, and the time order was processed
+            Console.WriteLine("Order has been processed for: " + 
+                order.SenderId + "\nTotal: $" + order.totalAmount + "\nTotal Quantity: " + order.Quantity);
+
+            Console.WriteLine($"Order processed at: {order.orderPlacedDateTime} \n");
         };
 
         private int GenerateCreditCardNumber()
         {
             // Generate a random credit card number
             Random random = new Random();
-            return random.Next(5000, 7001); // Including 7000
+            return random.Next(5000, 7001);
         }
 
         private int CalculateOrderQuantity(double currentPrice, double previousPrice)
@@ -57,6 +62,5 @@ namespace Project_2
             // order calculation???? I feel like I did this wrong.
             return (int)(1000 / (currentPrice - previousPrice));
         }
-
     }
 }

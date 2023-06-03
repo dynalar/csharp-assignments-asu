@@ -8,7 +8,7 @@ namespace Project_2
 {
     internal class OrderProcessing
     {
-        public void ProcessOrder(OrderClass order, double currentPrice)
+        public void ProcessOrder(OrderClass order, double currentPrice, Action<OrderClass> confirmationCallback, Store store)
         {
             // check cc number
             if (IsValidCreditCard(order.CardNo))
@@ -16,16 +16,21 @@ namespace Project_2
                 // using the formula given in assignment criteria to calculate all of this information
                 double totalAmount = currentPrice * order.Quantity + CalculateTax() + CalculateShippingHandling();
 
+                // add total to order with shipping, tax, etc
+                order.totalAmount = totalAmount;
+
+                // pass in the order date time that was saved in the store earlier
+                order.orderPlacedDateTime = store.orderPlacedDateTime;
+
                 // call back the event action with total amount
-                Console.WriteLine("Order has been processed for: " + order.SenderId + " Total: " + totalAmount);
-                order.ConfirmationCallback(totalAmount);
+                confirmationCallback(order);
             }
         }
 
         private bool IsValidCreditCard(int cardNo)
         {
             // checking the cc number just based on criteria in assignment
-            return cardNo >= 5000 && cardNo <= 7000;
+            return cardNo >= 4999 && cardNo <= 7001;
         }
 
         private double CalculateTax()

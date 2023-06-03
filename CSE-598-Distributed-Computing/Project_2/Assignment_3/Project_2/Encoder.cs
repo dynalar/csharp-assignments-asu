@@ -10,8 +10,8 @@ namespace Project_2
     {
         public string Encode(OrderClass order)
         {
-            // Implement your encoding logic here
-            // This is just a placeholder
+            // we encode using this colon delineated structure
+            // that way, we can explode it later into separate tokens
             return $"{order.SenderId}:{order.CardNo}:{order.Quantity}";
         }
     }
