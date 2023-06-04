@@ -10,7 +10,6 @@ namespace Project_2
     internal class Store
     {
         public string name;
-        private double currentPrice;
         public DateTime orderPlacedDateTime;
 
         public Store(string name)
@@ -20,9 +19,10 @@ namespace Project_2
 
         public void OnPriceCut(object sender, PriceCutEventArgs e)
         {
-            currentPrice = e.NewPrice;
             // Calculate the number of computers to order based on the current and previous prices
-            int quantity = CalculateOrderQuantity(currentPrice, e.PreviousPrice);
+            // we'll assume quantity is random, to simulate an entry from a customer.
+            Random rand = new Random();
+            int quantity = rand.Next(1, 5);
 
             // Create an order object
             OrderClass order = new OrderClass(name, GenerateCreditCardNumber(), quantity);
@@ -36,6 +36,7 @@ namespace Project_2
 
             // Send the order to the multi-cell buffer
             MultiCellBuffer.Instance.SetOneCell(encodedOrder);
+            Thread.Sleep(250);
         }
 
         // final confirmation callback, signalling that the order has been completed.
@@ -46,7 +47,6 @@ namespace Project_2
             // print the total amount, and the time order was processed
             Console.WriteLine("Order has been processed for: " + 
                 order.SenderId + "\nTotal: $" + order.totalAmount + "\nTotal Quantity: " + order.Quantity);
-
             Console.WriteLine($"Order processed at: {order.orderPlacedDateTime} \n");
         };
 
@@ -55,12 +55,6 @@ namespace Project_2
             // Generate a random credit card number
             Random random = new Random();
             return random.Next(5000, 7001);
-        }
-
-        private int CalculateOrderQuantity(double currentPrice, double previousPrice)
-        {
-            // order calculation???? I feel like I did this wrong.
-            return (int)(1000 / (currentPrice - previousPrice));
         }
     }
 }

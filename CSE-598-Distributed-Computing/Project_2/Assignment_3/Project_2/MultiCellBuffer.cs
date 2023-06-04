@@ -43,6 +43,12 @@ namespace Project_2
 
             lock (cells)
             {
+               // clear cells if we hit the limit
+               if(cells.Count > totalCells - 1)
+                {
+                    cells.Clear();
+                }
+
                cells.Add(data);
             }
             
@@ -59,12 +65,14 @@ namespace Project_2
             // lock all cells before we access
             lock (cells)
             {
+                // get the cell data, then delete it so it is no longer in there.
                 int index = 0;
                 foreach (string cell in cells)
                 {
                     string cellData = cell;
                     cells.RemoveAt(index);
                     index++;
+
                     return cellData;
                 }
             }

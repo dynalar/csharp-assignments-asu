@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project_2
 {
+    // simple order class, for keeping track of order data
     internal class OrderClass
     {
         public string SenderId { get; }

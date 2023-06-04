@@ -13,7 +13,7 @@ namespace Project_2
         public double CalculatePrice()
         {
             Random random = new Random();
-            double price = random.Next(500, 1000);
+            double price = random.Next(500, 2000);
 
             double rand = random.NextDouble();
 

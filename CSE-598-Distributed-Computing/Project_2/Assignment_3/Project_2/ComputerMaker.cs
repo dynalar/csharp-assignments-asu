@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -19,6 +20,9 @@ namespace Project_2
         private readonly MultiCellBuffer buffer;
         private readonly Decoder decoder;
         private readonly List<Store> stores;
+        private double currentPrice;
+
+        Thread orderProcessingThread;
 
         public event EventHandler<PriceCutEventArgs> PriceCutEvent;
 
@@ -36,53 +40,61 @@ namespace Project_2
             while (priceCutsCounter < maxPriceCuts)
             {
                 // get the current price of the computer
-                double currentPrice = pricingModel.CalculatePrice();
+                currentPrice = pricingModel.CalculatePrice();
 
                 // simulate a comparison if the price is lower than what was generated.
                 if (currentPrice < pricingModel.PreviousPrice)
                 {
                     // on price cut, call the event for when price cut occurs
-                    Console.WriteLine("Price Change detected!");
+                    Console.WriteLine("Price Change detected! " + 
+                        "\nOld Price: $" + pricingModel.PreviousPrice + "\nNew Price: $" + currentPrice);
+
                     OnPriceCut(currentPrice);
-
-                    // get an order from the multi cell buffer
-                    OrderClass decodedOrder = decoder.Decode(buffer.GetOneCell());
-                    
-                    // ensure the order arrived correctly and is not empty.
-                    if (decodedOrder != null)
-                    {
-                        // find the store based off the store name and sender id.
-                        foreach (Store store in stores)
-                        {
-                            if(store.name == decodedOrder.SenderId)
-                            {
-                                // Start a new thread to process the order
-                                OrderProcessing orderProcessing = new OrderProcessing();
-
-                                Thread orderProcessingThread = new Thread(
-                                    () => orderProcessing.ProcessOrder(decodedOrder, currentPrice, store.confirmationCallback, store)
-                                );
-
-                                orderProcessingThread.Start();
-                                break;
-                            }
-                        }
-                    }
                 }
 
                 // sleep the thread for 100ms
-                Thread.Sleep(300);
+                Thread.Sleep(150);
             }
 
-            // abort the thread if we reach a maximum
+            // abort the thread when a maximum amount of price cuts is reached
             if (priceCutsCounter == maxPriceCuts)
             {
+                foreach (Store store in stores)
+                {
+                    // get an order from the multi cell buffer
+                    OrderClass decodedOrder = decoder.Decode(buffer.GetOneCell());
+
+                    // ensure the order arrived correctly and is not empty.
+                    if (decodedOrder != null)
+                    {
+                        if (store.name == decodedOrder.SenderId)
+                        {
+                            // Start a new thread to process the order
+                            OrderProcessing orderProcessing = new OrderProcessing();
+
+                            orderProcessingThread = new Thread(
+                                () => orderProcessing.ProcessOrder(decodedOrder, currentPrice, store.confirmationCallback, store)
+                            );
+
+                            orderProcessingThread.Start();
+                        }
+                    }
+
+                    // sleep the thread for 100ms
+                    Thread.Sleep(300);
+                }
+
+                orderProcessingThread.Join();
+                Console.WriteLine("Order Process Threads ended.");
                 Thread.CurrentThread.Abort();
+                Console.WriteLine("Computer Maker thread ended.");
             }
         }
 
         public void AddStore(Store store)
         {
+            Thread storeThread = new Thread(() => new Store(store.name));
+
             stores.Add(store);
 
             // subscribe the store to the price cut event
@@ -95,7 +107,7 @@ namespace Project_2
             PriceCutEvent?.Invoke(this, new PriceCutEventArgs(newPrice));
             priceCutsCounter++;
 
-            Console.WriteLine("Total Price Cuts: " +  priceCutsCounter);
+            Console.WriteLine("Total Price Cuts: " +  priceCutsCounter + "\n");
         }
     }
 }
