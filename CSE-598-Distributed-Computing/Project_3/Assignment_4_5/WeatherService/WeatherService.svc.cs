@@ -10,13 +10,13 @@ namespace WeatherService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class WeatherService : IWeatherService
     {
+        // endpoint for weather API
         private const string weatherApiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
-        private const string openWeatherMapAPIKey = "1561b4c5abdb953b49f3ce70ff78aa8d";
+
+        // ADD API KEY HERE BEFORE SUBMITTING ASSIGNMENT
+        private const string openWeatherMapAPIKey = "";
 
         // get attributes
-        public string latitude;
-        public string longitude;
-        public string address;
         public string currentConditions;
         public string currentTemp;
         public string minTemp;

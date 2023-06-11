@@ -7,6 +7,8 @@ namespace WeatherService.JsonObjects
 {
     public class WeatherResponse
     {
+        // this is our json DTO, in a sense.
+        // this class is meant to encapsulate our json data coming from the weather api.
         public WeatherResponse(string currentConditions, string currentTemp, string minTemp, string maxTemp, string errors = "") 
         {
             this.currentConditions = currentConditions;
