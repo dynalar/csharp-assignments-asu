@@ -24,9 +24,6 @@ namespace WeatherService
         public string maxTemp;
         public string weatherResponseString { get; set; }
 
-        // instantiate new http client
-        HttpClient client = new HttpClient();
-
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
             if (composite == null)

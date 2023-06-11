@@ -2,6 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Enter Latitude and Longitude</h2>
+    <h6>Example: Los Angeles</h6>
+    <h6>Latitude: 34.052235 Longitude: -118.243683</h6>
     <div>
         <asp:TextBox ID="LatitudeTextBox" runat="server" placeholder="Latitude"></asp:TextBox>
     </div>

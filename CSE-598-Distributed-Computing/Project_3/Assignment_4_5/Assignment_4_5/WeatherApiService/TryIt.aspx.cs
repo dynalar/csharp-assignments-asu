@@ -20,8 +20,8 @@ namespace Assignment_4_5.WeatherApiService
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
             // Get the values from the text boxes
-            string latitude = LatitudeTextBox.Text;
-            string longitude = LongitudeTextBox.Text;
+            string latitude = LatitudeTextBox.Text.Trim();
+            string longitude = LongitudeTextBox.Text.Trim();
 
             // call the service reference to get our weather
             string weatherClientResponse = weatherServiceClient.GetWeather(latitude, longitude);
