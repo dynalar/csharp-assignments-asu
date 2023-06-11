@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.ServiceModel.Web;
 using System.Text;
 
@@ -14,7 +15,7 @@ namespace WeatherService
     {
 
         [OperationContract]
-        string GetWeather(float latVal, float longVal);
+        Task<string> GetWeather(string latVal, string longVal);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

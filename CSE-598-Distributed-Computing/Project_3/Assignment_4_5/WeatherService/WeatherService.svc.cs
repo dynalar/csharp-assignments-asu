@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;
 using WeatherService.JsonObjects;
+using System.Threading.Tasks;
 
 namespace WeatherService
 {
@@ -21,7 +22,7 @@ namespace WeatherService
         public string currentTemp;
         public string minTemp;
         public string maxTemp;
-        public string weatherResponseString;
+        public string weatherResponseString { get; set; }
 
         // instantiate new http client
         HttpClient client = new HttpClient();
@@ -39,44 +40,44 @@ namespace WeatherService
             return composite;
         }
 
-        public string GetWeather(float latVal, float longVal)
+        public async Task<string> GetWeather(string latVal, string longVal)
         {
             // call the weather API
-            callWeatherApi(latVal, longVal);
-
-            // return the serialized json string with our information
-            return weatherResponseString;
+            return await callWeatherApi(latVal, longVal);
         }
 
-        public async void callWeatherApi(float latVal, float longVal)
+        public async Task<string> callWeatherApi(string latVal, string longVal)
         {
-            try
+            using(HttpClient client = new HttpClient())
             {
-                var weatherApiResponse = await client.GetAsync(weatherApiEndpoint + "?lat=" + latVal + "&lon=" + longVal + "&units=imperial" + "&appid=" + openWeatherMapAPIKey);
-                weatherApiResponse.EnsureSuccessStatusCode();
-                weatherResponseString = (await weatherApiResponse.Content.ReadAsStringAsync()).Trim();
+                try
+                {
+                    var weatherApiResponse = await client.GetAsync(weatherApiEndpoint + "?lat=" + latVal + "&lon=" + longVal + "&units=imperial" + "&appid=" + openWeatherMapAPIKey);
+                    weatherApiResponse.EnsureSuccessStatusCode();
+                    string serializedWeatherResponse = (await weatherApiResponse.Content.ReadAsStringAsync()).Trim();
 
-                // get data from weather API endpoint
-                JObject weatherDataObject = JObject.Parse(weatherResponseString);
-                currentConditions = (string)weatherDataObject.SelectToken("weather[0].main");
-                currentTemp = (string)weatherDataObject.SelectToken("main.temp") + " °F";
-                minTemp = (string)weatherDataObject.SelectToken("main.temp_min") + " °F";
-                maxTemp = (string)weatherDataObject.SelectToken("main.temp_max") + " °F";
+                    // get data from weather API endpoint
+                    JObject weatherDataObject = JObject.Parse(serializedWeatherResponse);
+                    currentConditions = (string)weatherDataObject.SelectToken("weather[0].main");
+                    currentTemp = (string)weatherDataObject.SelectToken("main.temp") + " °F";
+                    minTemp = (string)weatherDataObject.SelectToken("main.temp_min") + " °F";
+                    maxTemp = (string)weatherDataObject.SelectToken("main.temp_max") + " °F";
 
-                // build json response from model
-                WeatherResponse weatherResponse = new WeatherResponse(currentConditions, currentTemp, minTemp, maxTemp);
+                    // build json response from model
+                    WeatherResponse weatherResponse = new WeatherResponse(currentConditions, currentTemp, minTemp, maxTemp);
 
-                // set our json response
-                weatherResponseString = JsonConvert.SerializeObject(weatherResponse);
+                    // set our json response
+                    return JsonConvert.SerializeObject(weatherResponse);
+                } catch (Exception e)
+                {
+                    // catch any errors from the response
+                    WeatherResponse weatherResponse = new WeatherResponse("", "", "", "", "No location found. Please try again. Error: " + e.Message);
+
+                    // set our json response
+                    return JsonConvert.SerializeObject(weatherResponse);
+                }
             }
-            catch (HttpRequestException e)
-            {
-                // catch any errors from the response
-                WeatherResponse weatherResponse = new WeatherResponse("", "", "", "", "No location found. Please try again. Error: " + e.Message);
-                
-                // set our json response
-                weatherResponseString = JsonConvert.SerializeObject(weatherResponse);
-            }
+
         }
     }
 }

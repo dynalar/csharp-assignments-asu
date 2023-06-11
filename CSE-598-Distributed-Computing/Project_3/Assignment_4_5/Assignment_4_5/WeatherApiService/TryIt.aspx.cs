@@ -9,6 +9,9 @@ namespace Assignment_4_5.WeatherApiService
 {
     public partial class TryIt : System.Web.UI.Page
     {
+        // instantiate our weather service reference
+        public WeatherServiceRef.WeatherServiceClient weatherServiceClient = new WeatherServiceRef.WeatherServiceClient();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -21,10 +24,10 @@ namespace Assignment_4_5.WeatherApiService
             string longitude = LongitudeTextBox.Text;
 
             // call the service reference to get our weather
-
+            string weatherClientResponse = weatherServiceClient.GetWeather(latitude, longitude);
 
             // Display the result
-            ResultLiteral.Text = $"Latitude: {latitude}, Longitude: {longitude}";
+            ResultLiteral.Text = $"Weather API Response: {weatherClientResponse}";
         }
     }
 }

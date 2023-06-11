@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Assignment_4_5.ServiceReference1 {
+namespace Assignment_4_5.WeatherServiceRef {
     using System.Runtime.Serialization;
     using System;
     
@@ -75,29 +75,29 @@ namespace Assignment_4_5.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IWeatherService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WeatherServiceRef.IWeatherService")]
     public interface IWeatherService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetWeather", ReplyAction="http://tempuri.org/IWeatherService/GetWeatherResponse")]
-        string GetWeather(float latVal, float longVal);
+        string GetWeather(string latVal, string longVal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetWeather", ReplyAction="http://tempuri.org/IWeatherService/GetWeatherResponse")]
-        System.Threading.Tasks.Task<string> GetWeatherAsync(float latVal, float longVal);
+        System.Threading.Tasks.Task<string> GetWeatherAsync(string latVal, string longVal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IWeatherService/GetDataUsingDataContractResponse")]
-        Assignment_4_5.ServiceReference1.CompositeType GetDataUsingDataContract(Assignment_4_5.ServiceReference1.CompositeType composite);
+        Assignment_4_5.WeatherServiceRef.CompositeType GetDataUsingDataContract(Assignment_4_5.WeatherServiceRef.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IWeatherService/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<Assignment_4_5.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(Assignment_4_5.ServiceReference1.CompositeType composite);
+        System.Threading.Tasks.Task<Assignment_4_5.WeatherServiceRef.CompositeType> GetDataUsingDataContractAsync(Assignment_4_5.WeatherServiceRef.CompositeType composite);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IWeatherServiceChannel : Assignment_4_5.ServiceReference1.IWeatherService, System.ServiceModel.IClientChannel {
+    public interface IWeatherServiceChannel : Assignment_4_5.WeatherServiceRef.IWeatherService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WeatherServiceClient : System.ServiceModel.ClientBase<Assignment_4_5.ServiceReference1.IWeatherService>, Assignment_4_5.ServiceReference1.IWeatherService {
+    public partial class WeatherServiceClient : System.ServiceModel.ClientBase<Assignment_4_5.WeatherServiceRef.IWeatherService>, Assignment_4_5.WeatherServiceRef.IWeatherService {
         
         public WeatherServiceClient() {
         }
@@ -118,19 +118,19 @@ namespace Assignment_4_5.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string GetWeather(float latVal, float longVal) {
+        public string GetWeather(string latVal, string longVal) {
             return base.Channel.GetWeather(latVal, longVal);
         }
         
-        public System.Threading.Tasks.Task<string> GetWeatherAsync(float latVal, float longVal) {
+        public System.Threading.Tasks.Task<string> GetWeatherAsync(string latVal, string longVal) {
             return base.Channel.GetWeatherAsync(latVal, longVal);
         }
         
-        public Assignment_4_5.ServiceReference1.CompositeType GetDataUsingDataContract(Assignment_4_5.ServiceReference1.CompositeType composite) {
+        public Assignment_4_5.WeatherServiceRef.CompositeType GetDataUsingDataContract(Assignment_4_5.WeatherServiceRef.CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<Assignment_4_5.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(Assignment_4_5.ServiceReference1.CompositeType composite) {
+        public System.Threading.Tasks.Task<Assignment_4_5.WeatherServiceRef.CompositeType> GetDataUsingDataContractAsync(Assignment_4_5.WeatherServiceRef.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
     }
