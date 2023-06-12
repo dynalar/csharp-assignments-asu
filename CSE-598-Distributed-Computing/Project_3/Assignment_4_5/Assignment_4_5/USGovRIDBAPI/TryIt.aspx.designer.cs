@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Assignment_4_5.WeatherApiService
+namespace Assignment_4_5.USGovRIDBAPI
 {
 
 
@@ -15,40 +15,40 @@ namespace Assignment_4_5.WeatherApiService
     {
 
         /// <summary>
-        /// label3 control.
+        /// label control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label3;
+        protected global::System.Web.UI.WebControls.Label label;
 
         /// <summary>
-        /// LatitudeTextBox control.
+        /// QueryTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LatitudeTextBox;
+        protected global::System.Web.UI.WebControls.TextBox QueryTextBox;
 
         /// <summary>
-        /// label4 control.
+        /// label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label4;
+        protected global::System.Web.UI.WebControls.Label label2;
 
         /// <summary>
-        /// LongitudeTextBox control.
+        /// StateTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LongitudeTextBox;
+        protected global::System.Web.UI.WebControls.TextBox StateTextBox;
 
         /// <summary>
         /// SubmitButton control.

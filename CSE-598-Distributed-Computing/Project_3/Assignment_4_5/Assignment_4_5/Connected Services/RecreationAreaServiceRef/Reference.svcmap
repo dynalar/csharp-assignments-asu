@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="e81dc50b-db6e-412c-b9d6-8008259e681a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64573/RecreationAreaService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RecreationAreaService.disco" MetadataType="Disco" ID="3b8a7dde-e2aa-4137-b626-c553bd857e62" SourceId="1" SourceUrl="http://localhost:64573/RecreationAreaService.svc?disco" />
+    <MetadataFile FileName="RecreationAreaService.xsd" MetadataType="Schema" ID="6613b926-b5aa-423b-b462-83521a9dc4ab" SourceId="1" SourceUrl="http://localhost:64573/RecreationAreaService.svc?xsd=xsd1" />
+    <MetadataFile FileName="RecreationAreaService1.xsd" MetadataType="Schema" ID="dc8971d1-9be3-489a-b1b2-53ef3e41b65e" SourceId="1" SourceUrl="http://localhost:64573/RecreationAreaService.svc?xsd=xsd0" />
+    <MetadataFile FileName="RecreationAreaService.wsdl" MetadataType="Wsdl" ID="b24d04c4-0a11-4224-b5d8-d9a2de5168e8" SourceId="1" SourceUrl="http://localhost:64573/RecreationAreaService.svc?wsdl" />
+    <MetadataFile FileName="RecreationAreaService2.xsd" MetadataType="Schema" ID="6937befa-df3c-46d2-9a7d-1ce57f520bd7" SourceId="1" SourceUrl="http://localhost:64573/RecreationAreaService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

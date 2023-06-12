@@ -105,9 +105,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Connected Services\RecreationAreaServiceRef\Assignment_4_5.RecreationAreaServiceRef.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService.disco" />
+    <None Include="Connected Services\RecreationAreaServiceRef\configuration91.svcinfo" />
+    <None Include="Connected Services\RecreationAreaServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\RecreationAreaServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Connected Services\WeatherServiceRef\Assignment_4_5.WeatherServiceRef.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService.wsdl" />
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WeatherServiceRef\WeatherService.disco" />
     <None Include="Connected Services\WeatherServiceRef\configuration91.svcinfo" />
     <None Include="Connected Services\WeatherServiceRef\configuration.svcinfo" />
@@ -202,6 +222,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="USGovRIDBAPI\TryIt.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="WeatherApiService\TryIt.aspx" />
     <Content Include="Web.config" />
@@ -218,6 +239,11 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\RecreationAreaServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\WeatherServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -255,6 +281,13 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="USGovRIDBAPI\TryIt.aspx.cs">
+      <DependentUpon>TryIt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="USGovRIDBAPI\TryIt.aspx.designer.cs">
+      <DependentUpon>TryIt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -272,7 +305,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="USGovRIDBAPI\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -289,6 +321,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\RecreationAreaServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\WeatherServiceRef\" />
   </ItemGroup>
   <PropertyGroup>

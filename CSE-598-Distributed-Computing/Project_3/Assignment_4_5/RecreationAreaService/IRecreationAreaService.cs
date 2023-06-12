@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RecreationAreaService
 {
@@ -14,7 +15,7 @@ namespace RecreationAreaService
     {
 
         [OperationContract]
-        string GetRecreationAreas(int value);
+        Task<string> GetRecreationAreas(string query, string states);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
