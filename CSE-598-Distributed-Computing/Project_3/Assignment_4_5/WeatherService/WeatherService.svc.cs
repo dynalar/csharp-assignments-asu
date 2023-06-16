@@ -15,7 +15,7 @@ namespace WeatherService
         private const string weatherApiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
 
         // ADD API KEY HERE BEFORE SUBMITTING ASSIGNMENT
-        private const string openWeatherMapAPIKey = "";
+        private const string openWeatherMapAPIKey = "962d2b73dff11a2f86c92b1acb90c59c";
 
         // get attributes
         public string currentConditions;

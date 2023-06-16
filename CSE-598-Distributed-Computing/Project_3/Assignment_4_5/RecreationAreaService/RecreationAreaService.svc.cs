@@ -18,7 +18,7 @@ namespace RecreationAreaService
         private const string ridbEndpoint = "https://ridb.recreation.gov/api/v1/recareas";
 
         // RIDB API token ADD WHEN SUBMITTED
-        private const string ridbAPIKey = "";
+        private const string ridbAPIKey = "fcaad9d5-a7a2-4244-a529-804033615583";
 
         public string ridbResponseString { get; set; }
 
