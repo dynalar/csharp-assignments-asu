@@ -141,9 +141,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Connected Services\EncryptDecryptServiceRef\Assignment_4_5.EncryptDecryptServiceRef.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\EncryptDecryptServiceRef\EncryptDecryptService.disco" />
+    <None Include="Connected Services\EncryptDecryptServiceRef\configuration91.svcinfo" />
+    <None Include="Connected Services\EncryptDecryptServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\EncryptDecryptServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Connected Services\PhoneNotificationServiceRef\Assignment_4_5.PhoneNotificationServiceRef.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\EncryptDecryptServiceRef\EncryptDecryptService.wsdl" />
+    <None Include="Connected Services\EncryptDecryptServiceRef\EncryptDecryptService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EncryptDecryptServiceRef\EncryptDecryptService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EncryptDecryptServiceRef\EncryptDecryptService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PhoneNotificationServiceRef\PhoneNotificationService.disco" />
     <None Include="Connected Services\PhoneNotificationServiceRef\configuration91.svcinfo" />
     <None Include="Connected Services\PhoneNotificationServiceRef\configuration.svcinfo" />
@@ -299,6 +319,11 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\EncryptDecryptServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\PhoneNotificationServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -414,6 +439,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\EncryptDecryptServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\PhoneNotificationServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\RecreationAreaServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\WeatherServiceRef\" />

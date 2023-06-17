@@ -13,6 +13,7 @@ using System.Data;
 using System.Net;
 using System.Xml.Linq;
 using System.Linq.Expressions;
+using System.Configuration;
 
 namespace PhoneNotificationService
 {
@@ -24,16 +25,11 @@ namespace PhoneNotificationService
         private static readonly string tmobile = "@tmomail.net";
         private static readonly string att = "@txt.att.net";
         private static readonly string verizon = "@vtext.com";
-
-        public string decryptPhoneNumber(string phoneNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string encryptPhoneNumber(string phoneNumber)
-        {
-            throw new NotImplementedException();
-        }
+        private static readonly string boost = "@smsmyboostmobile.com";
+        private static readonly string cricket = "@sms.cricketwireless.net";
+        private static readonly string sprint = "@messaging.sprintpcs.com";
+        private static readonly string uscc = "@email.uscc.net";
+        private static readonly string virgin = "@vmobl.com";
 
         /// <summary>
         /// gets the items from the notifications
@@ -53,16 +49,21 @@ namespace PhoneNotificationService
             // loop through the suscribed phoneNumber, compare to new temperature.
             foreach (string[] subscribedPhoneNumber in subscribedPhoneNumbers)
             {
-                string decryptedPhoneNumber = decryptString(subscribedPhoneNumber[0]);
+                string decryptedPhoneNumber = decryptPhoneNumber(subscribedPhoneNumber[0]);
 
                 // check if phone matches decrypted number
                 if(decryptedPhoneNumber == phoneNumber)
                 {
                     string carrier = subscribedPhoneNumber[1];
                     string previousTemperature = subscribedPhoneNumber[4];
-                       
+
+                    // google smtp configuration
+                    // made a google account for this project to leverage smtp gateway
+                    string smtpPassword = ConfigurationManager.AppSettings["GoogleSMTPPassword"];
+                    string smtpEmail = ConfigurationManager.AppSettings["GoogleSMTPEmail"];
+
                     // if there is a temperature change, send notification
-                    if(Int32.Parse(newTemperature) > Int32.Parse(subscribedPhoneNumber[4]) || Int32.Parse(newTemperature) < Int32.Parse(subscribedPhoneNumber[4]))
+                    if (Int32.Parse(newTemperature) > Int32.Parse(subscribedPhoneNumber[4]) || Int32.Parse(newTemperature) < Int32.Parse(subscribedPhoneNumber[4]))
                     {
                         // send notification text message of temperature change
                         MailMessage message = new MailMessage("bantillo@asu.edu", phoneNumber + getCorrectEmailDomain(carrier), "Temperature Update", "Temperature has changed to " + newTemperature);
@@ -71,7 +72,7 @@ namespace PhoneNotificationService
                         SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
 
                         // Set the credentials from smtp server, in this case gmail
-                        smtpClient.Credentials = new NetworkCredential("c971088@gmail.com", "ydhmeefqeelrmobs");
+                        smtpClient.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
 
                         // Enable SSL
                         smtpClient.EnableSsl = true;
@@ -80,7 +81,7 @@ namespace PhoneNotificationService
                         {
                             // Send the email
                             smtpClient.Send(message);
-                            return "Notification sent successfully!";
+                            return "Notification sent successfully! It may take a couple of minutes for it to arrive to your phone via SMS.";
                         }
                         catch (Exception ex)
                         {
@@ -102,6 +103,16 @@ namespace PhoneNotificationService
                     return att;
                 case "verizon":
                     return verizon;
+                case "boost":
+                    return boost;
+                case "cricket":
+                    return cricket;
+                case "sprint":
+                    return sprint;
+                case "uscc":
+                    return uscc;
+                case "virgin":
+                    return virgin;
                 default:
                     return "invalid";
             }
@@ -114,7 +125,7 @@ namespace PhoneNotificationService
             // encrypt the phone number and insert it into our csv file.
             List<string[]> dataRows = new List<string[]>
             { 
-                new string[] { encryptString(phoneNumber), carrier, latLocation, longLocation, currentTemperature },
+                new string[] { encryptPhoneNumber(phoneNumber), carrier, latLocation, longLocation, currentTemperature },
             };
 
             WriteToCsvFile(dataRows);
@@ -152,14 +163,19 @@ namespace PhoneNotificationService
             return csvRows;
         }
 
-        public static string encryptString(string plainText)
+        /// <summary>
+        /// THIS CODE WILL BE REMOVED IN FUTURE ASSIGNMENT, THIS WILL BE THE ENCRYPTION/DECRYPTION SERVICE
+        /// </summary>
+        /// <param name="plainText"></param>
+        /// <returns></returns>
+        public string encryptPhoneNumber(string plainText)
         {
             byte[] encryptedBytes;
 
             // key that we're using to encrypt along with initalization vector
             // bad practice, dont hard code keys
-            string key = "kal1m5mgg3415367";
-            string iv = "kal1m5mgg3415367";
+            string key = ConfigurationManager.AppSettings["EncryptionKey"];
+            string iv = ConfigurationManager.AppSettings["EncryptionKey"];
 
             using (Aes aes = Aes.Create())
             {
@@ -187,13 +203,18 @@ namespace PhoneNotificationService
             return Convert.ToBase64String(encryptedBytes);
         }
 
-        public static string decryptString(string encryptedText)
+        /// <summary>
+        /// THIS CODE WILL BE REMOVED IN FUTURE ASSIGNMENT, THIS WILL BE THE ENCRYPTION/DECRYPTION SERVICE
+        /// </summary>
+        /// <param name="encryptedText"></param>
+        /// <returns></returns>
+        public string decryptPhoneNumber(string encryptedText)
         {
             byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
 
             // bad practice, dont hard code keys
-            string key = "kal1m5mgg3415367";
-            string iv = "kal1m5mgg3415367";
+            string key = ConfigurationManager.AppSettings["EncryptionKey"];
+            string iv = ConfigurationManager.AppSettings["EncryptionKey"];
 
             using (Aes aes = Aes.Create())
             {

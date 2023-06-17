@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="c3195399-af9f-4cb1-a357-a076f6336d16" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:50108/EncryptDecryptService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="EncryptDecryptService.xsd" MetadataType="Schema" ID="8b16dd77-358b-452b-ba1f-4afda0cc6d7b" SourceId="1" SourceUrl="http://localhost:50108/EncryptDecryptService.svc?xsd=xsd1" />
+    <MetadataFile FileName="EncryptDecryptService.disco" MetadataType="Disco" ID="f968328e-ee3a-4663-8366-0798cb839b1e" SourceId="1" SourceUrl="http://localhost:50108/EncryptDecryptService.svc?disco" />
+    <MetadataFile FileName="EncryptDecryptService.wsdl" MetadataType="Wsdl" ID="8efd1f0c-3158-427e-90e2-9d8735eac1cd" SourceId="1" SourceUrl="http://localhost:50108/EncryptDecryptService.svc?wsdl" />
+    <MetadataFile FileName="EncryptDecryptService1.xsd" MetadataType="Schema" ID="33f1bd18-ae3a-44db-9356-ad4021ab2126" SourceId="1" SourceUrl="http://localhost:50108/EncryptDecryptService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EncryptDecryptService2.xsd" MetadataType="Schema" ID="a5204460-d606-4ac0-95f2-867179a28471" SourceId="1" SourceUrl="http://localhost:50108/EncryptDecryptService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
