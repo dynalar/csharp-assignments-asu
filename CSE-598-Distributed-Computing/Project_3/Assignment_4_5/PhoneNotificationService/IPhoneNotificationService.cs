@@ -10,8 +10,19 @@ namespace PhoneNotificationService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IService1
+    public interface IPhoneNotificationService
     {
+        [OperationContract]
+        string sendPhoneNotificationText(string phoneNumber, string newTemperature);
+
+        [OperationContract]
+        string decryptPhoneNumber(string phoneNumber);
+
+        [OperationContract]
+        void registerPhoneNumberNotification(string phoneNumber, string carrier, string latLocation, string longLocation, string currentTemperature);
+
+        [OperationContract]
+        string encryptPhoneNumber(string phoneNumber);
 
         [OperationContract]
         string GetData(int value);

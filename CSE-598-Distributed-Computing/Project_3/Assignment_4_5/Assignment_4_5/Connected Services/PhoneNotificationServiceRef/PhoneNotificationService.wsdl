@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="PhoneNotificationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:50117/PhoneNotificationService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:50117/PhoneNotificationService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50117/PhoneNotificationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PhoneNotificationService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPhoneNotificationService_sendPhoneNotificationText_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendPhoneNotificationText" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_sendPhoneNotificationText_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendPhoneNotificationTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_decryptPhoneNumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:decryptPhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_decryptPhoneNumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:decryptPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_registerPhoneNumberNotification_InputMessage">
+    <wsdl:part name="parameters" element="tns:registerPhoneNumberNotification" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_registerPhoneNumberNotification_OutputMessage">
+    <wsdl:part name="parameters" element="tns:registerPhoneNumberNotificationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_encryptPhoneNumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:encryptPhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_encryptPhoneNumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:encryptPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_GetDataUsingDataContract_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneNotificationService_GetDataUsingDataContract_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPhoneNotificationService">
+    <wsdl:operation name="sendPhoneNotificationText">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneNotificationService/sendPhoneNotificationText" message="tns:IPhoneNotificationService_sendPhoneNotificationText_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneNotificationService/sendPhoneNotificationTextResponse" message="tns:IPhoneNotificationService_sendPhoneNotificationText_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="decryptPhoneNumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneNotificationService/decryptPhoneNumber" message="tns:IPhoneNotificationService_decryptPhoneNumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneNotificationService/decryptPhoneNumberResponse" message="tns:IPhoneNotificationService_decryptPhoneNumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="registerPhoneNumberNotification">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneNotificationService/registerPhoneNumberNotification" message="tns:IPhoneNotificationService_registerPhoneNumberNotification_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneNotificationService/registerPhoneNumberNotificationResponse" message="tns:IPhoneNotificationService_registerPhoneNumberNotification_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="encryptPhoneNumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneNotificationService/encryptPhoneNumber" message="tns:IPhoneNotificationService_encryptPhoneNumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneNotificationService/encryptPhoneNumberResponse" message="tns:IPhoneNotificationService_encryptPhoneNumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneNotificationService/GetData" message="tns:IPhoneNotificationService_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneNotificationService/GetDataResponse" message="tns:IPhoneNotificationService_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneNotificationService/GetDataUsingDataContract" message="tns:IPhoneNotificationService_GetDataUsingDataContract_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneNotificationService/GetDataUsingDataContractResponse" message="tns:IPhoneNotificationService_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IPhoneNotificationService" type="tns:IPhoneNotificationService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="sendPhoneNotificationText">
+      <soap:operation soapAction="http://tempuri.org/IPhoneNotificationService/sendPhoneNotificationText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="decryptPhoneNumber">
+      <soap:operation soapAction="http://tempuri.org/IPhoneNotificationService/decryptPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerPhoneNumberNotification">
+      <soap:operation soapAction="http://tempuri.org/IPhoneNotificationService/registerPhoneNumberNotification" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="encryptPhoneNumber">
+      <soap:operation soapAction="http://tempuri.org/IPhoneNotificationService/encryptPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/IPhoneNotificationService/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <soap:operation soapAction="http://tempuri.org/IPhoneNotificationService/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PhoneNotificationService">
+    <wsdl:port name="BasicHttpBinding_IPhoneNotificationService" binding="tns:BasicHttpBinding_IPhoneNotificationService">
+      <soap:address location="http://localhost:50117/PhoneNotificationService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

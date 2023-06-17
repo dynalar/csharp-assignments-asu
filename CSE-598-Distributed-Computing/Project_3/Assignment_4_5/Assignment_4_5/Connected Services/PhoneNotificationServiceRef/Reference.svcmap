@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="0f5010ad-a104-427e-a0fd-2beb9ff5c2a7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:50117/PhoneNotificationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PhoneNotificationService.xsd" MetadataType="Schema" ID="b133ca27-567b-4de0-80de-59b42f6eb6b4" SourceId="1" SourceUrl="http://localhost:50117/PhoneNotificationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PhoneNotificationService.disco" MetadataType="Disco" ID="dd839cac-2bbd-481d-b4dc-6aab68af88fa" SourceId="1" SourceUrl="http://localhost:50117/PhoneNotificationService.svc?disco" />
+    <MetadataFile FileName="PhoneNotificationService1.xsd" MetadataType="Schema" ID="2a7f8c99-8870-4ed5-be45-fe9ddb56b67f" SourceId="1" SourceUrl="http://localhost:50117/PhoneNotificationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PhoneNotificationService2.xsd" MetadataType="Schema" ID="e4fa8fb7-fa28-4ec8-83b4-e4b60f6948ff" SourceId="1" SourceUrl="http://localhost:50117/PhoneNotificationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PhoneNotificationService.wsdl" MetadataType="Wsdl" ID="23613566-2821-472f-8b60-3751241f63b1" SourceId="1" SourceUrl="http://localhost:50117/PhoneNotificationService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

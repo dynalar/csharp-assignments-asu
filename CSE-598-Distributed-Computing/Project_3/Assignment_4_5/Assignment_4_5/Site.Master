@@ -48,6 +48,10 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/WeatherApiService/TryIt.aspx">Weather Service</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/USGovRIDBAPI/TryIt.aspx">US Gov Recreation Service</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/GeocodeAPIService/TryIt.aspx">Geocode API Service</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/PhoneNotificationService/TryIt.aspx">Phone Notification Service</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/FavoriteLocationsService/TryIt.aspx">Favorite Locations Service</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/EncryptDecryptService/TryIt.aspx">Encrypt/Decrypt Service</a></li>
                     </ul>
                 </div>
             </div>

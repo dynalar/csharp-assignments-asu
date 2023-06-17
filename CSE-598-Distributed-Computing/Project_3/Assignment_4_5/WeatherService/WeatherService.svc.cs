@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using WeatherService.JsonObjects;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace WeatherService
 {
@@ -11,12 +12,6 @@ namespace WeatherService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class WeatherService : IWeatherService
     {
-        // endpoint for weather API
-        private const string weatherApiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
-
-        // ADD API KEY HERE BEFORE SUBMITTING ASSIGNMENT
-        private const string openWeatherMapAPIKey = "962d2b73dff11a2f86c92b1acb90c59c";
-
         // get attributes
         public string currentConditions;
         public string currentTemp;
@@ -45,7 +40,11 @@ namespace WeatherService
 
         public async Task<string> callWeatherApi(string latVal, string longVal)
         {
-            using(HttpClient client = new HttpClient())
+            // env variables
+            string weatherApiEndpoint = ConfigurationManager.AppSettings["WeatherServiceURL"];
+            string openWeatherMapAPIKey = ConfigurationManager.AppSettings["WeatherServiceAPIKey"];
+
+            using (HttpClient client = new HttpClient())
             {
                 try
                 {

@@ -1,52 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
-using System.Configuration;
 
-namespace RecreationAreaService
+namespace GeocodingAPIService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class RecreationAreaService : IRecreationAreaService
+    public class GeocodingAPIService : IGeocodingAPIService
     {
-        public string ridbResponseString { get; set; }
+        private const string googleMapsGeocodingEndpoint = "https://maps.googleapis.com/maps/api/geocode/json";
+        private const string googleMapsAPIKey = "AIzaSyDokQhYEuIY82yVG1Tbt8n1WyrXaJnWoUs";
+        string geocodeResponseString;
 
-        // call the RIDB api to get recreation areas
-        public async Task<string> GetRecreationAreas(string searchTerms, string states)
+        public async Task<string> convertZipCodeToLongitudeLatitude(string zipCode)
         {
-            return await callRIDBApi(searchTerms, states);
+            return await callGeocodeApi(zipCode);
         }
 
-        private async Task<string> callRIDBApi(string searchTerms, string states)
+        private async Task<string> callGeocodeApi(string zipCode)
         {
-            string ridbEndpoint = ConfigurationManager.AppSettings["RIDBServiceURL"];
-            string ridbAPIKey = ConfigurationManager.AppSettings["RIDBAPIKey"];
-
             using (HttpClient client = new HttpClient())
             {
                 try
                 {
                     // set the headers with auth token and json data type
                     client.DefaultRequestHeaders.Add("accept", "application/json");
-                    client.DefaultRequestHeaders.Add("apikey", ridbAPIKey);
+                    client.DefaultRequestHeaders.Add("apikey", googleMapsAPIKey);
 
-                    var ridbApiResponse = await client.GetAsync(ridbEndpoint + "?limit=15" + "&query=" + searchTerms + "&state=" + states + "&radius=10");
+                    var geocodeApiResponse = await client.GetAsync(googleMapsGeocodingEndpoint + "?address=" + zipCode + "&key=" + googleMapsAPIKey);
 
-                    string serializedRidbResponse = (await ridbApiResponse.Content.ReadAsStringAsync()).Trim();
+                    string serializedRidbResponse = (await geocodeApiResponse.Content.ReadAsStringAsync()).Trim();
 
                     return serializedRidbResponse;
 
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
 
                     return e.Message;
                 }
             }
+        }
+
+
+        public string GetData(int value)
+        {
+            return string.Format("You entered: {0}", value);
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)

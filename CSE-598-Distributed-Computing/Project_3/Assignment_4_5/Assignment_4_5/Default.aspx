@@ -5,7 +5,7 @@
     <main>
         <section class="row" aria-labelledby="aspnetTitle">
             <h1 id="aspnetTitle">Project 3 Services</h1>
-            <p class="lead">Click the links in the header above to test out the two required services!</p>
+            <p class="lead">Click the links below or hit the dropdown above to access the services!</p>
         </section>
 
        
