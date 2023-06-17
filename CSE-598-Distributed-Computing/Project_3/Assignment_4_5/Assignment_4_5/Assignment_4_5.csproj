@@ -232,7 +232,6 @@
     <Content Include="Default.aspx" />
     <Content Include="EncryptDecryptService\TryIt.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="FavoriteLocationsService\TryIt.aspx" />
     <Content Include="GeocodeApiService\TryIt.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PhoneNotificationService\TryIt.aspx" />
@@ -358,13 +357,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EncryptDecryptService\TryIt.aspx.designer.cs">
-      <DependentUpon>TryIt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FavoriteLocationsService\TryIt.aspx.cs">
-      <DependentUpon>TryIt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FavoriteLocationsService\TryIt.aspx.designer.cs">
       <DependentUpon>TryIt.aspx</DependentUpon>
     </Compile>
     <Compile Include="GeocodeApiService\TryIt.aspx.cs">
