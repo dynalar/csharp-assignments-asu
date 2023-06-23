@@ -236,7 +236,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <None Include="App_Data\Persons.xml" />
+    <None Include="App_Data\Persons.xsd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

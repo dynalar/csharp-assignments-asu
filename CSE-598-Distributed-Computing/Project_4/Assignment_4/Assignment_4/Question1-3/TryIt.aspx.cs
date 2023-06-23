@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
+using System.Web;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
@@ -20,12 +23,18 @@ namespace Assignment_4.Question1_3
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
             // get the contents of the XML passed to us.
+            string defaultPersonsXmlPath = Server.MapPath("~/App_Data/Persons.xml");
             string xmlUrl = XmlUrlTextBox.Text;
             string xmlBody = "";
 
             // download the file contents from the URL
             using (WebClient webClient = new WebClient()) 
             { 
+                if(xmlUrl == "Persons.xml")
+                {
+                    xmlUrl = defaultPersonsXmlPath;
+                }
+
                 // try catch for sending error to front end (if any)
                 try
                 {
@@ -67,13 +76,15 @@ namespace Assignment_4.Question1_3
             }
         }
 
+
         /// <summary>
         /// XML parsing method that also builds HTML that gets outputted to the frontend
         /// </summary>
-        /// <param name="xmlNodes"></param>
+        /// <param name="node"></param>
+        /// <param name="htmlBuilder"></param>
+        /// <param name="indent"></param>
         protected void parseXmlNodes(XmlNode node, StringBuilder htmlBuilder, string indent = "")
         {
-            
             // add the current node and its value to the HTML output
             htmlBuilder.AppendLine("<div class=\"tree\">");
             htmlBuilder.AppendLine($"<span>{node.Name}: {node.InnerText}</span>");
