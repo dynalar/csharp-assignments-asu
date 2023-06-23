@@ -1,0 +1,47 @@
+﻿/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .body-content {
+        padding: 0;
+    }
+}
+
+
+.tree ul {
+    margin-left: 20px;
+    list-style-type: none;
+}
+
+.tree li {
+    margin-left: 20px;
+}
+
+    .tree li:before {
+        content: "Attribute: ";
+    }
+
+    .tree li:last-child:before {
+        content: "Attribute: ";
+    }
+
+.tree .indent {
+    margin-left: 20px;
+}
+
+.tree {
+    margin-left: 20px;
+}
