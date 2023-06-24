@@ -7,6 +7,8 @@
     <br />
     <a href="../xml_files/Persons.xml">Persons.xml</a>
     <a href="../xml_files/Persons.xsd">Persons.xsd</a>
+    <a href="https://venus.sod.asu.edu/WSRepository/xml/Courses.xml">Courses.xml</a>
+    <a href="https://venus.sod.asu.edu/WSRepository/xml/Courses.xsd">Courses.xsd</a>
     <br />
     &nbsp;
     <div>

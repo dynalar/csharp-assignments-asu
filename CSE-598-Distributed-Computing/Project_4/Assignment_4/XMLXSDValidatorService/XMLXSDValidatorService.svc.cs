@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
+using System.Runtime;
 using System.Xml;
 using System.Xml.Schema;
 
@@ -10,8 +12,10 @@ namespace XMLXSDValidatorService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class XMLXSDValidatorService : IXMLXSDValidatorService
     {
+        private string validationMessage;
+
         /// <summary>
-        /// Endpoint that validates XML to an XSD file.
+        /// method that returns proper message to the front-end consuming this service.
         /// </summary>
         /// <param name="xmlUrl"></param>
         /// <param name="xsdUrl"></param>
@@ -25,11 +29,11 @@ namespace XMLXSDValidatorService
                 bool validationStatus = ValidateXmlToXsd(xmlUrl, xsdUrl);
                 if (validationStatus)
                 {
-                    return "Success!";
+                    return "Succesfully validated XML against XSD Schema!";
                 }
                 else
                 {
-                    return "False";
+                    return "XML does not match the XSD schema provided. More information: " + validationMessage;
                 }
             } catch(Exception e)
             {
@@ -42,18 +46,24 @@ namespace XMLXSDValidatorService
             return string.Format("You entered: {0}", value);
         }
 
+        /// <summary>
+        /// method in charge of running actual validation of XML against XSD
+        /// </summary>
+        /// <param name="xmlUrl"></param>
+        /// <param name="xsdUrl"></param>
+        /// <returns></returns>
         public bool ValidateXmlToXsd(string xmlUrl, string xsdUrl)
         {
             try
             {
-                // pull both of our files 
+                // pull contents of XML link
                 string xmlContent;
                 using (WebClient xmlClient = new WebClient())
                 {
                     xmlContent = xmlClient.DownloadString(xmlUrl);
                 }
 
-                // Download the XSD schema file
+                // pull contents of XSD link
                 string xsdContent;
                 using (WebClient xsdClient = new WebClient())
                 {
@@ -66,26 +76,40 @@ namespace XMLXSDValidatorService
 
                 // Create XmlReaderSettings and specify the schema set for validation
                 XmlReaderSettings readerSettings = new XmlReaderSettings();
+
+                // according to MS documentation, these are proper settings for extra validation of xml files.
                 readerSettings.ValidationType = ValidationType.Schema;
-                readerSettings.Schemas = schemaSet;
+                readerSettings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
+                readerSettings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
+                readerSettings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
+                readerSettings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
 
                 // Create an XmlReader for the XML content
-                using (XmlReader reader = XmlReader.Create(new StringReader(xmlContent), readerSettings))
-                {
-                    // Read the XML content, performing the validation
-                    while (reader.Read())
-                    {
-                        // Perform validation here (if required)
-                    }
-                }
+                XmlReader xmlReader = XmlReader.Create(new StringReader(xmlContent), readerSettings);
+                
+                // iterate through the reader and read the file until an exception is raised
+                // we can add extra validation here, but it won't be necessary since we're just looking for exceptions.
+                while (xmlReader.Read()) { } ;
 
-                // If no exception occurred during validation, the XML is valid
+                // if no exception occurred, we'll just return true since everything was ok.
                 return true;
             } catch(Exception e)
             {
                 // Handle any exceptions that occurred during validation
-                Console.WriteLine("XML validation error: " + e.Message);
+                validationMessage = "XML validation error: " + e.Message;
                 return false;
+            }
+        }
+
+        // Display any warnings or errors.
+        private static void ValidationCallBack(object sender, ValidationEventArgs args)
+        {
+            if (args.Severity == XmlSeverityType.Warning)
+            {
+                Console.WriteLine("\tWarning: Matching schema not found.  No validation occurred." + args.Message);
+            } else
+            {
+                Console.WriteLine("\tValidation error: " + args.Message);
             }
         }
 
