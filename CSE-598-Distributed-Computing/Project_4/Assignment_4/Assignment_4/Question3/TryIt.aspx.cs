@@ -16,7 +16,14 @@ namespace Assignment_4.Question3
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
+            XmlXsdValidatorServiceRef.XMLXSDValidatorServiceClient xmlValidator = new XmlXsdValidatorServiceRef.XMLXSDValidatorServiceClient();
 
+            string encodedXmlUrl = HttpUtility.UrlPathEncode(XmlTextBox.Text);
+            string encodedXsdUrl = HttpUtility.UrlPathEncode(XsdTextBox.Text);
+
+            string validatorResponse = xmlValidator.ValidateXMLToXSD(encodedXmlUrl, encodedXsdUrl);
+
+            ResultLiteral.Text = validatorResponse;
         }
     }
 }

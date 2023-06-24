@@ -2,11 +2,23 @@
 
 <asp:Content ID="Question3" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Question 3</h3>
-    <h5>This service converts Zip Codes to Latitude/Longitude boundaries</h5>
+    <h5>Enter the URL for both an XML and XSD to validate if they are compatible.</h5>
+    <b>Links to sample XML files on this server. (Right Click > Copy Link Address and paste into the boxes)</b>
+    <br />
+    <a href="../xml_files/Persons.xml">Persons.xml</a>
+    <a href="../xml_files/Persons.xsd">Persons.xsd</a>
+    <br />
+    &nbsp;
     <div>
-        <asp:Label id="label2" AssociatedControlId="ZipCodeTextBox" Text="Zip Code:" runat="server" />
-        <asp:TextBox ID="ZipCodeTextBox" runat="server" placeholder="Zip Code..."></asp:TextBox>
+        <asp:Label id="label4" AssociatedControlId="XmlTextBox" Text="XML URL:" runat="server" />
+        <asp:TextBox ID="XmlTextBox" runat="server" placeholder="Enter URL for your XML here..."></asp:TextBox>
     </div>
+    &nbsp;
+    <div>
+        <asp:Label id="label5" AssociatedControlId="XsdTextBox" Text="XSD URL:" runat="server" />
+        <asp:TextBox ID="XsdTextBox" runat="server" placeholder="Enter URL for your XSD here..."></asp:TextBox>
+    </div>
+    &nbsp;
     <div>
         <asp:Button ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" />
     </div>
