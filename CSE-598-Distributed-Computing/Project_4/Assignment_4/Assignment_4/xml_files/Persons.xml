@@ -31,7 +31,6 @@
     <Credential>
       <ID>rriggs</ID>
       <Password>
-        <Encryption>Yes</Encryption>
         <Value>password4321</Value>
       </Password>
     </Credential>

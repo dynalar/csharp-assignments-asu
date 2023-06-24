@@ -91,12 +91,14 @@ namespace XMLXSDValidatorService
                     validationMessage = "Validation succeeded";
                 }
 
-                return true; // XML is valid
+                // all xml is valid
+                return true;
             }
             catch (Exception ex)
             {
+                // only if error occurs
                 validationMessage = "Error with schema or XML. Reason: " + ex.Message;
-                return false; // Error occurred
+                return false;
             }
         }
 
