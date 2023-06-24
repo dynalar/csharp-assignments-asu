@@ -13,12 +13,12 @@
     &nbsp;
     <div>
         <asp:Label id="label4" AssociatedControlId="XmlTextBox" Text="XML URL:" runat="server" />
-        <asp:TextBox ID="XmlTextBox" runat="server" placeholder="Enter URL for your XML here..."></asp:TextBox>
+        <asp:TextBox ID="XmlTextBox" class="xml-url-text-box" runat="server" placeholder="Enter URL for your XML here..."></asp:TextBox>
     </div>
     &nbsp;
     <div>
         <asp:Label id="label5" AssociatedControlId="XsdTextBox" Text="XSD URL:" runat="server" />
-        <asp:TextBox ID="XsdTextBox" runat="server" placeholder="Enter URL for your XSD here..."></asp:TextBox>
+        <asp:TextBox ID="XsdTextBox" class="xml-url-text-box" runat="server" placeholder="Enter URL for your XSD here..."></asp:TextBox>
     </div>
     &nbsp;
     <div>

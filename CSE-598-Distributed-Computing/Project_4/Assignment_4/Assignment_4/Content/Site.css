@@ -10,7 +10,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 50%;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -44,4 +44,12 @@ textarea {
 
 .tree {
     margin-left: 20px;
+}
+
+.xml-url-text-box {
+    width: 1000px
+}
+
+.results-label {
+    font-size: 24px
 }

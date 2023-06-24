@@ -6,7 +6,7 @@
     <h5>To get default Persons.xml file, just click Submit below.</h5>
     <div>
         <asp:Label id="label1" AssociatedControlId="XmlUrlTextBox" Text="XML URL:" runat="server" />
-        <asp:TextBox ID="XmlUrlTextBox" runat="server" placeholder="Enter URL to XML file..." value="Persons.xml"></asp:TextBox>
+        <asp:TextBox ID="XmlUrlTextBox" class="xml-url-text-box" runat="server" placeholder="Enter URL to XML file..." value="Persons.xml"></asp:TextBox>
     </div>
     <div>
         <asp:Button ID="SubmitButton" runat="server" Text="Submit" OnClick="SubmitButton_Click" />
