@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="66aa671b-ad10-42fd-88c0-1e55b9dfbc78" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:55710/XMLXSDValidatorService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="XMLXSDValidatorService.xsd" MetadataType="Schema" ID="9993053a-9fd9-44fc-a369-d80ea983c3f2" SourceId="1" SourceUrl="http://localhost:55710/XMLXSDValidatorService.svc?xsd=xsd0" />
+    <MetadataFile FileName="XMLXSDValidatorService.wsdl" MetadataType="Wsdl" ID="03cae86d-f40b-40c2-aedb-34cac79f8438" SourceId="1" SourceUrl="http://localhost:55710/XMLXSDValidatorService.svc?wsdl" />
+    <MetadataFile FileName="XMLXSDValidatorService1.xsd" MetadataType="Schema" ID="24f988f3-30b2-41b7-9cf2-67e3686e4393" SourceId="1" SourceUrl="http://localhost:55710/XMLXSDValidatorService.svc?xsd=xsd2" />
+    <MetadataFile FileName="XMLXSDValidatorService.disco" MetadataType="Disco" ID="7d28fbc1-d005-42f2-85ca-3fca4ffa1f2f" SourceId="1" SourceUrl="http://localhost:55710/XMLXSDValidatorService.svc?disco" />
+    <MetadataFile FileName="XMLXSDValidatorService2.xsd" MetadataType="Schema" ID="fec92d88-d60f-48e5-8c84-c1917ac80703" SourceId="1" SourceUrl="http://localhost:55710/XMLXSDValidatorService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
