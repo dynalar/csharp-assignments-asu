@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
+using System.Net;
 
 namespace Assignment_7.UserControls
 {
@@ -23,7 +24,7 @@ namespace Assignment_7.UserControls
             }
         }
 
-        protected async void btnSignUp_Click(object sender, EventArgs e)
+        protected void btnSignUp_Click(object sender, EventArgs e)
         {
             // get the entries from the username/pw fields
             string username = usernameEntry.Text;
@@ -38,10 +39,11 @@ namespace Assignment_7.UserControls
             }
 
             // if signup passes, save the user to the "database" (just an xml file)
-            // encrypt the password first. if it fails then we dont create the user for security.
             try
             {
-                encryptedPassword = await callEncryptionService(password);
+                encryptedPassword = callEncryptionService(password);
+                storeCredentialsToXmlDatabase(username, encryptedPassword);
+                successMessageLabel.Text = "Account successfully created! Try logging in.";
             } catch (Exception ex)
             {
                 errorMessageLabel.Text = "Failed to encrypt password: Reason: " + ex.Message;
@@ -51,22 +53,23 @@ namespace Assignment_7.UserControls
             storeCredentialsToXmlDatabase(username, encryptedPassword);
         }
 
-        protected async Task<string> callEncryptionService(string password)
+        protected string callEncryptionService(string password)
         {
-            // pull our env variables
             string encryptionServiceUrl = ConfigurationManager.AppSettings["EncryptionSvcUrl"];
             string encryptedString;
 
-            using (HttpClient client = new HttpClient())
+            using (WebClient webClient = new WebClient())
             {
+
+                // try catch for sending error to front end (if any)
                 try
                 {
-                    var encryptionServiceApiResponse = await client.GetAsync(encryptionServiceUrl + password);
-                    encryptionServiceApiResponse.EnsureSuccessStatusCode();
-                    encryptedString = (await encryptionServiceApiResponse.Content.ReadAsStringAsync()).Trim();
-                } catch(Exception ex)
+                    encryptedString = webClient.DownloadString(encryptionServiceUrl + password);
+                }
+                catch (Exception ex)
                 {
-                    return ex.Message;
+                    // send error to front end
+                    throw ex;
                 }
             }
 

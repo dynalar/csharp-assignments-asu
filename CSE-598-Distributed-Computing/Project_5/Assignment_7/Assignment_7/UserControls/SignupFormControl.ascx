@@ -13,6 +13,7 @@
         <asp:Button ID="btnSignUp" runat="server" Text="Sign Up" OnClick="btnSignUp_Click" />
     </div>
     <div>
+        <asp:Label ID="successMessageLabel" runat="server" ForeColor="Green"></asp:Label>
         <asp:Label ID="errorMessageLabel" runat="server" ForeColor="Red"></asp:Label>
     </div>
 </div>
