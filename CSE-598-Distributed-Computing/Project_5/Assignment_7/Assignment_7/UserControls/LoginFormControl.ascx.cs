@@ -35,6 +35,7 @@ namespace Assignment_7.UserControls
             } else
             {
                 // attempt to authenticate user.
+                // method will redirect the user to the main search page.
                 if(attemptToAuthenticateUser(username, password))
                 {
                     successMessageLabel.Text = "Authenticated!";
@@ -46,7 +47,33 @@ namespace Assignment_7.UserControls
         }
 
         /// <summary>
+        /// Stores the role and username of the user in a session cookie.
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void storeSessionInfo(string username, string role)
+        {
+            // create a new cookie
+            HttpCookie userCookie = new HttpCookie("AuthCookie");
+
+            // set the username and role for cookie.
+            userCookie["username"] = username;
+            userCookie["role"] = role;
+
+            // set an expiration time of 2 days.
+            userCookie.Expires = DateTime.Now.AddDays(2);
+
+            // store the cookie to the http context.
+            HttpContext.Current.Response.Cookies.Add(userCookie);
+        }
+
+        /// <summary>
         /// Method that attempts to authenticate the user.
+        /// once the user is authenticated, a cookie is created with the username and role of the user.
+        /// note that this only supports ONE ROLE per user.
+        /// 
+        /// current available roles: admin, user.
         /// 
         /// Uses ASU decryption REST service to check if the password is correct.
         /// </summary>
@@ -69,6 +96,8 @@ namespace Assignment_7.UserControls
                 // get the username node based off the one that was entered.
                 XmlNode usernameNode = userNode.SelectSingleNode("Credential/ID");
                 XmlNode passwordNode = userNode.SelectSingleNode("Credential/Password");
+                // ONLY SUPPORTS ONE ROLE FOR NOW. only two roles exist: admin or user.
+                XmlNode roleNode = userNode.SelectSingleNode("Credential/Roles/Role");
 
                 // if the username matches the one entered, then we verify the password.
                 if(usernameNode.InnerText == username)
@@ -78,6 +107,8 @@ namespace Assignment_7.UserControls
                     string encryptedEnteredPassword = callEncryptionService(password);
                     if(passwordNode.InnerText == encryptedEnteredPassword)
                     {
+                        // since the passwords match, lets just set the session cookie here.
+                        storeSessionInfo(usernameNode.InnerText, roleNode.InnerText);
                         return true;
                     }
 
