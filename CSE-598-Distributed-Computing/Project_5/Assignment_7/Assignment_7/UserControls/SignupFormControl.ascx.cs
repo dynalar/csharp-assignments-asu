@@ -17,11 +17,9 @@ namespace Assignment_7.UserControls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                // Clear any previous login error messages if necessary
-                errorMessageLabel.Text = string.Empty;
-            }
+            // clear any previous login error messages if necessary
+            successMessageLabel.Text = string.Empty;
+            errorMessageLabel.Text = string.Empty;
         }
 
         protected void btnSignUp_Click(object sender, EventArgs e)

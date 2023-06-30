@@ -14,12 +14,5 @@ namespace Assignment_7.Pages
         {
 
         }
-
-        protected void loginControl_LoginClicked(object sender, LoginEventArgs e)
-        {
-            // Handle the login event here
-            string username = e.Username;
-            // Perform any necessary authentication or redirection logic
-        }
     }
 }
