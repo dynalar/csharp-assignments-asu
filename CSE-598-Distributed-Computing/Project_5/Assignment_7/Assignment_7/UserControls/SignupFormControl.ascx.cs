@@ -15,9 +15,12 @@ namespace Assignment_7.UserControls
 {
     public partial class SignUpFormControl : System.Web.UI.UserControl
     {
+        public bool userAlreadyExists = false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // clear any previous login error messages if necessary
+            userAlreadyExists = false;
             successMessageLabel.Text = string.Empty;
             errorMessageLabel.Text = string.Empty;
         }
@@ -39,9 +42,18 @@ namespace Assignment_7.UserControls
             // if signup passes, save the user to the "database" (just an xml file)
             try
             {
+                // encrypt our password before creating the user
                 encryptedPassword = callEncryptionService(password);
                 storeCredentialsToXmlDatabase(username, encryptedPassword);
-                successMessageLabel.Text = "Account successfully created! Try logging in.";
+
+                // check if the user already exists. based off a flag that is set in our code.
+                if(userAlreadyExists)
+                {
+                    errorMessageLabel.Text = "Username already exists!";
+                } else
+                {
+                    successMessageLabel.Text = "Account successfully created! Try logging in.";
+                }
             } catch (Exception ex)
             {
                 errorMessageLabel.Text = "Failed to encrypt password: Reason: " + ex.Message;
@@ -85,52 +97,78 @@ namespace Assignment_7.UserControls
         /// <param name="password"></param>
         private void storeCredentialsToXmlDatabase(string username, string password)
         {
-            // get the xml file path of the Users.xml file that is stored in our app_data
-            // much better way than what I was doing before of building the path manually.
             string usersXmlFilePath = HttpContext.Current.Server.MapPath("~/App_Data/Users.xml");
-
-            // create our xml document
             XmlDocument xmlDocument = new XmlDocument();
 
-            // load our xml file. we will always make it.
+
             xmlDocument.Load(usersXmlFilePath);
 
-            // get root xml element, Users
-            XmlElement rootElement = xmlDocument.DocumentElement;
+            // check if the user already exists in the XML file
+            if (UserExists(xmlDocument, username))
+            {
+                // user already exists, skip adding it by setting flag
+                userAlreadyExists = true;
+                return;
+            }
 
-            // create a new user element
+
+            // set up and add our credential elements
             XmlElement userElement = xmlDocument.CreateElement("User");
-
-            // create the credential element
             XmlElement credentialElement = xmlDocument.CreateElement("Credential");
-
-            // create and append the ID element
             XmlElement idElement = xmlDocument.CreateElement("ID");
             idElement.InnerText = username;
             credentialElement.AppendChild(idElement);
 
-            // create and append the Roles/Role element
+            // create the roles element and the role element
             XmlElement rolesElement = xmlDocument.CreateElement("Roles");
             XmlElement roleElement = xmlDocument.CreateElement("Role");
+
+            // give a default role of "user" for every user created.
             roleElement.InnerText = "user";
 
-            // create and append the Password element
-            XmlElement passwordElement = xmlDocument.CreateElement("Password");
-            passwordElement.InnerText = password;
-            credentialElement.AppendChild(passwordElement);
-
-            // append the credential element to the user element
-            // credential contains roles as well.
+            // append the role element to the roles element
             rolesElement.AppendChild(roleElement);
-            userElement.AppendChild(credentialElement);
 
+            // append the roles element to the credential element
             credentialElement.AppendChild(rolesElement);
 
-            // append the user element to the root element
-            rootElement.AppendChild(userElement);
+            // create the password element
+            XmlElement passwordElement = xmlDocument.CreateElement("Password");
+            passwordElement.InnerText = password;
 
-            // save the XML document
+            // append the credentials
+            credentialElement.AppendChild(passwordElement);
+            userElement.AppendChild(credentialElement);
+
+            // append the user element to the root element
+            xmlDocument.DocumentElement.AppendChild(userElement);
+
+            // Save the XML document
             xmlDocument.Save(usersXmlFilePath);
+        }
+
+        /// <summary>
+        /// checks the XML file to see if the ID ("username") is already in the db.
+        /// </summary>
+        /// <param name="xmlDocument"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        private bool UserExists(XmlDocument xmlDocument, string username)
+        {
+            // get all the usernames and check if they exist
+            XmlNodeList userNodes = xmlDocument.SelectNodes("//User/Credential/ID");
+
+            // return true if username already exists
+            foreach (XmlNode idNode in userNodes)
+            {
+                if (idNode.InnerText == username)
+                {
+                    return true;
+                }
+            }
+
+            // return false if user doesn't exist.
+            return false;
         }
     }
 }

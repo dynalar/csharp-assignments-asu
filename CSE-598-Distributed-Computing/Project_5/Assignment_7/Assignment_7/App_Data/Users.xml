@@ -18,19 +18,10 @@
   <User>
     <Credential>
       <ID>brandon</ID>
-      <Password>"qh7brin_RO4"</Password>
       <Roles>
         <Role>user</Role>
       </Roles>
-    </Credential>
-  </User>
-  <User>
-    <Credential>
-      <ID>brandon</ID>
       <Password>"qh7brin_RO4"</Password>
-      <Roles>
-        <Role>user</Role>
-      </Roles>
     </Credential>
   </User>
 </Users>
