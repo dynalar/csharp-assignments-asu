@@ -1,0 +1,27 @@
+<Users>
+  <!-- Super User Admin -->
+  <User>
+    <Credential>
+      <ID>admin</ID>
+      <Password>admin1234</Password>
+    </Credential>
+    <FavoriteLocations>
+      <Location>
+        <Name>Water Town</Name>
+        <City>Orlando, FL</City>
+      </Location>
+    </FavoriteLocations>
+  </User>
+  <User>
+    <Credential>
+      <ID>asd</ID>
+      <Password>An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.</Password>
+    </Credential>
+  </User>
+  <User>
+    <Credential>
+      <ID>sds</ID>
+      <Password>An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.</Password>
+    </Credential>
+  </User>
+</Users>
