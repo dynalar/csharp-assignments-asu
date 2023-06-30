@@ -3,6 +3,9 @@
   <User>
     <Credential>
       <ID>admin</ID>
+      <Roles>
+        <Role>admin</Role>
+      </Roles>
       <Password>admin1234</Password>
     </Credential>
     <FavoriteLocations>
@@ -14,38 +17,20 @@
   </User>
   <User>
     <Credential>
-      <ID>brandido</ID>
-      <Password>"1AYijBfTjf6CkX4rkkIwsw"</Password>
-    </Credential>
-  </User>
-  <User>
-    <Credential>
-      <ID>brandido</ID>
-      <Password>"1AYijBfTjf6CkX4rkkIwsw"</Password>
+      <ID>brandon</ID>
+      <Password>"qh7brin_RO4"</Password>
+      <Roles>
+        <Role>user</Role>
+      </Roles>
     </Credential>
   </User>
   <User>
     <Credential>
       <ID>brandon</ID>
-      <Password>"JQKUAoP16m4"</Password>
-    </Credential>
-  </User>
-  <User>
-    <Credential>
-      <ID>brandon</ID>
-      <Password>"JQKUAoP16m4"</Password>
-    </Credential>
-  </User>
-  <User>
-    <Credential>
-      <ID>asdadasd</ID>
-      <Password>"ntM_CO1IyXIGlWcidMAKVw"</Password>
-    </Credential>
-  </User>
-  <User>
-    <Credential>
-      <ID>asdadasd</ID>
-      <Password>"ntM_CO1IyXIGlWcidMAKVw"</Password>
+      <Password>"qh7brin_RO4"</Password>
+      <Roles>
+        <Role>user</Role>
+      </Roles>
     </Credential>
   </User>
 </Users>

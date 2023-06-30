@@ -109,13 +109,22 @@ namespace Assignment_7.UserControls
             idElement.InnerText = username;
             credentialElement.AppendChild(idElement);
 
+            // create and append the Roles/Role element
+            XmlElement rolesElement = xmlDocument.CreateElement("Roles");
+            XmlElement roleElement = xmlDocument.CreateElement("Role");
+            roleElement.InnerText = "user";
+
             // create and append the Password element
             XmlElement passwordElement = xmlDocument.CreateElement("Password");
             passwordElement.InnerText = password;
             credentialElement.AppendChild(passwordElement);
 
             // append the credential element to the user element
+            // credential contains roles as well.
+            rolesElement.AppendChild(roleElement);
             userElement.AppendChild(credentialElement);
+
+            credentialElement.AppendChild(rolesElement);
 
             // append the user element to the root element
             rootElement.AppendChild(userElement);
