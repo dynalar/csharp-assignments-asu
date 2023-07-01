@@ -1,0 +1,31 @@
+<Users>
+  <!-- Super User Admin -->
+  <User>
+    <Credential>
+      <ID>admin</ID>
+      <Roles>
+        <Role>admin</Role>
+      </Roles>
+      <Password>"lxa7VV06ldMnN0hu5SU6EQ"</Password>
+    </Credential>
+    <FavoriteLocations>
+      <Location>
+        <Name>Water Town</Name>
+        <Directions>Orlando, FL</Directions>
+      </Location>
+      <Location>
+        <Name>Little Panoche Dam</Name>
+        <Directions>Site is about 5 miles west of I-5 on Little Panoche Road in Western Fresno County.</Directions>
+      </Location>
+    </FavoriteLocations>
+  </User>
+  <User>
+    <Credential>
+      <ID>brandon</ID>
+      <Roles>
+        <Role>user</Role>
+      </Roles>
+      <Password>"qh7brin_RO4"</Password>
+    </Credential>
+  </User>
+</Users>

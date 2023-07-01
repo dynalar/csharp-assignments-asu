@@ -6,12 +6,27 @@
       <Roles>
         <Role>admin</Role>
       </Roles>
-      <Password>"lxa7VV06ldMnN0hu5SU6EQ"</Password>
+      <Password>"l_Wz_0-7mOs"</Password>
     </Credential>
     <FavoriteLocations>
       <Location>
         <Name>Water Town</Name>
-        <City>Orlando, FL</City>
+        <Directions>Orlando, FL</Directions>
+      </Location>
+    </FavoriteLocations>
+  </User>
+  <User>
+    <Credential>
+      <ID>staff</ID>
+      <Roles>
+        <Role>staff</Role>
+      </Roles>
+      <Password>"fwAGxxvCoDQ"</Password>
+    </Credential>
+    <FavoriteLocations>
+      <Location>
+        <Name>Water Town</Name>
+        <Directions>Orlando, FL</Directions>
       </Location>
     </FavoriteLocations>
   </User>
@@ -23,5 +38,11 @@
       </Roles>
       <Password>"qh7brin_RO4"</Password>
     </Credential>
+    <FavoriteLocations>
+      <Location>
+        <Name>St. Marks Wilderness</Name>
+        <Directions>The refuge&amp;#39;s Visitor Center and administrative office is located about 25 miles south of Tallahassee, FL. From Tallahassee, take SR 363 (Woodville Hwy) to Wakulla. Turn left (east) on SR 267 (Bloxham Cutoff). At US 98 (Coastal Hwy), turn left (east) and cross the St. Marks River. Turn right on Lighthouse Road (CR 59) and drive 3 miles to the Visitor Center/Office. [GPS: 30&amp;#176; 9.097&amp;#39; N   84&amp;#176; 8.845&amp;#39; W]</Directions>
+      </Location>
+    </FavoriteLocations>
   </User>
 </Users>

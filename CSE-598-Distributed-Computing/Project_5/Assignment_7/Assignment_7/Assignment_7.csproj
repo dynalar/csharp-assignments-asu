@@ -66,6 +66,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +87,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -139,7 +141,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Actions\DeleteUser.aspx" />
+    <Content Include="Actions\SaveFavoriteLocation.aspx" />
     <Content Include="App_Data\Users.xml" />
+    <Content Include="Connected Services\RecreationAreaServiceRef\Assignment_7.RecreationAreaServiceRef.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService.disco" />
+    <None Include="Connected Services\RecreationAreaServiceRef\configuration91.svcinfo" />
+    <None Include="Connected Services\RecreationAreaServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\RecreationAreaServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -161,10 +174,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Pages\Admin.aspx" />
+    <Content Include="Pages\Favorites.aspx" />
     <Content Include="Pages\Forbidden.aspx" />
     <Content Include="Pages\Login.aspx" />
     <Content Include="Pages\Logout.aspx" />
     <Content Include="Pages\LogoutConfirmation.aspx" />
+    <Content Include="Pages\Search.aspx" />
     <Content Include="Pages\Signup.aspx" />
     <Content Include="Pages\Staff.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -195,6 +210,16 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService.wsdl" />
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RecreationAreaServiceRef\RecreationAreaService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -230,7 +255,9 @@
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\DeleteUser.aspx.cs">
       <DependentUpon>DeleteUser.aspx</DependentUpon>
@@ -239,8 +266,20 @@
     <Compile Include="Actions\DeleteUser.aspx.designer.cs">
       <DependentUpon>DeleteUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Actions\SaveFavoriteLocation.aspx.cs">
+      <DependentUpon>SaveFavoriteLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Actions\SaveFavoriteLocation.aspx.designer.cs">
+      <DependentUpon>SaveFavoriteLocation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\RecreationAreaServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -257,6 +296,13 @@
     </Compile>
     <Compile Include="Pages\Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Favorites.aspx.cs">
+      <DependentUpon>Favorites.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Favorites.aspx.designer.cs">
+      <DependentUpon>Favorites.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Forbidden.aspx.cs">
       <DependentUpon>Forbidden.aspx</DependentUpon>
@@ -285,6 +331,13 @@
     </Compile>
     <Compile Include="Pages\LogoutConfirmation.aspx.designer.cs">
       <DependentUpon>LogoutConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Signup.aspx.cs">
       <DependentUpon>Signup.aspx</DependentUpon>
@@ -337,7 +390,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\RecreationAreaServiceRef\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />

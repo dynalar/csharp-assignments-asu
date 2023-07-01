@@ -55,6 +55,7 @@
                         <%-- if is logged in, show these buttons --%>
                         <% if (Request.Cookies["AuthCookie"] != null) { %>
                             <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Search">Search</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Favorites">Favorite Locations</a></li>
                             
                             <%-- admin panel links, checks for role --%>
                             <%if(Request.Cookies["AuthCookie"]["role"] == "admin") { %>
