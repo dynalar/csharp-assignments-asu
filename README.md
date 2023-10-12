@@ -1,2 +1,4 @@
 # csharp-assignments-asu
-## very poggers assigments
+## My solutions for the following classes at ASU (Arizona State University)
+CSE 598 - Software Integration
+CSE 598 - Distributed Computing
